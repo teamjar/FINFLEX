@@ -1,0 +1,53 @@
+.landing-page {
+    background-color: #F2F2F2;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+.info {
+    text-align: center;
+    color: #333333;
+}
+
+.info h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.info h2 span {
+    color: #007BFF;
+}
+
+.info p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.get-started-button {
+    background-color: #007BFF;
+    color: #ffffff;
+    padding: 15px 30px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.get-started-button:hover {
+    background-color: #0056b3;
+}
