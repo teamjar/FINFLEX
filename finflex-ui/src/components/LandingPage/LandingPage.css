@@ -18,20 +18,20 @@ background: linear-gradient(360deg, rgba(0,0,0,1) 0%, rgba(3,29,68,1) 0%, rgba(4
 h1 {
     font-size: 800px;
     color: white;
-    margin: 10px;
-    padding: 10px;
+    margin: 5px;
+    padding: 5px;
 }
 
 h2 {
     color: white;
-    margin: 10px;
-    padding: 10px;
+    margin: 5px;
+    padding: 5px;
 }
 
 p {
     color: white;
-    margin: 10px;
-    padding: 10px;
+    margin: 5px;
+    padding: 5px;
 }
 
 .get-started-button {
