@@ -1,0 +1,68 @@
+.personal {
+    background-color:#F2EFE9;
+    width: 100vw;
+    height: 100vh;
+    color: black;
+}
+
+.welcome{
+    margin: 10px;
+    padding: 10px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+  }
+  
+input {
+    width: 300px;
+    background-color: white;
+    margin: 10px;
+    color: #031D44;
+}
+
+  input[type="text"] {
+    padding: 12px;
+    border-radius: 30px;
+    border: 1px solid whitesmoke;
+  }
+  
+.btn {
+    background-color: #031D44;
+    border-radius: 30px;
+    transition: transform .1s;
+    outline: none;
+    border: none;
+}
+
+.btn:hover {
+    cursor: pointer;
+    transform: scale(1.1)
+}
+
+.top {
+    display: flex;
+    direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 500px;
+}
+
+.top1 {
+    display: flex;
+    direction: row;
+    align-items: center;
+    gap: 0px;
+}
+
+.pic2 {
+  
+        transition: transform .1s;
+
+}
+
+.pic2:hover {
+    cursor: pointer;
+    transform: scale(1.2)
+  }
