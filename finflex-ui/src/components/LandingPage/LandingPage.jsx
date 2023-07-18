@@ -1,4 +1,3 @@
-
 import "./LandingPage.css"
 import { useNavigate } from 'react-router-dom'
 

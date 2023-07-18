@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
@@ -18,6 +19,19 @@ const RegisterForm = () => {
       password,
       confirmPassword,
     };
+
+    try {
+      const response = axios.post("http://localhost:3001/register", {
+        email: user.email,
+        username: user.username,
+        firstname: user.firstName,
+        lastname: user.lastName,
+        password: user.password
+      });
+      localStorage.setItem('userId', response.data.users.id);
+    } catch(err) {
+      console.log(err);
+    }
 
     setUsername('');
     setEmail('');
