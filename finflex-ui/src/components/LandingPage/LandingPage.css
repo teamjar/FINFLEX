@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 
 
 body {
@@ -11,7 +11,7 @@ background: linear-gradient(360deg, rgba(0,0,0,1) 0%, rgba(3,29,68,1) 0%, rgba(4
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-family: 'Poppins', sans-serif;
+    
     
 }
 

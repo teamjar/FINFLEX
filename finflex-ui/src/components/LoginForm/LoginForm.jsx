@@ -7,13 +7,13 @@ const LoginForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        // Need to implement login logic 
     }
 
     return (
         <form onSubmit={handleSubmit} className="login-form">
             <div className="form-group">
-                <label htmlFor="email">Email:</label>
+                <div className='lol'>
+                <label htmlFor="email">Email</label>
                 <input 
                     type="email" 
                     id="email" 
@@ -22,10 +22,12 @@ const LoginForm = () => {
                     onChange={e => setEmail(e.target.value)} 
                     required 
                 />
+                </div>
             </div>
 
             <div className="form-group">
-                <label htmlFor="password">Password:</label>
+            <div className='lol'>
+                <label htmlFor="password">Password</label>
                 <input 
                     type="password" 
                     id="password" 
@@ -34,6 +36,7 @@ const LoginForm = () => {
                     onChange={e => setPassword(e.target.value)} 
                     required 
                 />
+            </div>
             </div>
 
             <button type="submit" className="login-btn">Login</button>
