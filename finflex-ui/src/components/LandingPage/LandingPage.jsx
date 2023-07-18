@@ -9,7 +9,7 @@ const LandingPage = () => {
     const handleClick = () => {
         navigate('/login')
     }
-
+//
     return (
         <div className = 'landing-page'>
             <div className ='container'>
