@@ -1,0 +1,46 @@
+.si {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .flow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    align-items: flex-end;
+  }
+
+  .el {
+    border-radius: 30px;
+    border: 2px solid whitesmoke;
+    margin: 10px;
+    padding: 12px;
+    width: 250px;
+    height: 14px;
+  }
+
+  .ti{
+    color:#031D44;
+    font-weight: bolder;
+    font-size: 24px;
+  }
+
+
+  .btn2 {
+    background-color: #031D44;
+    border-radius: 30px;
+    transition: transform .1s;
+    outline: none;
+    border: none;
+    width: 90.27px;
+    margin: 10px;
+    padding: 12px;
+    text-align: center;
+    border: 2px solid #031D44;
+}
+
+.btn2:hover {
+    cursor: pointer;
+    transform: scale(1.1)
+}

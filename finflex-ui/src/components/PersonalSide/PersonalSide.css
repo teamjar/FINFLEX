@@ -1,0 +1,45 @@
+.side {
+    background-color: #ece8df;
+    width: 14%;
+    position: relative;
+    float: left;
+    height: 100vh;
+    align-items: center;
+    text-align: center;
+}
+
+li, ul {
+    list-style: none;
+    padding-left:0;
+    padding: 0;
+    list-style-type: none;
+}
+
+
+.one {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+    margin: 5px;
+    padding: 5px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    transition: transform .1s;
+}
+
+.one:hover{
+    transform: scale(1.1)
+}
+
+.icon {
+    width: 30px;
+}
+
+.icon2 {
+    width: 20px;
+}
+
+.icon3 {
+    width: 20px;
+}

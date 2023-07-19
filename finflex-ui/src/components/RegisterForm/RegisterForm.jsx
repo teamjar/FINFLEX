@@ -43,7 +43,7 @@ const RegisterForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="login-form">
-      <div className="form-group">
+      {/*<div className="form-group">
       <div className='lol'>
         <label htmlFor="username">Username</label>
         <input
@@ -54,7 +54,7 @@ const RegisterForm = () => {
           required
         />
     </div>
-      </div>
+  </div>*/}
       <div className="form-group">
       <div className='lol'>
         <label htmlFor="email">Email</label>

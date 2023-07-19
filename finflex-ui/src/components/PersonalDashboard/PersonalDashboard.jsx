@@ -1,10 +1,13 @@
 import "./PersonalDashboard.css"
 import Navbar from '../Navbar/Navbar'
 import InfoTile from "../InfoTile/InfoTile"
+import PersonalSide from "../PersonalSide/PersonalSide"
+import Expense from "../Expense/Expense"
 
 const PersonalDashboard = () => {
     return (
         <div className="personal">
+            <PersonalSide />
             <Navbar />
         <div className="top">
             <div className="welcome">
@@ -13,7 +16,7 @@ const PersonalDashboard = () => {
             
             <div className="top1">
             <div className="search-bar">
-                <input type="text" placeholder="Search for transactions and more" />
+                <input type="text" className="enter" placeholder="Search for transactions and more" />
                 <button type="submit" className="btn">Search</button>
             </div>
             <div className="pic2">
@@ -26,6 +29,8 @@ const PersonalDashboard = () => {
         </div>
         <InfoTile />
 
+        <h2 style={{color:"#031D44", margin:"15px", padding:"15px", textIndent:"1%"}}>Expenses and Purchases</h2>
+        <Expense />
         </div>
 
     )

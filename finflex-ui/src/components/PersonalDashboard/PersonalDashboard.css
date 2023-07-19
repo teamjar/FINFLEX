@@ -24,8 +24,6 @@ input {
 
   input[type="text"] {
     padding: 12px;
-    border-radius: 30px;
-    border: 1px solid whitesmoke;
   }
   
 .btn {
@@ -46,7 +44,7 @@ input {
     direction: row;
     justify-content: center;
     align-items: center;
-    gap: 500px;
+    gap: auto;
 }
 
 .top1 {
@@ -66,3 +64,8 @@ input {
     cursor: pointer;
     transform: scale(1.2)
   }
+
+.enter {
+    border-radius: 30px;
+    border: 2px solid whitesmoke;
+}
