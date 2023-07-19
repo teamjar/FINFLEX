@@ -6,10 +6,16 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const User = require('./models/user');
+const Stock = require('./models/stock');
+const Expenses = require('./models/expenses');
+const Goals = require('./models/goals');
+const Watchlist = require('./models/watchlist');
+const Help = require('./models/help');
 
 const { NotFoundError } = require("./utils/errors");
 const config = require("./config");
 const jwt = require('jsonwebtoken');
+const Bill = require("./models/bills");
 
 const app = express();
 
@@ -40,7 +46,7 @@ app.post("/login", async function (req, res, next) {
     }
   })
   
-  app.post("/register", async function (req, res, next) {
+app.post("/register", async function (req, res, next) {
     try {
       const user = await User.register(req.body)
       // Create and sign a JWT token
@@ -54,7 +60,97 @@ app.post("/login", async function (req, res, next) {
     } catch (err) {
       next(err)
     }
-  })
+})
+
+app.post("/stocks", async function (req, res, next) {
+    try {
+        const user = await Stock.add(req.body);
+        return res.status(201).json({user});
+    } catch(err) {
+        next(err);
+    }
+});
+
+app.get("/stocks/:id", async function (req, res, next) {
+    const userId = req.params.id;
+    const stock = await Stock.fetchById(userId);
+    return res.status(200).json({ database : stock })
+})
+
+app.post("/watchlist", async function (req, res, next) {
+    try {
+        const user = await Watchlist.add(req.body);
+        return res.status(201).json({user});
+    } catch(err) {
+        next(err);
+    }
+});
+
+app.get("/watchlist/:id", async function (req, res, next) {
+    const userId = req.params.id;
+    const watchlist = await Watchlist.fetchById(userId);
+    return res.status(200).json({ database : watchlist })
+})
+
+app.post("/bills", async function (req, res, next) {
+    try {
+        const user = await Bill.add(req.body);
+        return res.status(201).json({user});
+    } catch(err) {
+        next(err);
+    }
+});
+
+app.get("/bills/:id", async function (req, res, next) {
+    const userId = req.params.id;
+    const bills = await Bill.fetchById(userId);
+    return res.status(200).json({ database : bills })
+})
+
+app.post("/expenses", async function (req, res, next) {
+    try {
+        const user = await Expenses.add(req.body);
+        return res.status(201).json({user});
+    } catch(err) {
+        next(err);
+    }
+});
+
+app.get("/expenses/:id", async function (req, res, next) {
+    const userId = req.params.id;
+    const expenses = await Expenses.fetchById(userId);
+    return res.status(200).json({ database : expenses })
+})
+
+app.post("/goals", async function (req, res, next) {
+    try {
+        const user = await Goals.add(req.body);
+        return res.status(201).json({user});
+    } catch(err) {
+        next(err);
+    }
+});
+
+app.get("/goals/:id", async function (req, res, next) {
+    const userId = req.params.id;
+    const goals = await Goals.fetchById(userId);
+    return res.status(200).json({ database : goals })
+})
+
+app.post("/help", async function (req, res, next) {
+    try {
+        const user = await Help.add(req.body);
+        return res.status(201).json({user});
+    } catch(err) {
+        next(err);
+    }
+});
+
+app.get("/help/:id", async function (req, res, next) {
+    const userId = req.params.id;
+    const help = await Help.fetchById(userId);
+    return res.status(200).json({ database : help })
+})
 
 // health check
 app.get("/", function (req, res) {
