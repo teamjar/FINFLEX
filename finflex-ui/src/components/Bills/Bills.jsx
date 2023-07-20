@@ -1,14 +1,9 @@
-import "./PersonalDashboard.css"
+import "./Bills.css"
 import Navbar from '../Navbar/Navbar'
-import InfoTile from "../InfoTile/InfoTile"
 import PersonalSide from "../PersonalSide/PersonalSide"
-import Expense from "../Expense/Expense"
-import ExpenseDetail from "../ExpenseDetail/ExpenseDetail"
 
 
-const PersonalDashboard = () => {
-    const name = localStorage.getItem("name");
-    
+const Bills = () => {
     return (
         <div className="personal">
             <div className="random">
@@ -18,7 +13,7 @@ const PersonalDashboard = () => {
             <Navbar />
         <div className="top">
             <div className="welcome">
-            <h2 style={{color:"#031D44"}}>Hello, {name}</h2>
+            <h2 style={{color:"#031D44"}}>View Your Bills, Hardcoded Name</h2>
             </div>
             
             <div className="top1">
@@ -34,19 +29,19 @@ const PersonalDashboard = () => {
             </div>
             </div>
         </div>
-        <InfoTile />
-
-       <h2 style={{color:"#031D44", margin:"15px", padding:"15px"}} className="head"><span>Expenses and Purchases</span></h2>
-       <Expense />
-        <ExpenseDetail />
-        
-        <div className="personal2">
-       
+        <div className="tiles2">
+        <h1 className="bruh">Got Bills?</h1>
+        <h3 style={{color:"white"}}>View and manage all of your bills to keep them in check.</h3>
         </div>
+
+        
+     
+
+        
 
         </div>
     </div>
     )
  }
 
- export default PersonalDashboard;
+ export default Bills;
