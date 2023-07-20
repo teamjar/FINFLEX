@@ -65,7 +65,6 @@ class User {
 
    static async register(creds) {
     const { username,  email, password, firstName, lastName} = creds
-    console.log(creds)
     const requiredCreds = ["email", "password", "firstName", "lastName", "username"]
     try {
       validateFields({ required: requiredCreds, obj: creds })
