@@ -9,12 +9,6 @@ class Stock {
         const {userId, ticker, companyName, stockPrice, quantity, lastPrice, marketCap, exchange, lastDate} = creds;
         const requiredCreds = ['userId', 'ticker', 'companyName', 'stockPrice', 'quantity', 'lastPrice', 'marketCap', 'exchange', 'lastDate'];
 
-        try {
-            validateFields({ required: requiredCreds, obj: creds })
-        } catch (err) {
-            throw err
-        }
-
         const result = await db.query(
             `INSERT INTO stocks (
                 userid,
@@ -23,9 +17,9 @@ class Stock {
                 stockprice, 
                 quantity,
                 lastprice,
-                marketcap,
+                market_cap,
                 exchange,
-                lastdate
+                last_date
             )
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
             RETURNING
@@ -35,9 +29,9 @@ class Stock {
                     stockprice,
                     quantity,
                     lastprice,
-                    marketcap,
+                    market_cap,
                     exchange,
-                    lastdate
+                    last_date
                     `,
                     [userId, ticker, companyName, stockPrice, quantity, lastPrice, marketCap, exchange, lastDate]
         );
@@ -55,9 +49,9 @@ class Stock {
                     stockprice, 
                     quantity,
                     lastprice,
-                    marketcap,
+                    market_cap,
                     exchange,
-                    lastdate
+                    last_date
                 FROM stocks
                 WHERE userid = $1`,
                 [id]

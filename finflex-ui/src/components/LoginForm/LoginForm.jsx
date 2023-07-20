@@ -1,19 +1,26 @@
 import { useState } from 'react'
 import './LoginForm.css';
 import axios from 'axios';
+import { remoteHostURL } from '../../apiClient';
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3001/login", {
+            const response = await axios.post(remoteHostURL + "/login", {
                 email: email,
                 password: password
             });
-            localStorage.setItem('userId', response.data.users.id);
+
+            localStorage.setItem('userId', response.data.user.id);
+            localStorage.setItem("name", response.data.user.firstName);
+            navigate('/personal');
+
         } catch(err) {
             console.log(err);
         }

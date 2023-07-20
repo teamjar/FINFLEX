@@ -1,0 +1,1 @@
+export const remoteHostURL = "http://localhost:3001"

@@ -5,13 +5,15 @@ import PersonalSide from "../PersonalSide/PersonalSide"
 import Expense from "../Expense/Expense"
 
 const PersonalDashboard = () => {
+    const name = localStorage.getItem("name");
+    
     return (
         <div className="personal">
             <PersonalSide />
             <Navbar />
         <div className="top">
             <div className="welcome">
-            <h2 style={{color:"#031D44"}}>Hello, Hardcoded Name</h2>
+            <h2 style={{color:"#031D44"}}>Hello, {name}</h2>
             </div>
             
             <div className="top1">

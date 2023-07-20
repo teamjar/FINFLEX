@@ -9,12 +9,6 @@ class Help {
         const {userId, question, answer} = creds;
         const requiredCreds = ['userId', 'question', 'answer'];
 
-        try {
-            validateFields({ required: requiredCreds, obj: creds })
-        } catch (err) {
-            throw err
-        }
-
         const result = await db.query(
             `INSERT INTO help (
                 userid,
@@ -25,7 +19,7 @@ class Help {
             RETURNING
                 userid,
                 question,
-                answer`
+                answer`,
             [userId, question, answer]
         );
 

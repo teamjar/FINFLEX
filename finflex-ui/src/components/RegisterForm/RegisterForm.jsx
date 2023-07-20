@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { remoteHostURL } from '../../apiClient';
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
@@ -8,27 +10,32 @@ const RegisterForm = () => {
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const user = {
-      username,
-      email,
-      firstName,
-      lastName,
-      password,
-      confirmPassword,
-    };
+    // const user = {
+    //   username,
+    //   email,
+    //   firstName,
+    //   lastName,
+    //   password,
+    //   confirmPassword,
+    // };
 
     try {
-      const response = axios.post("http://localhost:3001/register", {
-        email: user.email,
-        username: user.username,
-        firstname: user.firstName,
-        lastname: user.lastName,
-        password: user.password
+      const response = await axios.post(remoteHostURL + "/register", {
+        email: email,
+        username: username,
+        firstName: firstName,
+        lastName: lastName,
+        password: password
       });
-      localStorage.setItem('userId', response.data.users.id);
+
+      localStorage.setItem('userId', response.data.user.id);
+      localStorage.setItem('name', response.data.user.firstName);
+      console.log(response.data)
+      navigate('/personal');
     } catch(err) {
       console.log(err);
     }
@@ -43,7 +50,7 @@ const RegisterForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="login-form">
-      {/*<div className="form-group">
+      <div className="form-group">
       <div className='lol'>
         <label htmlFor="username">Username</label>
         <input
@@ -54,7 +61,7 @@ const RegisterForm = () => {
           required
         />
     </div>
-  </div>*/}
+  </div>
       <div className="form-group">
       <div className='lol'>
         <label htmlFor="email">Email</label>
