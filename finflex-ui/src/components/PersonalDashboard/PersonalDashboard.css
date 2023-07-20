@@ -3,6 +3,13 @@
     width: 100vw;
     height: 100vh;
     color: black;
+    
+}
+
+
+.plz {
+    margin-left: 14%; /* Add margin to the main content container to avoid overlapping */
+    overflow-x: hidden;
 }
 
 .welcome{

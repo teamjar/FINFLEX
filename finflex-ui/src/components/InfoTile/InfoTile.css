@@ -28,7 +28,7 @@ h3 {
 
 .square {
     background-color: rgb(213, 136, 111);
-    width: 150px;
+    width: 130px;
     border-radius: 30px;
     box-shadow: 10px 10px 20px gray;
     outline: 2px solid white;
@@ -38,7 +38,7 @@ h3 {
 
 .square2 {
     background-color: rgb(112, 162, 136);
-    width: 150px;
+    width: 130px;
     border-radius: 30px;
     box-shadow: 10px 10px 20px gray;
     outline: 2px solid white;
@@ -48,7 +48,7 @@ h3 {
 
 .square3 {
     background-color: rgb(4, 57, 94);
-    width: 150px;
+    width: 130px;
     border-radius: 30px;
     box-shadow: 10px 10px 20px gray;
     outline: 2px solid white;
@@ -58,7 +58,7 @@ h3 {
 
 .square4{
     background-color: #dab785;
-    width: 150px;
+    width: 130px;
     border-radius: 30px;
     box-shadow: 10px 10px 20px gray;
     outline: 2px solid white;

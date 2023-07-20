@@ -3,11 +3,16 @@ import Navbar from '../Navbar/Navbar'
 import InfoTile from "../InfoTile/InfoTile"
 import PersonalSide from "../PersonalSide/PersonalSide"
 import Expense from "../Expense/Expense"
+import ExpenseDetail from "../ExpenseDetail/ExpenseDetail"
+
 
 const PersonalDashboard = () => {
     return (
         <div className="personal">
+            <div className="random">
             <PersonalSide />
+            </div>
+            <div className="plz">
             <Navbar />
         <div className="top">
             <div className="welcome">
@@ -29,10 +34,16 @@ const PersonalDashboard = () => {
         </div>
         <InfoTile />
 
-        <h2 style={{color:"#031D44", margin:"15px", padding:"15px", textIndent:"1%"}}>Expenses and Purchases</h2>
-        <Expense />
+       <h2 style={{color:"#031D44", margin:"15px", padding:"15px"}} className="head"><span>Expenses and Purchases</span></h2>
+       <Expense />
+        <ExpenseDetail />
+        
+        <div className="personal2">
+       
         </div>
 
+        </div>
+    </div>
     )
  }
 

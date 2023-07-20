@@ -1,11 +1,9 @@
-import "./Goals.css"
+import "./Bills.css"
 import Navbar from '../Navbar/Navbar'
 import PersonalSide from "../PersonalSide/PersonalSide"
-import Budget from "../Budget/Budget"
-import GoalCreation from "../GoalCreation/GoalCreation"
-import GoalDetail from "../GoalDetail/GoalDetail"
 
-const Goals = () => {
+
+const Bills = () => {
     return (
         <div className="personal">
             <div className="random">
@@ -15,7 +13,7 @@ const Goals = () => {
             <Navbar />
         <div className="top">
             <div className="welcome">
-            <h2 style={{color:"#031D44"}}>View Your Goals, Hardcoded Name</h2>
+            <h2 style={{color:"#031D44"}}>View Your Bills, Hardcoded Name</h2>
             </div>
             
             <div className="top1">
@@ -31,35 +29,19 @@ const Goals = () => {
             </div>
             </div>
         </div>
-        <div className="tiles">
-        <h1 className="bruh">Ready, Set, Goal!</h1>
-        <h3 style={{color:"white"}}>Financial goal setting and management for higher achievers.</h3>
+        <div className="tiles2">
+        <h1 className="bruh">Got Bills?</h1>
+        <h3 style={{color:"white"}}>View and manage all of your bills to keep them in check.</h3>
         </div>
 
         
-        <h2 style={{color:"#031D44", margin:"15px", padding:"15px"}} className="head"><span>Set a Weekly Budget</span></h2>
-        <Budget />
-        <h2 style={{color:"#031D44", margin:"15px", padding:"15px"}} className="head"><span>Create Your Goals</span></h2>
-        <GoalCreation />
+     
 
-        <div style={{backgroundColor:"#F2EFE9"}}>
-            <GoalDetail />
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            
-        </div>
+        
 
         </div>
     </div>
     )
  }
 
- export default Goals;
+ export default Bills;

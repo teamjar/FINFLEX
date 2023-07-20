@@ -11,12 +11,12 @@
     align-items: flex-end;
   }
 
-  .el {
+  .el2 {
     border-radius: 30px;
     border: 2px solid whitesmoke;
     margin: 10px;
     padding: 12px;
-    width: 200px;
+    width: 400px;
     height: 14px;
   }
 
