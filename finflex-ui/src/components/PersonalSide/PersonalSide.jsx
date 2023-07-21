@@ -4,7 +4,7 @@ import "./PersonalSide.css"
 function PersonalSide() {
   return (
     <div className="side">
-      <h2 style={{color:"#031D44", textAlign:"center"}}>FinFlex™</h2>
+      <h2 style={{color:"#031D44", textAlign:"center", fontSize:"40px"}}>FinFlex™</h2>
       <ul>
         <div className='one'>
         <img className='icon' src="https://clipart-library.com/newhp/kissclipart-dashboard-icon-png-clipart-computer-icons-dashboar-dcb8014117ab1ea8.png" />

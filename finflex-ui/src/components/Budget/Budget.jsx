@@ -25,7 +25,7 @@ export function BudgetForm() {
     </div>
 
    
-    <button type="submit" className="btn2" style={{width:"90.27px", height:"38.07px"}}>Set</button>
+    <button type="submit" className="btn2">Set</button>
     </div>
     </div>
   )

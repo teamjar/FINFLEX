@@ -5,6 +5,7 @@ import RegisterPage from '../RegisterPage/RegisterPage'
 import PersonalDashboard from '../PersonalDashboard/PersonalDashboard'
 import Goals from '../Goals/Goals'
 import Bills from '../Bills/Bills'
+import Help from '../Help/Help'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/personal" element={<PersonalDashboard />} />
           <Route path="/goals" element={<Goals />} />
           <Route path="/bills" element={<Bills />} />
+          <Route path="/help" element={<Help />} />
         </Routes>
       </Router>
     </div>

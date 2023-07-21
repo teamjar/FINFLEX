@@ -1,10 +1,9 @@
-import "./Bills.css"
+import "./Help.css"
 import Navbar from '../Navbar/Navbar'
 import PersonalSide from "../PersonalSide/PersonalSide"
-import BillCreation from "../BillCreation/BillCreation"
-import BillDetail from "../BillDetail/BillDetail"
+import FAQPage from "../FAQPage/FAQPage"
 
-const Bills = () => {
+const Help = () => {
     return (
         <div className="personal">
             <div className="random">
@@ -14,7 +13,7 @@ const Bills = () => {
             <Navbar />
         <div className="top">
             <div className="welcome">
-            <h2 style={{color:"#031D44"}}>View Your Bills, Hardcoded Name</h2>
+            <h2 style={{color:"#031D44"}}>A list of FAQ, Hardcoded Name</h2>
             </div>
             
             <div className="top1">
@@ -30,31 +29,25 @@ const Bills = () => {
             </div>
             </div>
         </div>
-        <div className="tiles2">
-        <h1 className="bruh">Got Bills?</h1>
-        <h3 style={{color:"white"}}>View and manage all of your bills to keep them in check.</h3>
+        <div className="tiles4">
+        <h1 className="bruh">Have Questions? We Have Answers!</h1>
+        <h3 style={{color:"white"}}>Some of the most commonly asked financial assistance questions provided, along with the ability to ask your own.</h3>
         </div>
-
-
-        <h2 style={{color:"#031D44", margin:"15px", padding:"15px", textAlign:"center"}} className="head"><span>Easily add and track your bills, manage their status, and stay in control of your financial commitments. Take charge of your expenses with our intuitive platform, designed to streamline your bill management process effortlessly.</span></h2>
-
-
-
+        <br></br>
         <div style={{backgroundColor:"#F2EFE9"}}>
-        <BillCreation />
-        <BillDetail />
-        
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br> 
-        <br></br>
-        <br></br>
-
+        <FAQPage />
+       
+        <h2 style={{color:"#031D44", margin:"15px", padding:"15px", textAlign:"center"}} className="head"><span>Don't see a specific question answered above or want more financial assistance and advice? Ask the chat box below!</span></h2>
+            
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            
         </div>
         </div>
     </div>
     )
  }
 
- export default Bills;
+ export default Help;

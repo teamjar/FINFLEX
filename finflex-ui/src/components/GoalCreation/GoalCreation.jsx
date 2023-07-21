@@ -35,7 +35,7 @@ export function GoalCreationForm() {
     </div>
 
    
-    <button type="submit" className="btn2" style={{width:"90.27px", height:"38.07px"}}>Add</button>
+    <button type="submit" className="btn2">Add</button>
     </div>
     </div>
   )
