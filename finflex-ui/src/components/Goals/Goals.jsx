@@ -6,6 +6,8 @@ import GoalCreation from "../GoalCreation/GoalCreation"
 import GoalDetail from "../GoalDetail/GoalDetail"
 
 const Goals = () => {
+    const name = localStorage.getItem('name');
+
     return (
         <div className="personal">
             <div className="random">
@@ -15,7 +17,7 @@ const Goals = () => {
             <Navbar />
         <div className="top">
             <div className="welcome">
-            <h2 style={{color:"#031D44"}}>View Your Goals, Hardcoded Name</h2>
+            <h2 style={{color:"#031D44"}}>View Your Goals, {name}</h2>
             </div>
             
             <div className="top1">
