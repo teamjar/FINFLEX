@@ -37,12 +37,14 @@ const Goals = () => {
         </div>
 
         
-        <h2 style={{color:"#031D44", margin:"15px", padding:"15px"}} className="head"><span>Set a Weekly Budget</span></h2>
+        
+        <h2 style={{color:"#031D44", margin:"15px", padding:"15px"}} className="head"><span>Set a Weekly Budget:</span></h2>
+        <div style={{backgroundColor:"#F2EFE9"}}>
         <Budget />
-        <h2 style={{color:"#031D44", margin:"15px", padding:"15px"}} className="head"><span>Create Your Goals</span></h2>
+        <hr style={{marginTop:"30px"}}></hr>
+        <h2 style={{color:"#031D44", margin:"15px", padding:"15px"}} className="head"><span>Create Your Goals:</span></h2>
         <GoalCreation />
 
-        <div style={{backgroundColor:"#F2EFE9"}}>
             <GoalDetail />
             <br></br>
             <br></br>

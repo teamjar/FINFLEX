@@ -35,8 +35,7 @@ const PersonalDashboard = () => {
             </div>
         </div>
         <InfoTile />
-
-       <h2 style={{color:"#031D44", margin:"15px", padding:"15px"}} className="head"><span>Expenses and Purchases</span></h2>
+       <h2 style={{color:"#031D44", margin:"15px", padding:"15px"}} className="head"><span>Expenses and Purchases:</span></h2>
        <Expense />
         <ExpenseDetail />
         
