@@ -6,9 +6,6 @@ import PersonalDashboard from '../PersonalDashboard/PersonalDashboard'
 import Goals from '../Goals/Goals'
 import Bills from '../Bills/Bills'
 import Help from '../Help/Help'
-import StockDashboard from '../StockDashboard/StockDashboard'
-import StockDetails from '../StockDetails/StockDetails'
-
 
 function App() {
   return (
@@ -22,8 +19,6 @@ function App() {
           <Route path="/goals" element={<Goals />} />
           <Route path="/bills" element={<Bills />} />
           <Route path="/help" element={<Help />} />
-          <Route path="/stocks" element={<StockDashboard />} />
-          <Route path="/stock-details/:symbol" element={<StockDetails />} />
         </Routes>
       </Router>
     </div>
