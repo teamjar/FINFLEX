@@ -1,5 +1,6 @@
 const basePath = "https://finnhub.io/api/v1";
 
+
 /**
  * Searches best stock matches based on a user's query
  * @param {string} query - The user's query, e.g. 'fb'

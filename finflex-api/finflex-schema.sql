@@ -50,6 +50,7 @@ CREATE TABLE bills (
     billId SERIAL PRIMARY KEY,
     userId INT NOT NULL,
     billName TEXT NOT NULL,
+    desctripion TEXT NOT NULL,
     due DATE NOT NULL,
     status TEXT CHECK (status IN ('unpaid', 'paid', 'overdue')),
     price FLOAT NOT NULL

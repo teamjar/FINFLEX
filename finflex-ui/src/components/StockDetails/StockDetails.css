@@ -1,0 +1,22 @@
+.stock-details{  display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "StockSide Navbar Navbar Navbar Navbar Navbar Navbar"
+      "StockSide Chart Chart Chart Chart Chart Overview"
+      "StockSide Chart Chart Chart Chart Chart Details"
+      "StockSide Chart Chart Chart Chart Chart Details";
+  }
+  
+  .StockSide { grid-area: StockSide; }
+  
+  .Navbar { grid-area: Navbar; }
+  
+  .Chart { grid-area: Chart; }
+  
+  .Overview { grid-area: Overview; }
+  
+  .Details { grid-area: Details; }
+  
