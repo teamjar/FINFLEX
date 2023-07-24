@@ -6,6 +6,8 @@ import PersonalDashboard from '../PersonalDashboard/PersonalDashboard'
 import Goals from '../Goals/Goals'
 import Bills from '../Bills/Bills'
 import Help from '../Help/Help'
+import StockDashboard from '../StockDashboard/StockDashboard'
+import StockDetails from '../StockDetails/StockDetails'
 
 function App() {
   return (
