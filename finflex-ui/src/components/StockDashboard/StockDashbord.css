@@ -1,0 +1,42 @@
+.stockcontainer {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "StockSide Navbar Navbar Navbar Navbar Navbar Navbar Navbar"
+    "StockSide StockSearch StockSearch StockSearch StockSearch StockSearch StockSearch StockSearch"
+    "StockSide Chart Chart Chart Chart Chart Overview Overview"
+    "StockSide Chart Chart Chart Chart Chart Details Details"
+    ". Chart Chart Chart Chart Chart Details Details";
+  background-color: #F2EFE9;
+}
+
+.StockSide { grid-area: StockSide; }
+
+.Navbar {
+  align-self: start;
+  grid-area: Navbar;
+}
+
+/* .StockSearch {
+  grid-area: StockSearch;
+  display: flex;
+  justify-content: center;
+} */
+
+.StockSearch {
+  grid-area: StockSearch;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+
+
+
+.Chart { grid-area: Chart; }
+
+.Overview { grid-area: Overview; }
+
+.Details { grid-area: Details; }

@@ -1,0 +1,36 @@
+.search-results-container {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* to position it below the StockSearch */
+  position: absolute;
+  width: 80%; /* 80% of the width of StockSearch */
+  left: 10%; /* centers the search results relative to StockSearch */
+  top: 5.0em; /* moves the search results down */
+  z-index: 1;
+}
+
+.search-result-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  color: #031D44; /* for the font color */
+  font-family: Arial, sans-serif; /* replace with the font you want */
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background-color: #e9ecef;
+}
