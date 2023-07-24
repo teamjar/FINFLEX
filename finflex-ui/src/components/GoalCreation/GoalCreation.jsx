@@ -51,7 +51,7 @@ export function GoalCreationForm() {
 
         <div className="si">
           <label className="ti">Category</label>
-          <select id="status" name="type">
+          <select id="status" name="category">
           <option value="food">Food</option>
             <option value="housing">Housing</option>
             <option value="transportation">Transportation</option>
