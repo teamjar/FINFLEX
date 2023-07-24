@@ -19,6 +19,8 @@ function App() {
           <Route path="/goals" element={<Goals />} />
           <Route path="/bills" element={<Bills />} />
           <Route path="/help" element={<Help />} />
+          <Route path="/stocks" element={<StockDashboard />} />
+          <Route path="/stock-details/:symbol" element={<StockDetails />} />
         </Routes>
       </Router>
     </div>
@@ -26,3 +28,4 @@ function App() {
 }
 
 export default App
+
