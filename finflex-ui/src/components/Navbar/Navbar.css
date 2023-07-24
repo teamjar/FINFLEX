@@ -16,7 +16,7 @@
 .navbar__item {
   margin: 0 50px;
   transition: transform .1s;
-  position: relative; /* Add relative positioning to the navigation items */
+  position: relative; 
 }
 
 .navbar__item:hover {
@@ -24,11 +24,11 @@
   transform: scale(1.1);
 }
 
-/* Add the active state styles */
+
 .navbar__item.active::after {
   content: '';
   position: absolute;
-  bottom: -5px; /* Adjust the underline position as needed */
+  bottom: -5px; 
   left: 0;
   width: 100%;
   height: 2px;

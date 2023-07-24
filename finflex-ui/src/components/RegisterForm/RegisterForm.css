@@ -1,0 +1,31 @@
+.haha {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px; /* You can adjust this value according to your needs */
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  .lol {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-btn {
+    padding: 10px;
+    margin-top: 15px;
+  }
+  

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import "./PersonalSide.css"
+
 
 function PersonalSide() {
   return (
@@ -38,4 +38,3 @@ function PersonalSide() {
 }
 
 export default PersonalSide;
-

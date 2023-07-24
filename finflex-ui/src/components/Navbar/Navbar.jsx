@@ -1,11 +1,23 @@
 import React, { useState } from "react";
 import "./Navbar.css";
+import { useNavigate } from 'react-router-dom'; 
 
 const Navbar = () => {
   const [activeNavItem, setActiveNavItem] = useState("Personal");
+  const navigate = useNavigate(); 
 
   const handleNavItemClick = (itemName) => {
     setActiveNavItem(itemName);
+
+  
+    if (itemName === "Stocks") {
+      navigate("/stocks"); 
+    }
+
+  
+    if (itemName === "Personal") {
+      navigate("/personal"); 
+    }
   };
 
   return (
