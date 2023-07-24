@@ -6,8 +6,8 @@ const { BadRequestError, UnauthorizedError } = require("../utils/errors")
 
 class Watchlist {
     static async add(creds) {
-        const {userId, ticker, companyName, stockPrice, quantity, lastPrice, marketCap, exchange, lastDate} = creds;
-        const requiredCreds = ['userId', 'ticker', 'companyName', 'stockPrice', 'quantity', 'lastPrice', 'marketCap', 'exchange', 'lastDate'];
+        const {userId, ticker, companyName, stockPrice, quantity} = creds;
+        const requiredCreds = ['userId', 'ticker', 'companyName', 'stockPrice', 'quantity'];
 
         const result = await db.query(
             `INSERT INTO watchlist (
@@ -15,25 +15,17 @@ class Watchlist {
                 ticker,
                 companyname,
                 stockprice, 
-                quantity,
-                lastprice,
-                market_cap,
-                exchange,
-                last_date
+                quantity
             )
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+            VALUES ($1, $2, $3, $4, $5)
             RETURNING
                     userid,
                     ticker,
                     companyname,
                     stockprice,
-                    quantity,
-                    lastprice,
-                    market_cap,
-                    exchange,
-                    last_date
+                    quantity
                     `,
-                    [userId, ticker, companyName, stockPrice, quantity, lastPrice, marketCap, exchange, lastDate]
+                    [userId, ticker, companyName, stockPrice, quantity]
         );
 
         const stock = result.rows[0];
@@ -47,11 +39,7 @@ class Watchlist {
                     ticker,
                     companyname,
                     stockprice, 
-                    quantity,
-                    lastprice,
-                    market_cap,
-                    exchange,
-                    last_date
+                    quantity
                 FROM watchlist
                 WHERE userid = $1`,
                 [id]

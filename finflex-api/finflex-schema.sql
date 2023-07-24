@@ -14,10 +14,6 @@ CREATE TABLE stocks (
     companyName TEXT NOT NULL,
     stockPrice FLOAT NOT NULL,
     quantity INT NOT NULL,
-    lastPrice FLOAT NOT NULL,
-    market_cap FLOAT NOT NULL,
-    exchange FLOAT NOT NULL,
-    last_date DATE NOT NULL
 );
 
 CREATE TABLE watchlist (
@@ -27,10 +23,6 @@ CREATE TABLE watchlist (
     companyName TEXT NOT NULL,
     stockPrice FLOAT NOT NULL,
     quantity INT NOT NULL,
-    lastPrice FLOAT NOT NULL,
-    market_cap FLOAT NOT NULL,
-    exchange CHAR NOT NULL,
-    last_date DATE NOT NULL
 );
 
 CREATE TABLE expense (
