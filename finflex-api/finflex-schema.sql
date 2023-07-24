@@ -58,6 +58,7 @@ CREATE TABLE bills (
     billId SERIAL PRIMARY KEY,
     userId INT NOT NULL,
     billName TEXT NOT NULL,
+    desctripion TEXT NOT NULL,
     due DATE NOT NULL,
     status BOOLEAN NOT NULL,
     price FLOAT NOT NULL
