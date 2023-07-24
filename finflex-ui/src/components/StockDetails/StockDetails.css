@@ -20,3 +20,8 @@
   
   .Details { grid-area: Details; }
   
+  .plz {
+    margin-left: 14%; /* Add margin to the main content container to avoid overlapping */
+    overflow-x: hidden;
+    align-items: center;
+}

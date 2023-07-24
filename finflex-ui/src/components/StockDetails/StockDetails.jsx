@@ -11,8 +11,11 @@ const StockDetails = () => {
     <StockProvider symbol={symbol}>
       <div className="stock-details">
         <Navbar />
-        <StockSide />
+        <div className="plz">
         <Chart />
+        </div>
+        <StockSide />
+        
       </div>
     </StockProvider>
   );
