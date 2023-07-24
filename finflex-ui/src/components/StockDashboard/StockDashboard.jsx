@@ -34,7 +34,7 @@ import StockSearch from '../StockSearch/StockSearch';
 
 function StockDashboard() {
   return (
-    <StockProvider> {/* Wrap your components with StockProvider */}
+    <StockProvider>
       <div className='stockcontainer'>
         <div className="StockSearch"> <StockSearch /></div>
         {/* <div className="Chart"></div>
