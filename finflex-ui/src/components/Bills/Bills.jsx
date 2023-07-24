@@ -5,6 +5,8 @@ import BillCreation from "../BillCreation/BillCreation"
 import BillDetail from "../BillDetail/BillDetail"
 
 const Bills = () => {
+    const name = localStorage.getItem('name');
+    
     return (
         <div className="personal">
             <div className="random">
@@ -14,7 +16,7 @@ const Bills = () => {
             <Navbar />
         <div className="top">
             <div className="welcome">
-            <h2 style={{color:"#031D44"}}>View Your Bills, Hardcoded Name</h2>
+            <h2 style={{color:"#031D44"}}>View Your Bills, {name}</h2>
             </div>
             
             <div className="top1">

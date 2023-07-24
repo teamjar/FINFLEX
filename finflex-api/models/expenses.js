@@ -9,12 +9,6 @@ class Expense {
         const {userId, pName, pDesc, pPrice, pDate, category} = creds;
         const requiredCreds = ['userId', 'pName', 'pDesc', 'pPrice', 'category'];
 
-        try {
-            validateFields({ required: requiredCreds, obj: creds })
-        } catch (err) {
-            throw err
-        }
-
         const result = await db.query(
             `INSERT INTO expense (
                 userid,

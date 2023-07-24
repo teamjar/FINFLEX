@@ -9,23 +9,17 @@ class Watchlist {
         const {userId, ticker, companyName, stockPrice, quantity, lastPrice, marketCap, exchange, lastDate} = creds;
         const requiredCreds = ['userId', 'ticker', 'companyName', 'stockPrice', 'quantity', 'lastPrice', 'marketCap', 'exchange', 'lastDate'];
 
-        try {
-            validateFields({ required: requiredCreds, obj: creds })
-        } catch (err) {
-            throw err
-        }
-
-        const result = db.query(
-            `INSERT INTO stocks (
+        const result = await db.query(
+            `INSERT INTO watchlist (
                 userid,
                 ticker,
                 companyname,
                 stockprice, 
                 quantity,
                 lastprice,
-                marketcap,
+                market_cap,
                 exchange,
-                lastdate
+                last_date
             )
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
             RETURNING
@@ -35,9 +29,9 @@ class Watchlist {
                     stockprice,
                     quantity,
                     lastprice,
-                    marketcap,
+                    market_cap,
                     exchange,
-                    lastdate
+                    last_date
                     `,
                     [userId, ticker, companyName, stockPrice, quantity, lastPrice, marketCap, exchange, lastDate]
         );
@@ -48,17 +42,17 @@ class Watchlist {
     }
 
     static async fetchById(id) {
-        const result = db.query(
+        const result = await db.query(
             `SELECT userid,
                     ticker,
                     companyname,
                     stockprice, 
                     quantity,
                     lastprice,
-                    marketcap,
+                    market_cap,
                     exchange,
-                    lastdate
-                FROM stocks
+                    last_date
+                FROM watchlist
                 WHERE userid = $1`,
                 [id]
         );

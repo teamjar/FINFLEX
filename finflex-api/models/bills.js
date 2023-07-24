@@ -9,12 +9,6 @@ class Bill {
         const {userId, billName, due, status, price} = creds;
         const requiredCreds = ['userId', 'billName', 'due', 'status', 'price'];
 
-        try {
-            validateFields({ required: requiredCreds, obj: creds })
-        } catch (err) {
-            throw err
-        }
-
         const result = await db.query(
             `INSERT INTO bills (
                 userid,
