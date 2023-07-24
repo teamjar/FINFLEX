@@ -5,8 +5,9 @@ import PersonalSide from "../PersonalSide/PersonalSide"
 import Expense from "../Expense/Expense"
 import ExpenseDetail from "../ExpenseDetail/ExpenseDetail"
 
-
 const PersonalDashboard = () => {
+    const name = localStorage.getItem("name");
+    
     return (
         <div className="personal">
             <div className="random">
@@ -16,7 +17,7 @@ const PersonalDashboard = () => {
             <Navbar />
         <div className="top">
             <div className="welcome">
-            <h2 style={{color:"#031D44"}}>Hello, Hardcoded Name</h2>
+            <h2 style={{color:"#031D44"}}>Hello, {name}</h2>
             </div>
             
             <div className="top1">
@@ -33,7 +34,8 @@ const PersonalDashboard = () => {
             </div>
         </div>
         <InfoTile />
-       <h2 style={{color:"#031D44", margin:"15px", padding:"15px"}} className="head"><span>Expenses and Purchases:</span></h2>
+
+       <h2 style={{color:"#031D44", margin:"15px", padding:"15px"}} className="head"><span>Expenses and Purchases</span></h2>
        <Expense />
         <ExpenseDetail />
         

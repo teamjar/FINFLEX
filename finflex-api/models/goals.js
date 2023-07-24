@@ -9,17 +9,11 @@ class Goals {
         const {userId, gName, gDesc, target, dateCreated, dateDue, type} = creds;
         const requiredCreds = ['userId', 'gName', 'gDesc', 'target', 'dateCreated', 'dateDue', 'type'];
 
-        try {
-            validateFields({ required: requiredCreds, obj: creds })
-        } catch (err) {
-            throw err
-        }
-
         const result = await db.query(
             `INSERT INTO goals (
                 userid,
                 gname,
-                pdesc,
+                gdesc,
                 target,
                 datecreated,
                 datedue,

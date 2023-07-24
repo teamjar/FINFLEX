@@ -4,6 +4,8 @@ import PersonalSide from "../PersonalSide/PersonalSide"
 import FAQPage from "../FAQPage/FAQPage"
 
 const Help = () => {
+    const name = localStorage.getItem('name');
+
     return (
         <div className="personal">
             <div className="random">
@@ -13,7 +15,7 @@ const Help = () => {
             <Navbar />
         <div className="top">
             <div className="welcome">
-            <h2 style={{color:"#031D44"}}>A list of FAQ, Hardcoded Name</h2>
+            <h2 style={{color:"#031D44"}}>A list of FAQ, {name}</h2>
             </div>
             
             <div className="top1">
