@@ -11,11 +11,12 @@ const Expenses = require('./models/expenses');
 const Goals = require('./models/goals');
 const Watchlist = require('./models/watchlist');
 const Help = require('./models/help');
+const Bill = require("./models/bills");
+const Budget = require('./models/budget');
 
 const { NotFoundError } = require("./utils/errors");
 const config = require("./config");
 const jwt = require('jsonwebtoken');
-const Bill = require("./models/bills");
 
 const app = express();
 
@@ -150,7 +151,22 @@ app.get("/help/:id", async function (req, res, next) {
     const userId = req.params.id;
     const help = await Help.fetchById(userId);
     return res.status(200).json({ database : help })
-})
+});
+
+app.post("/budget", async function (req, res, next) {
+  try {
+      const user = await Budget.add(req.body);
+      return res.status(201).json({user});
+  } catch(err) {
+      next(err);
+  }
+});
+
+app.get("/budget/:id", async function (req, res, next) {
+  const userId = req.params.id;
+  const budget = await Budget.fetchById(userId);
+  return res.status(200).json({ database : budget })
+});
 
 // health check
 app.get("/", function (req, res) {
