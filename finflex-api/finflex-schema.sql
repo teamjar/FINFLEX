@@ -39,7 +39,7 @@ CREATE TABLE expense (
     pName TEXT NOT NULL,
     pDescription TEXT NOT NULL,
     pPrice TEXT NOT NULL,
-    pDate DATE NOT NULL,
+    pDate DATE DEFAULT NOW() NOT NULL,
     category TEXT NOT NULL
 );
 
@@ -49,9 +49,9 @@ CREATE TABLE goals (
     gName TEXT NOT NULL,
     gDesc TEXT NOT NULL,
     target FLOAT NOT NULL,
-    dateCreated DATE NOT NULL,
+    dateCreated DATE DEFAULT NOW() NOT NULL,
     dateDue DATE NOT NULL,
-    type TEXT NOT NULL
+    category TEXT NOT NULL
 );
 
 CREATE TABLE bills (
@@ -60,7 +60,7 @@ CREATE TABLE bills (
     billName TEXT NOT NULL,
     desctripion TEXT NOT NULL,
     due DATE NOT NULL,
-    status BOOLEAN NOT NULL,
+    status TEXT CHECK (status IN ('unpaid', 'paid', 'overdue')),
     price FLOAT NOT NULL
 );
 
@@ -70,3 +70,10 @@ CREATE TABLE help (
     question TEXT NOT NULL,
     answer TEXT NOT NULL
 );
+
+CREATE TABLE budget (
+    budgetId SERIAL PRIMARY KEY,
+    userId INT NOT NULL,
+    earnings FLOAT NOT NULL,
+    budget FLOAT NOT NULL
+)
