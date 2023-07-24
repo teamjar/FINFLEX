@@ -1,0 +1,27 @@
+.chart-filter-button {
+    width: 3rem;
+    margin: 0.5rem;
+    height: 2rem;
+    border-width: 1px;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-color: #c7d2fe; /* Corresponding color for indigo-300 */
+    color: #c7d2fe; /* Corresponding color for indigo-300 */
+  }
+  
+  .chart-filter-button:hover {
+    background-color: #6366f1; /* Corresponding color for indigo-600 */
+    color: #f3f4f6; /* Corresponding color for gray-100 */
+    border-color: #4c6ef5; /* Corresponding color for indigo-700 */
+  }
+  
+  .chart-filter-button.active {
+    background-color: #6366f1; /* Corresponding color for indigo-600 */
+    border-color: #4c6ef5; /* Corresponding color for indigo-700 */
+    color: #f3f4f6; /* Corresponding color for gray-100 */
+  }
+  
