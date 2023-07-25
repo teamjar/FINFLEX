@@ -1,19 +1,22 @@
- .filter-list {
-    display: flex;
-    margin: 0px;
-    padding: 0px;
-    justify-content: center;
-  }
+.filter-list {
+  display: flex;
+  margin: 0px;
+  padding: 0px;
+  justify-content: center;
+}
 
-  .chart-container {
-  height: 540px;
-  width: 1000px;
+.chart-container {
+  height: calc(100% - 3rem); 
+  width: calc(100% - 3rem);  
+
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding: 30px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
-  
 
+.area-chart {
+  height: 100%; 
+  width: 100%; 
+}
