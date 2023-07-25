@@ -74,9 +74,6 @@ const Chart = () => {
           return []; 
       }
   };
-  
-
-
 
   return (
     <Card>
@@ -94,31 +91,38 @@ const Chart = () => {
             </li>
           ))}
         </ul>
-
-        <ResponsiveContainer>
-          <AreaChart data={data}>
-            <defs>
-              <linearGradient id="chartColor" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#70A288" stopOpacity={1} />
-                <stop offset="95%" stopColor="#70A288" stopOpacity={0.2} />
-              </linearGradient>
-            </defs>
-            <Tooltip />
-            <Area
-              type="monotone"
-              dataKey="value"
-              stroke="#031D44"
-              fill="url(#chartColor)"
-              fillOpacity={1}
-              strokeWidth={0.5}
-            />
-            <XAxis dataKey="date" />
-            <YAxis domain={["dataMin", "dataMax"]} />
-          </AreaChart>
-        </ResponsiveContainer>
+  
+        <div className="area-chart">
+          <ResponsiveContainer>
+            <AreaChart data={data}>
+              <defs>
+                <linearGradient id="chartColor" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#70A288" stopOpacity={1} />
+                  <stop offset="95%" stopColor="#70A288" stopOpacity={0.2} />
+                </linearGradient>
+              </defs>
+              <Tooltip />
+              <Area
+                type="monotone"
+                dataKey="value"
+                stroke="#031D44"
+                fill="url(#chartColor)"
+                fillOpacity={1}
+                strokeWidth={0.5}
+              />
+              <XAxis dataKey="date" />
+              <YAxis domain={["dataMin", "dataMax"]} />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </Card>
   );
+  
+
+
+
+
 };
 
 export default Chart;
