@@ -20,21 +20,12 @@
   grid-area: Navbar;
 }
 
-/* .StockSearch {
-  grid-area: StockSearch;
-  display: flex;
-  justify-content: center;
-} */
-
 .StockSearch {
   grid-area: StockSearch;
   display: flex;
   justify-content: center;
   position: relative;
 }
-
-
-
 
 .Chart { grid-area: Chart; }
 

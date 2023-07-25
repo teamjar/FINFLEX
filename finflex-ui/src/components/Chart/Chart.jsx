@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import Card from '../Card/Card'
 import ChartFilter from "../ChartFilter/ChartFilter";
 import {
   Area,
@@ -48,7 +49,7 @@ const Chart = () => {
                 startTimestampUnix,
                 endTimestampUnix
             );
-            console.log('API response:', result); // Add this line to log the API response
+            console.log('API response:', result); 
             console.log("Stock Symbol: ", stockSymbol);
             setData(formatData(result));
         } catch (error) {
@@ -70,60 +71,53 @@ const Chart = () => {
               };
           });
       } else {
-          return []; // return an empty array if data or data.c is not available
+          return []; 
       }
   };
   
 
 
 
-return (
-    <div className="chart-container">
-      <ul className="filter-list">
-        {Object.keys(chartConfig).map((item) => (
-          <li key={item}>
-            <ChartFilter
-              text={item}
-              active={filter === item}
-              onClick={() => {
-                setFilter(item);
-              }}
+  return (
+    <Card>
+      <div className="chart-container">
+        <ul className="filter-list">
+          {Object.keys(chartConfig).map((item) => (
+            <li key={item}>
+              <ChartFilter
+                text={item}
+                active={filter === item}
+                onClick={() => {
+                  setFilter(item);
+                }}
+              />
+            </li>
+          ))}
+        </ul>
+
+        <ResponsiveContainer>
+          <AreaChart data={data}>
+            <defs>
+              <linearGradient id="chartColor" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#70A288" stopOpacity={1} />
+                <stop offset="95%" stopColor="#70A288" stopOpacity={0.2} />
+              </linearGradient>
+            </defs>
+            <Tooltip />
+            <Area
+              type="monotone"
+              dataKey="value"
+              stroke="#031D44"
+              fill="url(#chartColor)"
+              fillOpacity={1}
+              strokeWidth={0.5}
             />
-          </li>
-        ))}
-      </ul>
-
-      <ResponsiveContainer>
-      <AreaChart data={data}>
-          <defs>
-            <linearGradient id="chartColor" x1="0" y1="0" x2="0" y2="1">
-              <stop
-                offset="5%"
-                stopColor="#70A288"
-                stopOpacity={1}
-              />
-              <stop
-                offset="95%"
-                stopColor="#70A288"
-                stopOpacity={0.2}
-              />
-            </linearGradient>
-          </defs>
-          <Tooltip />
-          <Area
-            type="monotone"
-            dataKey="value"
-            stroke="#031D44"
-            fill="url(#chartColor)"
-            fillOpacity={1}
-            strokeWidth={0.5}
-          />
-          <XAxis dataKey="date" />
-          <YAxis domain={["dataMin", "dataMax"]} />
-        </AreaChart>
-      </ResponsiveContainer>
+            <XAxis dataKey="date" />
+            <YAxis domain={["dataMin", "dataMax"]} />
+          </AreaChart>
+        </ResponsiveContainer>
       </div>
-
+    </Card>
   );
 };
 
