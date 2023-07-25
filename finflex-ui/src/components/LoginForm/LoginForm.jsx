@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import './LoginForm.css';
 import axios from 'axios';
 import { remoteHostURL } from '../../apiClient';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const nav = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -16,6 +18,7 @@ const LoginForm = () => {
                 password: password
             });
             localStorage.setItem('userId', response.data.users.id);
+            nav('/personal');
         } catch(err) {
             console.log(err);
         }

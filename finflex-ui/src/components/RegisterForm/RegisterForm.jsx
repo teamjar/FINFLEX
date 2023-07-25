@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import './RegisterForm.css'
 import { remoteHostURL } from '../../apiClient';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
@@ -10,6 +11,7 @@ const RegisterForm = () => {
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const nav = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -26,11 +28,12 @@ const RegisterForm = () => {
       const response = axios.post(`${remoteHostURL}/register`, {
         email: user.email,
         username: user.username,
-        firstname: user.firstName,
-        lastname: user.lastName,
+        firstName: user.firstName,
+        lastName: user.lastName,
         password: user.password
       });
       localStorage.setItem('userId', response.data.users.id);
+      nav('/personal');
     } catch(err) {
       console.log(err);
     }
@@ -61,6 +64,18 @@ const RegisterForm = () => {
         </div>
         <div className="form-group">
         <div className='lol'>
+          <label htmlFor="firstName">User Name</label>
+          <input
+            type="text"
+            id="firstName"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          </div>
+        </div>
+        <div className="form-group">
+        <div className='lol'>
           <label htmlFor="firstName">First Name</label>
           <input
             type="text"
@@ -71,6 +86,7 @@ const RegisterForm = () => {
           />
           </div>
         </div>
+        
         <div className="form-group">
         <div className='lol'>
           <label htmlFor="lastName">Last Name</label>

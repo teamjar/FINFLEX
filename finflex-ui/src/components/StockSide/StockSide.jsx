@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 
 function PersonalSide() {
+  const nav = useNavigate();
 
   const handleLogOut = () => {
     localStorage.removeItem("name");
     localStorage.removeItem('userId');
+    nav('/');
   }
 
   return (
