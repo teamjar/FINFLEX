@@ -17,7 +17,8 @@ const LoginForm = () => {
                 email: email,
                 password: password
             });
-            localStorage.setItem('userId', response.data.users.id);
+            localStorage.setItem('userId', response.data.user.id);
+            localStorage.setItem('name', response.data.user.firstName);
             nav('/personal');
         } catch(err) {
             console.log(err);

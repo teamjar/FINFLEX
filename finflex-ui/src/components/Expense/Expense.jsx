@@ -23,7 +23,7 @@ export function ExpenseForm() {
     const authUser = async () => {
       try {
         const userId = localStorage.getItem('userId');
-        const res = await axios.get(`${remoteHostURL}/expenses/:${userId}`);
+        const res = await axios.get(`${remoteHostURL}/expenses/${userId}`);
         if (res?.data?.database) {
           setArray(res.data.database);
         }
@@ -48,11 +48,16 @@ export function ExpenseForm() {
         pDate: date,
         category: category
       })
-
-      console.log(res.data);
-
       const newArray = [...array, res.data.user];
       setArray(newArray);
+      console.log(newArray);
+
+      setName('');
+      setDesc('');
+      setPrice('');
+      setDate('');
+      setCat('');
+
     } catch(err) {
       console.log(err)
     }

@@ -13,7 +13,7 @@ const RegisterForm = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const nav = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const user = {
       username,
@@ -25,14 +25,15 @@ const RegisterForm = () => {
     };
 
     try {
-      const response = axios.post(`${remoteHostURL}/register`, {
+      const response = await axios.post(`${remoteHostURL}/register`, {
         email: user.email,
         username: user.username,
         firstName: user.firstName,
         lastName: user.lastName,
         password: user.password
       });
-      localStorage.setItem('userId', response.data.users.id);
+      localStorage.setItem('userId', response.data.user.id);
+      localStorage.setItem('name', response.data.user.firstName);
       nav('/personal');
     } catch(err) {
       console.log(err);

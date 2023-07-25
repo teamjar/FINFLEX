@@ -23,7 +23,7 @@ export function BillCreationForm() {
     const authUser = async () => {
       try {
         const userId = localStorage.getItem('userId');
-        const res = await axios.get(`${remoteHostURL}/bills/:${userId}`);
+        const res = await axios.get(`${remoteHostURL}/bills/${userId}`);
         if (res?.data?.database) {
           setArray(res.data.database);
         }
@@ -48,12 +48,8 @@ export function BillCreationForm() {
         status: status,
         price: price
       })
-
-      console.log(res.data);
-
       const newArray = [...array, res.data.user];
       setArray(newArray);
-
     } catch(err) {
       console.log(err)
     }
@@ -99,7 +95,7 @@ export function BillCreationForm() {
           <label className="ti">Due Date</label>
           <input
             className="el"
-            type="datetime-local"
+            type="date"
             placeholder="Enter a deadline"
             name="due"
             value={due}

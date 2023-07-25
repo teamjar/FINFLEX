@@ -23,7 +23,7 @@ export function GoalCreationForm() {
     const authUser = async () => {
       try {
         const userId = localStorage.getItem('userId');
-        const res = await axios.get(`${remoteHostURL}/goals/:${userId}`);
+        const res = await axios.get(`${remoteHostURL}/goals/${userId}`);
         if (res?.data?.database) {
           setArray(res.data.database);
         }
@@ -53,6 +53,7 @@ export function GoalCreationForm() {
 
       const newArray = [...array, res.data.user];
       setArray(newArray);
+      console.log(newArray)
     } catch(err) {
       console.log(err)
     }
@@ -98,7 +99,7 @@ export function GoalCreationForm() {
           <label className="ti">Deadline</label>
           <input
             className="el"
-            type="datetime-local"
+            type="date"
             placeholder="Enter a deadline"
             name="dateDue"
             value={deadline}

@@ -52,7 +52,7 @@ CREATE TABLE bills (
     billName TEXT NOT NULL,
     billDesc TEXT NOT NULL,
     due DATE NOT NULL,
-    status TEXT CHECK (status IN ('unpaid', 'paid', 'overdue')),
+    status TEXT NOT NULL,
     price FLOAT NOT NULL
 );
 
