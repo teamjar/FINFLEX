@@ -93,9 +93,9 @@ const useDebouncedEffect = (effect, delay, deps) => {
 };
 
 const StockSearch = () => {
-
   const [input, setInput] = useState("");
   const [bestMatches, setBestMatches] = useState([]);
+  const name = localStorage.getItem('name');
 
   useDebouncedEffect(() => {
     updateBestMatches();
@@ -124,7 +124,7 @@ const StockSearch = () => {
   return (
     <div className="top">
             <div className="welcome">
-        <h2 style={{color:"#031D44"}}>Hello, </h2>
+        <h2 style={{color:"#031D44"}}>Hello, {name}</h2>
       </div>
       <div className="top1">
         <div className="search-bar">

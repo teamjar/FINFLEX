@@ -2,6 +2,12 @@ import { Link } from 'react-router-dom'
 
 
 function PersonalSide() {
+
+  const handleLogOut = () => {
+    localStorage.removeItem("name");
+    localStorage.removeItem('userId');
+  }
+
   return (
     <div className="side">
       <h2 style={{color:"#031D44", textAlign:"center", fontSize:"30px"}}>FinFlex™</h2>
@@ -21,11 +27,9 @@ function PersonalSide() {
         <li><Link to="/watch" style={{color:"#031D44"}}>Watch List</Link></li>
         </div>
 
-
-
         <div className='one' style={{position:"absolute", bottom:"0"}}>
         <img className='icon3' src="https://static-00.iconduck.com/assets.00/log-out-icon-2048x2048-cru8zabe.png" />
-        <li><Link style={{color:"#031D44"}}>Log Out</Link></li>
+        <li><Link onClick={handleLogOut} to={'/'}  style={{color:"#031D44"}}>Log Out</Link></li>
         </div>
 
       </ul>

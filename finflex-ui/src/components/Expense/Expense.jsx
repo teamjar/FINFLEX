@@ -1,4 +1,7 @@
 import "./Expense.css";
+import { useEffect, useState } from "react";
+import { remoteHostURL } from "../../apiClient";
+import axios from "axios";
 
 export default function Expense() {
   return (
@@ -9,6 +12,52 @@ export default function Expense() {
 }
 
 export function ExpenseForm() {
+  const [pName, setName] = useState('');
+  const [pDesc, setDesc] = useState('');
+  const [price, setPrice] = useState('');
+  const [date, setDate] = useState('');
+  const [category, setCat] = useState('');
+  const [array, setArray] = useState([]); //pname, pdescription, pprice, pdate, category
+  
+  useEffect(() => {
+    const authUser = async () => {
+      try {
+        const userId = localStorage.getItem('userId');
+        const res = await axios.get(`${remoteHostURL}/expenses/:${userId}`);
+        if (res?.data?.database) {
+          setArray(res.data.database);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    authUser();
+  }, [])
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const userId = localStorage.getItem('userId');
+      const res = await axios.post(`${remoteHostURL}/expenses`, {
+        userId: userId,
+        pName: pName,
+        pDesc: pDesc,
+        pPrice: price,
+        pDate: date,
+        category: category
+      })
+
+      console.log(res.data);
+
+      const newArray = [...array, res.data.user];
+      setArray(newArray);
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
   return (
     <div>
       <div className="flow">
@@ -18,6 +67,8 @@ export function ExpenseForm() {
             className="el"
             placeholder="Enter name of purchase"
             name="pName"
+            value={pName}
+            onChange={e => setName(e.target.value)}
           />
         </div>
 
@@ -26,7 +77,9 @@ export function ExpenseForm() {
           <input
             className="el"
             placeholder="Enter a description"
-            name="pDescription" 
+            name="pDescription"
+            value={pDesc}
+            onChange={e => setDesc(e.target.value)} 
           />
         </div>
 
@@ -35,7 +88,9 @@ export function ExpenseForm() {
           <input
             className="el"
             placeholder="Enter paid amount"
-            name="pPrice" 
+            name="pPrice"
+            value={price}
+            onChange={e => setPrice(e.target.value)} 
           />
         </div>
 
@@ -44,13 +99,15 @@ export function ExpenseForm() {
           <input
             className="el"
             type="date"
-            name="pDate" 
+            name="pDate"
+            value={date}
+            onChange={e => setDate(e.target.value)} 
           />
         </div>
 
         <div className="si">
           <label className="ti">Category</label>
-          <select id="status" name="category">
+          <select id="status" name="category" value={category} onChange={e => setCat(e.target.value)}>
           <option value="food">Food</option>
             <option value="housing">Housing</option>
             <option value="transportation">Transportation</option>
@@ -64,7 +121,7 @@ export function ExpenseForm() {
           </select>
         </div>
 
-        <button type="submit" className="btn2">
+        <button type="submit" className="btn2" onClick={handleSubmit}>
           Add
         </button>
       </div>

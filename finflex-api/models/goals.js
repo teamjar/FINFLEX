@@ -6,8 +6,8 @@ const { BadRequestError, UnauthorizedError } = require("../utils/errors")
 
 class Goals {
     static async add(creds) {
-        const {userId, gName, gDesc, target, dateCreated, dateDue, type} = creds;
-        const requiredCreds = ['userId', 'gName', 'gDesc', 'target', 'dateCreated', 'dateDue', 'type'];
+        const {userId, gName, gDesc, target, dateDue, category} = creds;
+        const requiredCreds = ['userId', 'gName', 'gDesc', 'target', 'dateDue', 'category'];
 
         const result = await db.query(
             `INSERT INTO goals (
@@ -15,11 +15,10 @@ class Goals {
                 gname,
                 gdesc,
                 target,
-                datecreated,
                 datedue,
-                type
+                category
             )
-            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            VALUES ($1, $2, $3, $4, $5, $6)
             RETURNING
                 userid,
                 gname,
@@ -27,8 +26,8 @@ class Goals {
                 target,
                 datecreated,
                 datedue,
-                type`,
-            [userId, gName, gDesc, target, dateCreated, dateDue, type]
+                category`,
+            [userId, gName, gDesc, target, dateDue, category]
         );
 
         const goals = result.rows[0];
@@ -45,7 +44,7 @@ class Goals {
                 target,
                 datecreated,
                 datedue,
-                type
+                category
             FROM goals
             WHERE userid = $1`,
             [id]

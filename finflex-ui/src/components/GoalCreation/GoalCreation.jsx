@@ -1,4 +1,7 @@
 import "./GoalCreation.css";
+import { useEffect, useState } from "react";
+import { remoteHostURL } from "../../apiClient";
+import axios from "axios";
 
 export default function GoalCreation() {
   return (
@@ -9,6 +12,52 @@ export default function GoalCreation() {
 }
 
 export function GoalCreationForm() {
+  const [gName, setName] = useState('');
+  const [gDesc, setDesc] = useState('');
+  const [amount, setAmount] = useState('');
+  const [deadline, setDeadline] = useState('');
+  const [category, setCat] = useState('');
+  const [array, setArray] = useState([]); //gname, gdesc, target(amount), datedue(deadline), category
+
+  useEffect(() => {
+    const authUser = async () => {
+      try {
+        const userId = localStorage.getItem('userId');
+        const res = await axios.get(`${remoteHostURL}/goals/:${userId}`);
+        if (res?.data?.database) {
+          setArray(res.data.database);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    authUser();
+  }, [])
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const userId = localStorage.getItem('userId');
+      const res = await axios.post(`${remoteHostURL}/goals`, {
+        userId: userId,
+        gName: gName,
+        gDesc: gDesc,
+        target: amount,
+        dateDue: deadline,
+        category: category
+      })
+
+      console.log(res.data);
+
+      const newArray = [...array, res.data.user];
+      setArray(newArray);
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
   return (
     <div>
       <div className="flow">
@@ -18,6 +67,8 @@ export function GoalCreationForm() {
             className="el"
             placeholder="Enter a name for your goal"
             name="gName"
+            value={gName}
+            onChange={e => setName(e.target.value)}
           />
         </div>
 
@@ -27,6 +78,8 @@ export function GoalCreationForm() {
             className="el"
             placeholder="Enter a short goal description"
             name="gDesc"
+            value={gDesc}
+            onChange={e => setDesc(e.target.value)}
           />
         </div>
 
@@ -35,7 +88,9 @@ export function GoalCreationForm() {
           <input
             className="el"
             placeholder="Enter a specific goal amount"
-            name="target" 
+            name="target"
+            value={amount} 
+            onChange={e => setAmount(e.target.value)}
           />
         </div>
 
@@ -46,12 +101,14 @@ export function GoalCreationForm() {
             type="datetime-local"
             placeholder="Enter a deadline"
             name="dateDue"
+            value={deadline}
+            onChange={e => setDeadline(e.target.value)}
           />
         </div>
 
         <div className="si">
           <label className="ti">Category</label>
-          <select id="status" name="category">
+          <select id="status" name="category" value={category} onChange={e => setCat(e.target.value)}>
           <option value="food">Food</option>
             <option value="housing">Housing</option>
             <option value="transportation">Transportation</option>
@@ -65,7 +122,7 @@ export function GoalCreationForm() {
           </select>
         </div>
 
-        <button type="submit" className="btn2">
+        <button type="submit" className="btn2" onClick={handleSubmit}>
           Add
         </button>
       </div>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import './RegisterForm.css'
+import { remoteHostURL } from '../../apiClient';
 
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
@@ -22,7 +23,7 @@ const RegisterForm = () => {
     };
 
     try {
-      const response = axios.post("http://localhost:3001/register", {
+      const response = axios.post(`${remoteHostURL}/register`, {
         email: user.email,
         username: user.username,
         firstname: user.firstName,

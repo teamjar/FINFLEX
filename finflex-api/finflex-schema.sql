@@ -13,7 +13,7 @@ CREATE TABLE stocks (
     ticker TEXT NOT NULL,
     companyName TEXT NOT NULL,
     stockPrice FLOAT NOT NULL,
-    quantity INT NOT NULL,
+    quantity INT NOT NULL
 );
 
 CREATE TABLE watchlist (
@@ -22,7 +22,7 @@ CREATE TABLE watchlist (
     ticker TEXT NOT NULL,
     companyName TEXT NOT NULL,
     stockPrice FLOAT NOT NULL,
-    quantity INT NOT NULL,
+    quantity INT NOT NULL
 );
 
 CREATE TABLE expense (
@@ -50,7 +50,7 @@ CREATE TABLE bills (
     billId SERIAL PRIMARY KEY,
     userId INT NOT NULL,
     billName TEXT NOT NULL,
-    desctripion TEXT NOT NULL,
+    billDesc TEXT NOT NULL,
     due DATE NOT NULL,
     status TEXT CHECK (status IN ('unpaid', 'paid', 'overdue')),
     price FLOAT NOT NULL
