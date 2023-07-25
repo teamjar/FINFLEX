@@ -15,8 +15,3 @@ const StockProvider = ({ children, symbol }) => {
 export { StockProvider, StockContext };
 
 
-// import React from "react";
-
-// const StockContext = React.createContext();
-
-// export default StockContext;
