@@ -140,12 +140,7 @@ const StockSearch = () => {
               }
             }}
           />
-          {input && (
-            // <button onClick={clear} className="btn">
-            //   <XIcon className="h-4 w-4 fill-gray-500" />
-            // </button>
-            <button type="submit" onClick={clear} className="btn">Clear</button>
-          )}
+          
           <button type="submit" onClick={updateBestMatches} className="btn">Search</button>
         </div>
         <div className="pic2">
