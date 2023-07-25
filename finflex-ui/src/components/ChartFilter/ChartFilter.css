@@ -9,19 +9,19 @@
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s;
-    border-color: #c7d2fe; /* Corresponding color for indigo-300 */
-    color: #c7d2fe; /* Corresponding color for indigo-300 */
+    border-color: #70A288;
+    color: #70A288;
   }
   
   .chart-filter-button:hover {
-    background-color: #6366f1; /* Corresponding color for indigo-600 */
-    color: #f3f4f6; /* Corresponding color for gray-100 */
-    border-color: #4c6ef5; /* Corresponding color for indigo-700 */
+    background-color: #70A288;
+    color: white;
+    border-color: #70A288;
   }
   
   .chart-filter-button.active {
-    background-color: #6366f1; /* Corresponding color for indigo-600 */
-    border-color: #4c6ef5; /* Corresponding color for indigo-700 */
-    color: #f3f4f6; /* Corresponding color for gray-100 */
+    background-color: #70A288;
+    color: white;
+    border-color: #70A288;
   }
   

@@ -93,18 +93,18 @@ return (
         ))}
       </ul>
       <ResponsiveContainer>
-        <AreaChart data={data}>
+      <AreaChart data={data}>
           <defs>
             <linearGradient id="chartColor" x1="0" y1="0" x2="0" y2="1">
               <stop
                 offset="5%"
-                stopColor="rgb(199 210 254)"
-                stopOpacity={0.8}
+                stopColor="#70A288"
+                stopOpacity={1}
               />
               <stop
                 offset="95%"
-                stopColor="rgb(199 210 254)"
-                stopOpacity={0}
+                stopColor="#70A288"
+                stopOpacity={0.2}
               />
             </linearGradient>
           </defs>
@@ -112,7 +112,7 @@ return (
           <Area
             type="monotone"
             dataKey="value"
-            stroke="#312e81"
+            stroke="#031D44"
             fill="url(#chartColor)"
             fillOpacity={1}
             strokeWidth={0.5}

@@ -8,23 +8,19 @@ function PersonalSide() {
       <ul>
         <div className='one'>
         <img className='icon' src="https://clipart-library.com/newhp/kissclipart-dashboard-icon-png-clipart-computer-icons-dashboar-dcb8014117ab1ea8.png" />
-        <li><Link to="/personal" style={{color:"#031D44"}}>Dashboard</Link></li>
+        <li><Link to="/stocks" style={{color:"#031D44"}}>Dashboard</Link></li>
         </div>
 
         <div className='one'>
-        <img className='icon' src="https://static.thenounproject.com/png/371327-200.png"/>
-        <li><Link to="/goals" style={{color:"#031D44"}}>My Goals</Link></li>
+        <img className='icon' src="https://www.pngarts.com/files/17/Finance-Silhouette-PNG-Picture.png"/>
+        <li><Link to="/mystocks" style={{color:"#031D44"}}>My Stocks</Link></li>
         </div>
 
         <div className='one'>
-        <img className='icon' src="https://cdn-icons-png.flaticon.com/512/3533/3533887.png" />
-        <li><Link to="/bills" style={{color:"#031D44"}}>Bills</Link></li>
+        <img className='icon' src="https://cdn-icons-png.flaticon.com/128/1118/1118301.png" />
+        <li><Link to="/watch" style={{color:"#031D44"}}>Watch List</Link></li>
         </div>
 
-        <div className='one'>
-        <img className='icon2' src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Question_mark_alternate.svg" />
-        <li><Link to="/help" style={{color:"#031D44"}}>Ask Help</Link></li>
-        </div>
 
 
         <div className='one' style={{position:"absolute", bottom:"0"}}>

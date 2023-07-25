@@ -124,7 +124,7 @@ const StockSearch = () => {
   return (
     <div className="top">
             <div className="welcome">
-        <h2 style={{color:"#031D44"}}>Hello, Hardcoded Name</h2>
+        <h2 style={{color:"#031D44"}}>Hello, </h2>
       </div>
       <div className="top1">
         <div className="search-bar">
@@ -132,7 +132,7 @@ const StockSearch = () => {
             type="text" 
             value={input}
             className="enter" 
-            placeholder="Search for transactions and more" 
+            placeholder="Search for stocks" 
             onChange={(event) => setInput(event.target.value)}
             onKeyPress={(event) => {
               if (event.key === "Enter") {
@@ -144,9 +144,9 @@ const StockSearch = () => {
             // <button onClick={clear} className="btn">
             //   <XIcon className="h-4 w-4 fill-gray-500" />
             // </button>
-            <button type="submit" onClick={clear} className="btn"> X </button>
+            <button type="submit" onClick={clear} className="btn">Clear</button>
           )}
-          <button type="submit" onClick={updateBestMatches} className="btn"> Search </button>
+          <button type="submit" onClick={updateBestMatches} className="btn">Search</button>
         </div>
         <div className="pic2">
           <img style={{width:"40px", marginLeft:"10px", padding:"10px"}} src="https://cdn-icons-png.flaticon.com/512/1827/1827504.png" />
