@@ -92,6 +92,7 @@ return (
           </li>
         ))}
       </ul>
+
       <ResponsiveContainer>
       <AreaChart data={data}>
           <defs>
@@ -121,7 +122,8 @@ return (
           <YAxis domain={["dataMin", "dataMax"]} />
         </AreaChart>
       </ResponsiveContainer>
-    </div>
+      </div>
+
   );
 };
 
