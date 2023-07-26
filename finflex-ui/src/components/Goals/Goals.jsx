@@ -3,7 +3,6 @@ import Navbar from '../Navbar/Navbar'
 import PersonalSide from "../PersonalSide/PersonalSide"
 import Budget from "../Budget/Budget"
 import GoalCreation from "../GoalCreation/GoalCreation"
-import GoalDetail from "../GoalDetail/GoalDetail"
 
 const Goals = () => {
     const name = localStorage.getItem('name');
@@ -47,7 +46,7 @@ const Goals = () => {
         <h2 style={{color:"#031D44", margin:"15px", padding:"15px"}} className="head"><span>Create Your Goals:</span></h2>
         <GoalCreation />
 
-            <GoalDetail />
+            {/* <GoalDetail /> */}
             <br></br>
             <br></br>
             <br></br>

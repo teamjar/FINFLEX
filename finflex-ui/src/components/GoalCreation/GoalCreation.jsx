@@ -2,6 +2,7 @@ import "./GoalCreation.css";
 import { useEffect, useState } from "react";
 import { remoteHostURL } from "../../apiClient";
 import axios from "axios";
+import GoalDetail from "../GoalDetail/GoalDetail";
 
 export default function GoalCreation() {
   return (
@@ -110,6 +111,7 @@ export function GoalCreationForm() {
         <div className="si">
           <label className="ti">Category</label>
           <select id="status" name="category" value={category} onChange={e => setCat(e.target.value)}>
+            <option></option>
           <option value="food">Food</option>
             <option value="housing">Housing</option>
             <option value="transportation">Transportation</option>
@@ -127,6 +129,16 @@ export function GoalCreationForm() {
           Add
         </button>
       </div>
+      <GoalDetail/>
+      {array.map((a,idx) => (
+        <div key={idx}>
+          <p>{a.gname}</p>
+          <p>{a.gdesc}</p>
+          <p>{a.target}</p>
+          <p>{a.datedue}</p>
+          <p>{a.category}</p>
+        </div>
+      ))}
     </div>
   );
 }

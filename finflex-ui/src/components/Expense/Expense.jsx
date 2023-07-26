@@ -114,6 +114,7 @@ export function ExpenseForm() {
         <div className="si">
           <label className="ti">Category</label>
           <select id="status" name="category" value={category} onChange={e => setCat(e.target.value)}>
+            <option></option>
           <option value="food">Food</option>
             <option value="housing">Housing</option>
             <option value="transportation">Transportation</option>

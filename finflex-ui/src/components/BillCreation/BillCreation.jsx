@@ -2,6 +2,7 @@ import "./BillCreation.css";
 import { useEffect, useState } from "react";
 import { remoteHostURL } from "../../apiClient";
 import axios from "axios";
+import BillDetail from '../BillDetail/BillDetail'
 
 export default function BillCreation() {
   return (
@@ -115,6 +116,16 @@ export function BillCreationForm() {
           Add
         </button>
       </div>
+      <BillDetail/>
+      {array.map((a,idx) => (
+        <div key={idx}>
+          <p>{a.billname}</p>
+          <p>{a.billdesc}</p>
+          <p>{a.due}</p>
+          <p>{a.status}</p>
+          <p>{a.price}</p>
+        </div>
+      ))}
     </div>
   );
 }

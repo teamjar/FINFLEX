@@ -2,7 +2,7 @@ import "./Bills.css"
 import Navbar from '../Navbar/Navbar'
 import PersonalSide from "../PersonalSide/PersonalSide"
 import BillCreation from "../BillCreation/BillCreation"
-import BillDetail from "../BillDetail/BillDetail"
+//import BillDetail from "../BillDetail/BillDetail"
 
 const Bills = () => {
     const name = localStorage.getItem('name');
@@ -44,7 +44,7 @@ const Bills = () => {
 
         <div style={{backgroundColor:"#F2EFE9"}}>
         <BillCreation />
-        <BillDetail />
+        {/* <BillDetail /> */}
         
         <br></br>
         <br></br>
