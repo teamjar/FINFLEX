@@ -25,15 +25,7 @@
 }
 
 
-.navbar__item.active::after {
-  content: '';
-  position: absolute;
-  bottom: -5px; 
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #031D44;
-}
+
 
 .pic {
   width: 50px;
