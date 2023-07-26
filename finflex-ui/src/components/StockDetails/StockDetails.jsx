@@ -1,4 +1,4 @@
-import { useParams} from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import { useContext, useEffect, useState } from 'react';
 import { StockProvider, StockContext } from "../../Context/StockContext";
 import { fetchStockDetails, fetchQuote } from '../api/stock-api';
@@ -8,6 +8,7 @@ import StockSide from '../StockSide/StockSide'
 import Overview from "../Overview/Overview";
 import "./StockDetails.css"
 import Details from "../Details/Details";
+
 
 const StockDetails = () => {
   const { symbol } = useParams();
@@ -28,6 +29,12 @@ const StockDetails = () => {
     
     fetchData();
   }, [symbol]);
+
+  const navigate = useNavigate();
+
+  const buyStock = () => {
+    navigate(`/stock-details/${symbol}/buy`);
+  };
 
   return (
     <StockProvider symbol={symbol}>
@@ -52,6 +59,9 @@ const StockDetails = () => {
         </div>
         <div className="Details">
           <Details details={stockDetails} />
+      </div>
+      <div className="BuyButton">
+        <button onClick={buyStock}>Buy Stocks</button>
       </div>
         
 

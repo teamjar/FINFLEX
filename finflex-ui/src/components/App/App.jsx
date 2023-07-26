@@ -8,6 +8,7 @@ import Bills from '../Bills/Bills'
 import Help from '../Help/Help'
 import StockDashboard from '../StockDashboard/StockDashboard'
 import StockDetails from '../StockDetails/StockDetails'
+import BuyStockPage from '../BuyStockPage/BuyStockPage'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/help" element={<Help />} />
           <Route path="/stocks" element={<StockDashboard />} />
           <Route path="/stock-details/:symbol" element={<StockDetails />} />
+          <Route path="/stock-details/:symbol/buy" element={<BuyStockPage />} /> 
         </Routes>
       </Router>
     </div>
