@@ -115,15 +115,15 @@ export function ExpenseForm() {
           <label className="ti">Category</label>
           <select id="status" name="category" value={category} onChange={e => setCat(e.target.value)}>
             <option></option>
-          <option value="food">Food</option>
-            <option value="housing">Housing</option>
-            <option value="transportation">Transportation</option>
-            <option value="education">Education</option>
-            <option value="health">Health/Medical</option>
-            <option value="entertainment">Entertainment</option>
-            <option value="personal">Personal Care</option>
-            <option value="debt">Debt/Loans</option>
-            <option value="misc">Miscellaneous</option>
+          <option value="Food">Food</option>
+            <option value="Housing">Housing</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Education">Education</option>
+            <option value="Health/Medical">Health/Medical</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Personal">Personal Care</option>
+            <option value="Debt/Loans">Debt/Loans</option>
+            <option value="Miscellaneous">Miscellaneous</option>
             
           </select>
         </div>
@@ -135,12 +135,17 @@ export function ExpenseForm() {
       <ExpenseDetail/>
       {array.map((a, idx) => (
         <div key={idx}>
-          <p>{a.pname}</p>
-          <p>{a.pdescription}</p>
-          <p>{a.pprice}</p>
-          <p>{a.pdate}</p>
-          <p>{a.category}</p>
+        <table>
+        <tr>
+          <th><span style={{color:"#031D44"}}>{a.category}</span></th>
+          <th><span style={{color:"#031D44"}}>{a.pname}</span></th>
+          <th><span style={{color:"#031D44"}}>{a.pdescription}</span></th>
+          <th><span style={{color:"#031D44"}}>{a.pprice}</span></th>
+          <th><span style={{color:"#031D44"}}>{a.pdate}</span></th>
+        </tr>
+        </table>
         </div>
+
       ))}
     </div>
   );

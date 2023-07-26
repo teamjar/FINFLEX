@@ -44,3 +44,18 @@
     cursor: pointer;
     transform: scale(1.1)
 }
+
+th, td {
+  border: 2px solid rgb(112, 162, 136);
+  width: 20%;
+  background-color: #ece8df;
+  padding: 20px;
+}
+
+table {
+  width: 99%;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-collapse: collapse; 
+}
