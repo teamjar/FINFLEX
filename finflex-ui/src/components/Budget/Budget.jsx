@@ -44,6 +44,14 @@ export function BudgetForm() {
       })
       const newArray = [...array, res.data.user];
       setArray(newArray);
+
+      if (localStorage.getItem("earnings")) {
+        const newEarnings = localStorage.getItem("earnings") + earnings
+        localStorage.removeItem("earnings")
+        localStorage.setItem("earnings", newEarnings);
+      } else {
+        localStorage.setItem("earnings", earnings);
+      }
     } catch(err) {
       console.log(err)
     }

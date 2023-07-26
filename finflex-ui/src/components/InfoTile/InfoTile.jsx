@@ -1,11 +1,13 @@
 import "./InfoTile.css"
 
 const InfoTile = () => {
+    const earnings = localStorage.getItem("earnings")
+
     return (
         <div className="tile2">
             <div className="tile square">
             <h3>Total Earnings</h3>
-            <h1>$0.00</h1>
+            <h1>${earnings}</h1>
             </div>
             
             <div className="tile square2">

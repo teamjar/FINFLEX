@@ -2,6 +2,7 @@ import "./Expense.css";
 import { useEffect, useState } from "react";
 import { remoteHostURL } from "../../apiClient";
 import axios from "axios";
+import ExpenseDetail from "../ExpenseDetail/ExpenseDetail";
 
 export default function Expense() {
   return (
@@ -130,6 +131,16 @@ export function ExpenseForm() {
           Add
         </button>
       </div>
+      <ExpenseDetail/>
+      {array.map((a, idx) => (
+        <div key={idx}>
+          <p>{a.pname}</p>
+          <p>{a.pdescription}</p>
+          <p>{a.pprice}</p>
+          <p>{a.pdate}</p>
+          <p>{a.category}</p>
+        </div>
+      ))}
     </div>
   );
 }

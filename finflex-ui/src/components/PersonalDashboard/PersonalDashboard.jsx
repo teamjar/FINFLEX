@@ -8,6 +8,7 @@ import ExpenseDetail from "../ExpenseDetail/ExpenseDetail"
 const PersonalDashboard = () => {
     const name = localStorage.getItem("name");
     
+    
     return (
         <div className="personal">
             <div className="random">
@@ -37,7 +38,7 @@ const PersonalDashboard = () => {
 
        <h2 style={{color:"#031D44", margin:"15px", padding:"15px"}} className="head"><span>Expenses and Purchases</span></h2>
        <Expense />
-        <ExpenseDetail />
+        {/* <ExpenseDetail /> */}
         
         <div className="personal2">
        
