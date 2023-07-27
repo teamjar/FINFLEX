@@ -132,6 +132,7 @@ export function BillCreationForm() {
           </table>
         </div>
       ))}
+       <br></br>
     </div>
   );
 }

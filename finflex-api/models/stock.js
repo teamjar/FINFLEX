@@ -6,7 +6,7 @@ const { BadRequestError, UnauthorizedError } = require("../utils/errors")
 
 class Stock {
     static async add(creds) {
-        const {userId, ticker, companyName, stockPrice, quantity, lastPrice, marketCap, exchange, lastDate} = creds;
+        const {userId, ticker, companyName, stockPrice, quantity} = creds;
         const requiredCreds = ['userId', 'ticker', 'companyName', 'stockPrice', 'quantity'];
 
         const result = await db.query(

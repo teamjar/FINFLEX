@@ -21,8 +21,7 @@ CREATE TABLE watchlist (
     userid INT NOT NULL,
     ticker TEXT NOT NULL,
     companyName TEXT NOT NULL,
-    stockPrice FLOAT NOT NULL,
-    quantity INT NOT NULL
+    stockPrice FLOAT NOT NULL
 );
 
 CREATE TABLE expense (

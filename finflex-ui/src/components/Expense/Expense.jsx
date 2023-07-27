@@ -144,9 +144,11 @@ export function ExpenseForm() {
           <th><span style={{color:"#031D44"}}>{a.pdate}</span></th>
         </tr>
         </table>
+       
         </div>
 
       ))}
+       <br></br>
     </div>
   );
 }

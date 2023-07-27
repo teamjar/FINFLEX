@@ -3,18 +3,18 @@ import StockSide from '../StockSide/StockSide';
 import Navbar from '../Navbar/Navbar';
 import './StockDashbord.css';
 import StockSearch from '../StockSearch/StockSearch';
+import StockCarousel from '../StockCarousel/StockCarousel';
 
 function StockDashboard() {
   return (
   <div className='plz'>
-    <Navbar />
+    {/* <Navbar /> */}
     <StockProvider>
-      <div className='stockcontainers'>
-        <div> <StockSearch /></div>
-        {/* <div className="Chart"></div>
-        <div className="Overview"></div>
-        <div className="Details"></div> */}
-        <div className="StockSide"> <StockSide /> </div> 
+      <div className='stock-dashboard'>
+      <div className="Navbar"><Navbar/></div>
+      <div className="StockSearch"> <StockSearch/></div>
+      <div className="StockSide"> <StockSide/> </div>
+      <div className="StockCarousel"> <StockCarousel/></div>
       </div>
     </StockProvider>
   </div>
@@ -22,3 +22,4 @@ function StockDashboard() {
 }
 
 export default StockDashboard;
+

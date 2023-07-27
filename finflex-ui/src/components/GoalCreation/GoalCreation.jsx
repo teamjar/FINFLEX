@@ -141,8 +141,10 @@ export function GoalCreationForm() {
           <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>{a.datedue}</span></th>
           </tr>
           </table>
+         
         </div>
       ))}
+       <br></br>
     </div>
   );
 }
