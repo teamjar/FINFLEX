@@ -5,36 +5,27 @@ import axios from 'axios'
 import { remoteHostURL } from '../../apiClient';
 
 function StockCarousel() {
-  const stocks = [
-    { id: 1, name: 'Apple', price: 150, change: 2 },
-    { id: 2, name: 'Google', price: 2800, change: -10 },
-    { id: 3, name: 'Microsoft', price: 220, change: 5 },
-    { id: 4, name: 'Tesla', price: 700, change: -15 },
-    { id: 5, name: 'Facebook', price: 250, change: 8 },
-    { id: 6, name: 'Amazon', price: 3300, change: -20 },
-    { id: 7, name: 'Netflix', price: 500, change: 10 },
-  ];
-  const [array, setArray] = useState([]); //userid, ticker, companyname, stockprice, quantity, change
+  const [stocks, setStocks] = useState([]); 
   const colors = ['color-1', 'color-2', 'color-3', 'color-4'];
+  
   const scroll = (scrollOffset) => {
     document.querySelector('.carousel').scrollLeft += scrollOffset;
   };
 
   useEffect(() => {
-    const authUser = async () => {
+    const fetchStocks = async () => {
       try {
-        const userId = localStorage.getItem('userId');
+        const userId = localStorage.getItem('userId')
         const res = await axios.get(`${remoteHostURL}/stocks/${userId}`);
         if (res?.data?.database) {
-          setArray(res.data.database);
+          setStocks(res.data.database);
         }
-        console.log(array);
       } catch (err) {
         console.log(err);
       }
     };
 
-    authUser();
+    fetchStocks();
   }, [])
 
   return (
@@ -44,8 +35,8 @@ function StockCarousel() {
       {stocks.map((stock, index) => (
         <Link to={`/stock/${stock.id}`} key={stock.id}> 
           <div key={stock.id} className={`stock-card ${colors[index % 4]}`}>
-            <h4>{stock.name}</h4>
-            <p>Price: ${stock.price}</p>
+            <h4>{stock.companyname}</h4>
+            <p>Price: ${stock.stockprice}</p>
             <p>Change: {stock.change}</p>
           </div>
         </Link>
@@ -58,4 +49,3 @@ function StockCarousel() {
 }
 
 export default StockCarousel;
-
