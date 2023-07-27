@@ -140,13 +140,15 @@ export function ExpenseForm() {
           <th><span style={{color:"#031D44"}}>{a.category}</span></th>
           <th><span style={{color:"#031D44"}}>{a.pname}</span></th>
           <th><span style={{color:"#031D44"}}>{a.pdescription}</span></th>
-          <th><span style={{color:"#031D44"}}>{a.pprice}</span></th>
+          <th><span style={{color:"#031D44"}}>${a.pprice}.00</span></th>
           <th><span style={{color:"#031D44"}}>{a.pdate}</span></th>
         </tr>
         </table>
+       
         </div>
 
       ))}
+       <br></br>
     </div>
   );
 }

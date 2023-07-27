@@ -46,17 +46,7 @@ const Goals = () => {
         <h2 style={{color:"#031D44", margin:"15px", padding:"15px"}} className="head"><span>Create Your Goals:</span></h2>
         <GoalCreation />
 
-            {/* <GoalDetail /> */}
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
+    
             
         </div>
 

@@ -72,6 +72,3 @@ const StockDetails = () => {
 
 export default StockDetails;
 
-
-
-

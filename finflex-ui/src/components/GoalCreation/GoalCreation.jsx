@@ -132,13 +132,19 @@ export function GoalCreationForm() {
       <GoalDetail/>
       {array.map((a,idx) => (
         <div key={idx}>
-          <p>{a.gname}</p>
-          <p>{a.gdesc}</p>
-          <p>{a.target}</p>
-          <p>{a.datedue}</p>
-          <p>{a.category}</p>
+        <table>
+        <tr>
+        <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>{a.category}</span></th>
+          <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>{a.gname}</span></th>
+          <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>{a.gdesc}</span></th>
+          <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>${a.target}.00</span></th>
+          <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>{a.datedue}</span></th>
+          </tr>
+          </table>
+         
         </div>
       ))}
+       <br></br>
     </div>
   );
 }

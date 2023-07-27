@@ -44,14 +44,6 @@ const Bills = () => {
 
         <div style={{backgroundColor:"#F2EFE9"}}>
         <BillCreation />
-        {/* <BillDetail /> */}
-        
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br> 
-        <br></br>
-        <br></br>
 
         </div>
         </div>
