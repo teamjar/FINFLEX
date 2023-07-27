@@ -2,6 +2,8 @@
 
 /** Express app for LifeTracker */
 
+require("dotenv").config()
+
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -17,6 +19,11 @@ const Budget = require('./models/budget');
 const { NotFoundError } = require("./utils/errors");
 const config = require("./config");
 const jwt = require('jsonwebtoken');
+const { Configuration, OpenAIApi } = require("openai");
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
 
 const app = express();
 
@@ -166,6 +173,15 @@ app.get("/budget/:id", async function (req, res, next) {
   const userId = req.params.id;
   const budget = await Budget.fetchById(userId);
   return res.status(200).json({ database : budget })
+});
+
+app.post('/api/chat', async (req, res) => {
+  const prompt = req.body.prompt;
+  const response = await openai.createCompletion({
+    model: "text-davinci-003",
+    prompt: prompt
+  });
+  console.log(response)
 });
 
 // health check
