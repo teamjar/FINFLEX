@@ -13,7 +13,8 @@ CREATE TABLE stocks (
     ticker TEXT NOT NULL,
     companyName TEXT NOT NULL,
     stockPrice FLOAT NOT NULL,
-    quantity INT NOT NULL
+    quantity INT NOT NULL,
+    change FLOAT NOT NULL
 );
 
 CREATE TABLE watchlist (
@@ -21,7 +22,8 @@ CREATE TABLE watchlist (
     userid INT NOT NULL,
     ticker TEXT NOT NULL,
     companyName TEXT NOT NULL,
-    stockPrice FLOAT NOT NULL
+    stockPrice FLOAT NOT NULL,
+    change FLOAT NOT NULL
 );
 
 CREATE TABLE expense (

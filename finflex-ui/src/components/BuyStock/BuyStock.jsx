@@ -11,6 +11,7 @@ function BuyStock() {
     const [investment, setInvestment] = useState(0);
     const [stockPrice, setStockPrice] = useState(0);
     const [companyName, setName] = useState('');
+    const [change, setChange] = useState(0.0);
     const [array, setArray] = useState([]);
 
     useEffect(() => {
@@ -20,6 +21,7 @@ function BuyStock() {
                 const details = await fetchStockDetails(symbol);
                 setName(details.name);
                 setStockPrice(quote.c);
+                setChange(quote.dp);
             } catch (error) {
                 console.error(error);
             }
@@ -42,7 +44,8 @@ function BuyStock() {
                 ticker: symbol,
                 companyName: companyName,
                 stockPrice: stockPrice,
-                quantity: quantity
+                quantity: quantity,
+                change: change
             })
             const newArray = [...array, res.data.user];
             setArray(newArray);

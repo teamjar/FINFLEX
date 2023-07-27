@@ -1,6 +1,9 @@
 import React from 'react'
 import './StockCarousel.css'
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios'
+import { remoteHostURL } from '../../apiClient';
 
 function StockCarousel() {
   const stocks = [
@@ -12,12 +15,28 @@ function StockCarousel() {
     { id: 6, name: 'Amazon', price: 3300, change: -20 },
     { id: 7, name: 'Netflix', price: 500, change: 10 },
   ];
-
+  const [array, setArray] = useState([]); //userid, ticker, stockprice, quantity, change
   const colors = ['color-1', 'color-2', 'color-3', 'color-4'];
-
   const scroll = (scrollOffset) => {
     document.querySelector('.carousel').scrollLeft += scrollOffset;
   };
+
+  useEffect(() => {
+    const authUser = async () => {
+      try {
+        const userId = localStorage.getItem('userId');
+        const res = await axios.get(`${remoteHostURL}/stocks/${userId}`);
+        if (res?.data?.database) {
+          setArray(res.data.database);
+        }
+        console.log(array);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    authUser();
+  }, [])
 
   return (
     <div className="carousel-container">
