@@ -44,7 +44,7 @@ const StockDetails = () => {
             currency={stockDetails.currency} 
           />
         </div>
-        <div className="Chart">
+        <div className="Chart" >
           <Chart />
         </div>
         <div className="StockSide">

@@ -107,6 +107,7 @@ export function BillCreationForm() {
         <div className="si">
           <label className="ti">Status</label>
           <select id="status" name="status" defaultValue="unpaid" value={status} onChange={e => setStatus(e.target.value)}>
+            <option></option>
             <option value="unpaid">Unpaid</option>
             <option value="paid">Paid</option>
             <option value="overdue">Overdue</option>
@@ -119,11 +120,16 @@ export function BillCreationForm() {
       <BillDetail/>
       {array.map((a,idx) => (
         <div key={idx}>
-          <p>{a.billname}</p>
-          <p>{a.billdesc}</p>
-          <p>{a.due}</p>
-          <p>{a.status}</p>
-          <p>{a.price}</p>
+        <table>
+        <tr>
+        <th style={{border:"2px solid #dab785"}}><span>{a.status}</span></th>
+          <th style={{border:"2px solid #dab785"}}><span>{a.billname}</span></th>
+          <th style={{border:"2px solid #dab785"}}><span>{a.billdesc}</span></th>
+          <th style={{border:"2px solid #dab785"}}><span>${a.price}.00</span></th>
+          <th style={{border:"2px solid #dab785"}}><span>{a.due}</span></th>
+          </tr>
+
+          </table>
         </div>
       ))}
     </div>

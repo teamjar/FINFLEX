@@ -1,13 +1,5 @@
 .title3 {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 15%;
-    font-size: 20px;
-    margin: 10px;
-    padding: 12px;
-    background-color: #dab785;
-    color: #031D44;
+    font-size: 25px;
     color: white;
 }
 
