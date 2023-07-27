@@ -15,7 +15,7 @@ function StockCarousel() {
     { id: 6, name: 'Amazon', price: 3300, change: -20 },
     { id: 7, name: 'Netflix', price: 500, change: 10 },
   ];
-  const [array, setArray] = useState([]); //userid, ticker, stockprice, quantity, change
+  const [array, setArray] = useState([]); //userid, ticker, companyname, stockprice, quantity, change
   const colors = ['color-1', 'color-2', 'color-3', 'color-4'];
   const scroll = (scrollOffset) => {
     document.querySelector('.carousel').scrollLeft += scrollOffset;
