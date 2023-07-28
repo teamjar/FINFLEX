@@ -52,6 +52,18 @@ class Bill {
         return user;
     }
 
+    static async totalDue(id) {
+        const result = await db.query(
+            `SELECT SUM(price)
+            FROM bills
+            WHERE userid = $1`,
+            [id]
+        );
+
+        const user = result.rows;
+
+        return user;
+    }
     
 }
 
