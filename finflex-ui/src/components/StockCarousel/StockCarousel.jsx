@@ -56,9 +56,9 @@ function StockCarousel() {
      {stocks.map((stock, index) => (
        <Link to={`/stock-details/${stock.ticker}`} key={stock.ticker}>
          <div key={stock.id} className={`stock-card ${colors[index % 4]}`}>
-           <h4>{stock.companyname}</h4>
-           <p>Price: ${stock.stockprice}</p>
-           <p className={stock.change > 0 ? "green" : "red"}>Change: {stock.change} {stock.change > 0 ? '↑' : '↓'}</p>
+           <h4 style={{color:"white", textAlign:"center", fontWeight:"bolder"}}>{stock.companyname}</h4>
+           <p style={{fontWeight:"bolder"}}>Price: ${stock.stockprice}</p>
+           <p className={stock.change > 0 ? "green" : "red"} style={{fontWeight:"bolder"}}>Change: {stock.change} {stock.change > 0 ? '↑' : '↓'}</p>
            <img src={stock.logo} alt={`${stock.companyname} logo`} className="stock-logo" />
          </div>
        </Link>
