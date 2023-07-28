@@ -85,6 +85,12 @@ app.get("/stocks/:id", async function (req, res, next) {
     return res.status(200).json({ database : stock })
 })
 
+app.get("/stocks/investment/:id", async function (req, res, next) {
+  const userId = req.params.id;
+  const stock = await Stock.addInvestment(userId);
+  return res.status(200).json({ database : stock })
+})
+
 app.post("/watchlist", async function (req, res, next) {
     try {
         const user = await Watchlist.add(req.body);

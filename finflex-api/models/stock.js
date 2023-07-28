@@ -6,8 +6,8 @@ const { BadRequestError, UnauthorizedError } = require("../utils/errors")
 
 class Stock {
     static async add(creds) {
-        const {userId, ticker, companyName, stockPrice, quantity, change} = creds;
-        const requiredCreds = ['userId', 'ticker', 'companyName', 'stockPrice', 'quantity', 'change'];
+        const {userId, ticker, companyName, stockPrice, quantity, change, investment, logo} = creds;
+        //const requiredCreds = ['userId', 'ticker', 'companyName', 'stockPrice', 'quantity', 'change'];
 
         const result = await db.query(
             `INSERT INTO stocks (
@@ -17,17 +17,22 @@ class Stock {
                 stockprice, 
                 quantity,
                 change
+                investment, 
+                logo
             )
-            VALUES ($1, $2, $3, $4, $5, $6)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
             RETURNING
                     userid,
                     ticker,
                     companyname,
                     stockprice,
                     quantity,
-                    change
+                    change,
+                    balance,
+                    investment,
+                    logo
                     `,
-                    [userId, ticker, companyName, stockPrice, quantity, change]
+                    [userId, ticker, companyName, stockPrice, quantity, change, investment, logo]
         );
 
         const stock = result.rows[0];
@@ -42,7 +47,10 @@ class Stock {
                     companyname,
                     stockprice, 
                     quantity,
-                    change
+                    change,
+                    balance,
+                    investment,
+                    logo
                 FROM stocks
                 WHERE userid = $1`,
                 [id]
@@ -53,6 +61,21 @@ class Stock {
         return user;
     }
 
+    static async addInvestment(id) {
+        const result = await db.query(
+            `SELECT SUM(investment)
+            FROM stocks
+            WHERE userid = $1`,
+            [id]
+        );
+
+        const user = result.rows;
+
+        return user;
+    }
+
 }
+
+
 
 module.exports = Stock;

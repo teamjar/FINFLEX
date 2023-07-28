@@ -14,7 +14,10 @@ CREATE TABLE stocks (
     companyName TEXT NOT NULL,
     stockPrice FLOAT NOT NULL,
     quantity INT NOT NULL,
-    change FLOAT NOT NULL
+    change FLOAT NOT NULL,
+    balance FLOAT GENERATED ALWAYS AS (quantity * stockPrice) STORED,
+    investment FLOAT NOT NULL,
+    logo TEXT NOT NULL
 );
 
 CREATE TABLE watchlist (
