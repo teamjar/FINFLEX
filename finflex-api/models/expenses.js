@@ -52,6 +52,19 @@ class Expense {
 
         return user;
     }
+
+    static async totalSpent(id) {
+        const result = await db.query(
+            `SELECT SUM(pprice)
+            FROM expense
+            WHERE userid = $1`,
+            [id]
+        );
+
+        const user = result.rows;
+
+        return user;
+    }
     
 }
 

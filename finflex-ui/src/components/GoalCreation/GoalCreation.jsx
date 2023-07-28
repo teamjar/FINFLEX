@@ -137,8 +137,8 @@ export function GoalCreationForm() {
         <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>{a.category}</span></th>
           <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>{a.gname}</span></th>
           <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>{a.gdesc}</span></th>
-          <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>${a.target}.00</span></th>
-          <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>{a.datedue}</span></th>
+          <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>${a.target}</span></th>
+          <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>{a.datedue.substring(0, a.datedue.indexOf('T'))}</span></th>
           </tr>
           </table>
          

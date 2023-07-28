@@ -121,6 +121,12 @@ app.get("/bills/:id", async function (req, res, next) {
     return res.status(200).json({ database : bills })
 })
 
+app.get("/bills/due/:id", async function (req, res, next) {
+  const userId = req.params.id;
+  const bills = await Bill.totalDue(userId);
+  return res.status(200).json({ database : bills })
+})
+
 app.post("/expenses", async function (req, res, next) {
     try {
         const user = await Expenses.add(req.body);
@@ -134,6 +140,12 @@ app.get("/expenses/:id", async function (req, res, next) {
     const userId = req.params.id;
     const expenses = await Expenses.fetchById(userId);
     return res.status(200).json({ database : expenses })
+})
+
+app.get("/expense/spent/:id", async function (req, res, next) {
+  const userId = req.params.id;
+  const expenses = await Expenses.totalSpent(userId);
+  return res.status(200).json({ database : expenses })
 })
 
 app.post("/goals", async function (req, res, next) {
@@ -178,6 +190,18 @@ app.post("/budget", async function (req, res, next) {
 app.get("/budget/:id", async function (req, res, next) {
   const userId = req.params.id;
   const budget = await Budget.fetchById(userId);
+  return res.status(200).json({ database : budget })
+});
+
+app.get("/budget/earnings/:id", async function (req, res, next) {
+  const userId = req.params.id;
+  const budget = await Budget.totalEarnings(userId);
+  return res.status(200).json({ database : budget })
+});
+
+app.get("/budget/total/:id", async function (req, res, next) {
+  const userId = req.params.id;
+  const budget = await Budget.totalBudget(userId);
   return res.status(200).json({ database : budget })
 });
 

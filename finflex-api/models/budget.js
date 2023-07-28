@@ -43,6 +43,32 @@ class Budget {
 
         return user;
     }
+
+    static async totalEarnings(id) {
+        const result = await db.query(
+            `SELECT SUM(earnings)
+            FROM budget
+            WHERE userid = $1`,
+            [id]
+        );
+
+        const user = result.rows;
+
+        return user;
+    }
+
+    static async totalBudget(id) {
+        const result = await db.query(
+            `SELECT SUM(budget)
+            FROM budget
+            WHERE userid = $1`,
+            [id]
+        );
+
+        const user = result.rows;
+
+        return user;
+    }
 }
 
 module.exports = Budget

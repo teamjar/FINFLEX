@@ -125,8 +125,8 @@ export function BillCreationForm() {
         <th style={{border:"2px solid #dab785"}}><span>{a.status}</span></th>
           <th style={{border:"2px solid #dab785"}}><span>{a.billname}</span></th>
           <th style={{border:"2px solid #dab785"}}><span>{a.billdesc}</span></th>
-          <th style={{border:"2px solid #dab785"}}><span>${a.price}.00</span></th>
-          <th style={{border:"2px solid #dab785"}}><span>{a.due}</span></th>
+          <th style={{border:"2px solid #dab785"}}><span>${a.price}</span></th>
+          <th style={{border:"2px solid #dab785"}}><span>{a.due.substring(0, a.due.indexOf('T'))}</span></th>
           </tr>
 
           </table>

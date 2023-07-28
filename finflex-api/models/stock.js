@@ -16,7 +16,7 @@ class Stock {
                 companyname,
                 stockprice, 
                 quantity,
-                change
+                change,
                 investment, 
                 logo
             )
