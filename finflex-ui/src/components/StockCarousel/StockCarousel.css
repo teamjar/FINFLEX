@@ -86,6 +86,7 @@
   width: 50px;
   margin-left: auto;
   mix-blend-mode: multiply;
+  border-radius: 30px;
 }
 
 .green {
