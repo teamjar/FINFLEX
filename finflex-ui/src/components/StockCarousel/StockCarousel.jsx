@@ -43,25 +43,26 @@ function StockCarousel() {
 }, []);
 
 
- return (
-   <div className="carousel-container">
-     <button className="scroll-button left" onClick={() => scroll(-200)}>←</button>
-     <div className="carousel">
-     {stocks.map((stock, index) => (
-       <Link to={`/stock-details/${stock.ticker}`} key={stock.ticker}>
-         <div key={stock.id} className={`stock-card ${colors[index % 4]}`}>
-           <h4 style={{color:"white", textAlign:"center", fontWeight:"bolder"}}>{stock.companyname}</h4>
-           <p style={{fontWeight:"bolder"}}>Price: ${stock.stockprice}</p>
-           <p className={stock.change > 0 ? "green" : "red"} style={{fontWeight:"bolder"}}>Change: {stock.change} {stock.change > 0 ? '↑' : '↓'}</p>
-           <img src={stock.logo} alt={`${stock.companyname} logo`} className="stock-logo" />
-         </div>
-       </Link>
-    
-       ))}
-     </div>
-     <button className="scroll-button right" onClick={() => scroll(200)}>→</button>
-   </div>
- );
+return (
+  <div className="carousel-container">
+    <button className="scroll-button left" onClick={() => scroll(-200)}>←</button>
+    <div className="carousel">
+    {stocks.map((stock, index) => (
+      <Link to={`/stock-details/${stock.ticker}`} key={stock.ticker}>
+        <div key={stock.id} className={`stock-card ${colors[index % 4]}`}>
+          <h4 style={{color:"white", textAlign:"center", fontWeight:"bolder"}}>{stock.companyname}</h4>
+          <p style={{fontWeight:"bolder"}}>Price: ${stock.stockprice.toLocaleString()}</p> 
+          <p style={{fontWeight:"bolder"}}>Invested: ${stock.investment.toLocaleString()}</p> 
+          <p className={stock.change > 0 ? "green" : "red"} style={{fontWeight:"bolder"}}>Change: {stock.change} {stock.change > 0 ? '↑' : '↓'}</p>
+          {/* <img src={stock.logo} alt={`${stock.companyname} logo`} className="stock-logo" /> */}
+        </div>
+      </Link>
+      ))}
+    </div>
+    <button className="scroll-button right" onClick={() => scroll(200)}>→</button>
+  </div>
+);
 }
+
 
 export default StockCarousel;

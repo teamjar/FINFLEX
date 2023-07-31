@@ -67,3 +67,24 @@
   .scroll-button.right {
     right: 0;
   }
+  
+  /* .stock-logo {
+    height: 50px;
+    width: 50px;
+    margin-left: auto; 
+ } */
+
+ .stock-logo {
+  height: 50px;
+  width: 50px;
+  margin-left: auto;
+  mix-blend-mode: multiply;
+  border-radius: 30px;
+}
+
+.green {
+  color: green;
+}
+.red {
+  color: red;
+}
