@@ -15,7 +15,6 @@ function StockDashboard() {
       <div className='stock-dashboard'>
       <div className="Navbar"><Navbar/></div>
       <div className="StockSearch"> <StockSearch/></div>
-
       <div className="StockCarousel"> <StockCarousel/></div>
       </div>
     </StockProvider>

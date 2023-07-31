@@ -4,22 +4,15 @@ import { remoteHostURL } from "../../apiClient";
 import axios from "axios";
 import ExpenseDetail from "../ExpenseDetail/ExpenseDetail";
 
-export default function Expense() {
-  return (
-    <div className="add-transaction">
-      <ExpenseForm />
-    </div>
-  );
-}
-
-export function ExpenseForm() {
+export default function Expense({ searchQuery }) {
   const [pName, setName] = useState('');
   const [pDesc, setDesc] = useState('');
   const [price, setPrice] = useState('');
   const [date, setDate] = useState('');
   const [category, setCat] = useState('');
-  const [array, setArray] = useState([]); //pname, pdescription, pprice, pdate, category
-  
+  const [array, setArray] = useState([]); // pname, pdescription, pprice, pdate, category
+  const [filterCategory, setFilterCategory] = useState('');
+
   useEffect(() => {
     const authUser = async () => {
       try {
@@ -27,6 +20,11 @@ export function ExpenseForm() {
         const res = await axios.get(`${remoteHostURL}/expenses/${userId}`);
         if (res?.data?.database) {
           setArray(res.data.database);
+
+          // Extract unique categories for filter dropdown
+          const uniqueCategories = Array.from(new Set(res.data.database.map(item => item.category)));
+          setFilterCategory(''); // Reset the filter category on new data load
+          setCategoriesForFilter(uniqueCategories);
         }
       } catch (err) {
         console.log(err);
@@ -34,7 +32,9 @@ export function ExpenseForm() {
     };
 
     authUser();
-  }, [])
+  }, []);
+
+  const [categoriesForFilter, setCategoriesForFilter] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -49,7 +49,7 @@ export function ExpenseForm() {
         pPrice: price,
         pDate: date,
         category: category
-      })
+      });
       const newArray = [...array, res.data.user];
       setArray(newArray);
       console.log(newArray);
@@ -59,11 +59,10 @@ export function ExpenseForm() {
       setPrice('');
       setDate('');
       setCat('');
-
-    } catch(err) {
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
   return (
     <div>
@@ -75,7 +74,7 @@ export function ExpenseForm() {
             placeholder="Enter name of purchase"
             name="pName"
             value={pName}
-            onChange={e => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
 
@@ -116,7 +115,7 @@ export function ExpenseForm() {
           <label className="ti">Category</label>
           <select id="status" name="category" value={category} onChange={e => setCat(e.target.value)}>
             <option></option>
-          <option value="Food">Food</option>
+            <option value="Food">Food</option>
             <option value="Housing">Housing</option>
             <option value="Transportation">Transportation</option>
             <option value="Education">Education</option>
@@ -125,38 +124,54 @@ export function ExpenseForm() {
             <option value="Personal">Personal Care</option>
             <option value="Debt/Loans">Debt/Loans</option>
             <option value="Miscellaneous">Miscellaneous</option>
-            
           </select>
         </div>
 
         <button type="submit" className="btn2" onClick={handleSubmit}>
           Add
         </button>
+
+        
+
       </div>
-      <ExpenseDetail/>
-      {array.map((a, idx) => (
-        <div key={idx}>
-        <table>
-        <tr>
-          <th><span style={{color:"#031D44"}}>{a.category}</span></th>
-          <th><span style={{color:"#031D44"}}>{a.pname}</span></th>
-          <th><span style={{color:"#031D44"}}>{a.pdescription}</span></th>
-          <th><span style={{color:"#031D44"}}>${a.pprice}</span></th>
-          <th><span style={{color:"#031D44"}}>{a.pdate.substring(0, a.pdate.indexOf('T'))}</span></th>
-        </tr>
-        </table>
-       
+
+       {/* Add the new filter dropdown */}
+       <div className="si">
+        <div className="flow">
+          <select id="filter" name="filter" value={filterCategory} onChange={e => setFilterCategory(e.target.value)}>
+            <option value="">All Categories</option>
+            {categoriesForFilter.map((cat, idx) => (
+              <option key={idx} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+          </div>
         </div>
 
-      ))}
-       <br></br>
+      <ExpenseDetail />
+      {array
+        .filter(
+          (a) =>
+            (a.pname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            a.pdescription.toLowerCase().includes(searchQuery.toLowerCase()))
+            &&
+            (filterCategory === '' || a.category === filterCategory)
+        )
+        .map((a, idx) => (
+          <div key={idx}>
+            <table>
+              <tr>
+                <th><span style={{ color: "#031D44" }}>{a.category}</span></th>
+                <th><span style={{ color: "#031D44" }}>{a.pname}</span></th>
+                <th><span style={{ color: "#031D44" }}>{a.pdescription}</span></th>
+                <th><span style={{ color: "#031D44" }}>${a.pprice}</span></th>
+                <th><span style={{ color: "#031D44" }}>{a.pdate.substring(0, a.pdate.indexOf('T'))}</span></th>
+              </tr>
+            </table>
+          </div>
+        ))}
+      <br></br>
     </div>
   );
 }
-
-
-
-
-
-
-

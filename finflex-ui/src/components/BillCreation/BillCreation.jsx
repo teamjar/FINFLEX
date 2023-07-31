@@ -2,17 +2,9 @@ import "./BillCreation.css";
 import { useEffect, useState } from "react";
 import { remoteHostURL } from "../../apiClient";
 import axios from "axios";
-import BillDetail from '../BillDetail/BillDetail'
+import BillDetail from '../BillDetail/BillDetail';
 
-export default function BillCreation() {
-  return (
-    <div className="add-transaction">
-      <BillCreationForm />
-    </div>
-  );
-}
-
-export function BillCreationForm() {
+export default function BillCreation({ searchQuery }) {
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
   const [price, setPrice] = useState('');
@@ -34,7 +26,7 @@ export function BillCreationForm() {
     };
 
     authUser();
-  }, [])
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -48,18 +40,21 @@ export function BillCreationForm() {
         due: due,
         status: status,
         price: price
-      })
+      });
+
+      console.log(res.data);
+
       const newArray = [...array, res.data.user];
       setArray(newArray);
-    } catch(err) {
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
   }
 
   return (
     <div>
       <div className="flow">
-        <div className="si">
+      <div className="si">
           <label className="ti">Bill Name</label>
           <input
             className="el"
@@ -113,26 +108,34 @@ export function BillCreationForm() {
             <option value="overdue">Overdue</option>
           </select>
         </div>
+
         <button type="submit" className="btn2" onClick={handleSubmit}>
           Add
         </button>
       </div>
-      <BillDetail/>
-      {array.map((a,idx) => (
-        <div key={idx}>
-        <table>
-        <tr>
-        <th style={{border:"2px solid #dab785"}}><span>{a.status}</span></th>
-          <th style={{border:"2px solid #dab785"}}><span>{a.billname}</span></th>
-          <th style={{border:"2px solid #dab785"}}><span>{a.billdesc}</span></th>
-          <th style={{border:"2px solid #dab785"}}><span>${a.price}</span></th>
-          <th style={{border:"2px solid #dab785"}}><span>{a.due.substring(0, a.due.indexOf('T'))}</span></th>
-          </tr>
-
-          </table>
-        </div>
-      ))}
-       <br></br>
+      <BillDetail />
+      {array
+        .filter(
+          (a) =>
+            a.billname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            a.billdesc.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        .map((a, idx) => (
+          <div key={idx}>
+            <table>
+              <tr>
+                <th style={{ border: "2px solid #dab785" }}><span>{a.status}</span></th>
+                <th style={{ border: "2px solid #dab785" }}><span>{a.billname}</span></th>
+                <th style={{ border: "2px solid #dab785" }}><span>{a.billdesc}</span></th>
+                <th style={{ border: "2px solid #dab785" }}><span>${a.price}</span></th>
+                <th style={{ border: "2px solid #dab785" }}><span>{a.due.substring(0, a.due.indexOf('T'))}</span></th>
+              </tr>
+            </table>
+          </div>
+        ))}
+      <br></br>
     </div>
   );
 }
+
+

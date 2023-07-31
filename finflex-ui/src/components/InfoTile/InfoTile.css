@@ -6,6 +6,7 @@
     color: white;
     row-gap: 0px;
     transition: transform .1s;
+    justify-content: center;
 }
 
 .tile:hover{
@@ -28,40 +29,56 @@ h3 {
 
 .square {
     background-color: rgb(213, 136, 111);
-    width: 130px;
+    width: 100px;
     border-radius: 30px;
     box-shadow: 10px 10px 20px gray;
     outline: 2px solid white;
     display: flex;
     align-items: center;
+    height: 100px;
 }
 
 .square2 {
     background-color: rgb(112, 162, 136);
-    width: 130px;
+    width: 100px;
     border-radius: 30px;
     box-shadow: 10px 10px 20px gray;
     outline: 2px solid white;
     display: flex;
     align-items: center;
+    height: 100px;
 }
 
 .square3 {
     background-color: rgb(4, 57, 94);
-    width: 130px;
+    width: 100px;
     border-radius: 30px;
     box-shadow: 10px 10px 20px gray;
     outline: 2px solid white;
     display: flex;
     align-items: center;
+    height: 100px;
 }
 
 .square4{
     background-color: #dab785;
-    width: 130px;
+    width: 100px;
     border-radius: 30px;
     box-shadow: 10px 10px 20px gray;
     outline: 2px solid white;
     display: flex;
     align-items: center;
+    height: 100px;
+}
+
+
+.square5 {
+    background-color: rgb(109, 64, 109);
+    width: 100px;
+    border-radius: 30px;
+    box-shadow: 10px 10px 20px gray;
+    outline: 2px solid white;
+    display: flex;
+    align-items: center;
+    height: 100px;
 }

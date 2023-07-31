@@ -34,23 +34,28 @@ const InfoTile = () => {
     return (
         <div className="tile2">
             <div className="tile square">
-            <h3>Total Earnings</h3>
-            <h1>${earnings}</h1>
+            <h3>Earnings</h3>
+            <h1 style={{fontSize:"30px"}}>${earnings}</h1>
             </div>
             
             <div className="tile square2">
-            <h3>Total Spent</h3>
-            <h1>${spent}</h1>
+            <h3>Transactions</h3>
+            <h1 style={{fontSize:"30px"}}>${spent}</h1>
             </div>
 
             <div className="tile square3">
             <h3>Budget</h3>
-            <h1>${budget}</h1>
+            <h1 style={{fontSize:"30px"}}>${budget}</h1>
             </div>
 
             <div className="tile square4">
-            <h3>Due Amount</h3>
-            <h1>${due}</h1>
+            <h3>Due</h3>
+            <h1 style={{fontSize:"30px"}}>${due}</h1>
+            </div>
+
+            <div className="tile square5">
+            <h3>Balance</h3>
+            <h1 style={{fontSize:"30px"}}>$</h1>
             </div>
 
         </div>

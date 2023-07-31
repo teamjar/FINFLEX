@@ -4,21 +4,14 @@ import { remoteHostURL } from "../../apiClient";
 import axios from "axios";
 import GoalDetail from "../GoalDetail/GoalDetail";
 
-export default function GoalCreation() {
-  return (
-    <div className="add-transaction">
-      <GoalCreationForm />
-    </div>
-  );
-}
-
-export function GoalCreationForm() {
+export default function GoalCreation({ searchQuery }) {
   const [gName, setName] = useState('');
   const [gDesc, setDesc] = useState('');
   const [amount, setAmount] = useState('');
   const [deadline, setDeadline] = useState('');
   const [category, setCat] = useState('');
-  const [array, setArray] = useState([]); //gname, gdesc, target(amount), datedue(deadline), category
+  const [array, setArray] = useState([]); // gname, gdesc, target(amount), datedue(deadline), category
+  const [filterCategory, setFilterCategory] = useState('');
 
   useEffect(() => {
     const authUser = async () => {
@@ -27,6 +20,11 @@ export function GoalCreationForm() {
         const res = await axios.get(`${remoteHostURL}/goals/${userId}`);
         if (res?.data?.database) {
           setArray(res.data.database);
+
+          // Extract unique categories for filter dropdown
+          const uniqueCategories = Array.from(new Set(res.data.database.map(item => item.category)));
+          setFilterCategory(''); // Reset the filter category on new data load
+          setCategoriesForFilter(uniqueCategories);
         }
       } catch (err) {
         console.log(err);
@@ -34,7 +32,9 @@ export function GoalCreationForm() {
     };
 
     authUser();
-  }, [])
+  }, []);
+
+  const [categoriesForFilter, setCategoriesForFilter] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -48,17 +48,17 @@ export function GoalCreationForm() {
         target: amount,
         dateDue: deadline,
         category: category
-      })
+      });
 
       console.log(res.data);
 
       const newArray = [...array, res.data.user];
       setArray(newArray);
-      console.log(newArray)
-    } catch(err) {
-      console.log(err)
+      console.log(newArray);
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
   return (
     <div>
@@ -70,7 +70,7 @@ export function GoalCreationForm() {
             placeholder="Enter a name for your goal"
             name="gName"
             value={gName}
-            onChange={e => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
 
@@ -81,7 +81,7 @@ export function GoalCreationForm() {
             placeholder="Enter a short goal description"
             name="gDesc"
             value={gDesc}
-            onChange={e => setDesc(e.target.value)}
+            onChange={(e) => setDesc(e.target.value)}
           />
         </div>
 
@@ -91,8 +91,8 @@ export function GoalCreationForm() {
             className="el"
             placeholder="Enter a specific goal amount"
             name="target"
-            value={amount} 
-            onChange={e => setAmount(e.target.value)}
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
           />
         </div>
 
@@ -104,15 +104,20 @@ export function GoalCreationForm() {
             placeholder="Enter a deadline"
             name="dateDue"
             value={deadline}
-            onChange={e => setDeadline(e.target.value)}
+            onChange={(e) => setDeadline(e.target.value)}
           />
         </div>
 
         <div className="si">
           <label className="ti">Category</label>
-          <select id="status" name="category" value={category} onChange={e => setCat(e.target.value)}>
+          <select
+            id="status"
+            name="category"
+            value={category}
+            onChange={(e) => setCat(e.target.value)}
+          >
             <option></option>
-          <option value="food">Food</option>
+            <option value="food">Food</option>
             <option value="housing">Housing</option>
             <option value="transportation">Transportation</option>
             <option value="education">Education</option>
@@ -121,7 +126,6 @@ export function GoalCreationForm() {
             <option value="personal">Personal Care</option>
             <option value="debt">Debt/Loans</option>
             <option value="misc">Miscellaneous</option>
-            
           </select>
         </div>
 
@@ -129,22 +133,59 @@ export function GoalCreationForm() {
           Add
         </button>
       </div>
-      <GoalDetail/>
-      {array.map((a,idx) => (
-        <div key={idx}>
-        <table>
-        <tr>
-        <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>{a.category}</span></th>
-          <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>{a.gname}</span></th>
-          <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>{a.gdesc}</span></th>
-          <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>${a.target}</span></th>
-          <th style={{border:"2px solid rgb(4, 57, 94)"}}><span>{a.datedue.substring(0, a.datedue.indexOf('T'))}</span></th>
-          </tr>
-          </table>
-         
+      {/* Add the new filter dropdown */}
+      <div className="si">
+        <div className="flow">
+          <select
+            id="filter"
+            name="filter"
+            value={filterCategory}
+            onChange={(e) => setFilterCategory(e.target.value)}
+          >
+            <option value="">All Categories</option>
+            {categoriesForFilter.map((cat, idx) => (
+              <option key={idx} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
         </div>
-      ))}
-       <br></br>
+        </div>
+      <GoalDetail />
+      {array
+        .filter(
+          (a) =>
+            (a.gname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              a.gdesc.toLowerCase().includes(searchQuery.toLowerCase())) &&
+            (filterCategory === '' || a.category === filterCategory)
+        )
+        .map((a, idx) => (
+          <div key={idx}>
+            <table>
+              <tr>
+                <th style={{ border: "2px solid rgb(4, 57, 94)" }}>
+                  <span>{a.category}</span>
+                </th>
+                <th style={{ border: "2px solid rgb(4, 57, 94)" }}>
+                  <span>{a.gname}</span>
+                </th>
+                <th style={{ border: "2px solid rgb(4, 57, 94)" }}>
+                  <span>{a.gdesc}</span>
+                </th>
+                <th style={{ border: "2px solid rgb(4, 57, 94)" }}>
+                  <span>${a.target}</span>
+                </th>
+                <th style={{ border: "2px solid rgb(4, 57, 94)" }}>
+                  <span>{a.datedue.substring(0, a.datedue.indexOf('T'))}</span>
+                </th>
+              </tr>
+            </table>
+          </div>
+        ))}
+      <br></br>
     </div>
   );
 }
+
+
+
