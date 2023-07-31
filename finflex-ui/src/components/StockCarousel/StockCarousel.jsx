@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { remoteHostURL } from '../../apiClient';
+import { fetchQuote } from '../api/stock-api';
 
 function StockCarousel() {
  const [stocks, setStocks] = useState([]);
@@ -14,10 +15,20 @@ function StockCarousel() {
  useEffect(() => {
   const fetchStocks = async () => {
     try {
-      const userId = localStorage.getItem('userId')
+      const userId = localStorage.getItem('userId');
       const res = await axios.get(`${remoteHostURL}/stocks/${userId}`);
       if (res?.data?.database) {
-        setStocks(res.data.database);
+        const updatedStocks = await Promise.all(
+          res.data.database.map(async (stock) => {
+            const quote = await fetchQuote(stock.ticker);
+            return {
+              ...stock,
+              stockprice: quote.c,
+              change: quote.dp,
+            };
+          }),
+        );
+        setStocks(updatedStocks);
       }
     } catch (err) {
       console.log(err);
@@ -26,28 +37,11 @@ function StockCarousel() {
 
   fetchStocks();
 
-
-  const interval = setInterval(fetchStocks, 5000); 
+  const interval = setInterval(fetchStocks, 30000); 
 
   return () => clearInterval(interval);
 }, []);
 
-
-
-//  useEffect(() => {
-//    const fetchStocks = async () => {
-//      try {
-//        const userId = localStorage.getItem('userId')
-//        const res = await axios.get(`${remoteHostURL}/stocks/${userId}`);
-//        if (res?.data?.database) {
-//          setStocks(res.data.database);
-//        }
-//      } catch (err) {
-//        console.log(err);
-//      }
-//    };
-//    fetchStocks();
-//  }, [])
 
  return (
    <div className="carousel-container">
@@ -71,3 +65,4 @@ function StockCarousel() {
 }
 
 export default StockCarousel;
+
