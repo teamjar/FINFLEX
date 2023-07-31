@@ -85,6 +85,12 @@ app.get("/stocks/:id", async function (req, res, next) {
     return res.status(200).json({ database : stock })
 })
 
+app.get("/stocks/investment/:id", async function (req, res, next) {
+  const userId = req.params.id;
+  const stock = await Stock.addInvestment(userId);
+  return res.status(200).json({ database : stock })
+})
+
 app.post("/watchlist", async function (req, res, next) {
     try {
         const user = await Watchlist.add(req.body);
@@ -115,6 +121,12 @@ app.get("/bills/:id", async function (req, res, next) {
     return res.status(200).json({ database : bills })
 })
 
+app.get("/bills/due/:id", async function (req, res, next) {
+  const userId = req.params.id;
+  const bills = await Bill.totalDue(userId);
+  return res.status(200).json({ database : bills })
+})
+
 app.post("/expenses", async function (req, res, next) {
     try {
         const user = await Expenses.add(req.body);
@@ -128,6 +140,12 @@ app.get("/expenses/:id", async function (req, res, next) {
     const userId = req.params.id;
     const expenses = await Expenses.fetchById(userId);
     return res.status(200).json({ database : expenses })
+})
+
+app.get("/expense/spent/:id", async function (req, res, next) {
+  const userId = req.params.id;
+  const expenses = await Expenses.totalSpent(userId);
+  return res.status(200).json({ database : expenses })
 })
 
 app.post("/goals", async function (req, res, next) {
@@ -175,6 +193,18 @@ app.get("/budget/:id", async function (req, res, next) {
   return res.status(200).json({ database : budget })
 });
 
+app.get("/budget/earnings/:id", async function (req, res, next) {
+  const userId = req.params.id;
+  const budget = await Budget.totalEarnings(userId);
+  return res.status(200).json({ database : budget })
+});
+
+app.get("/budget/total/:id", async function (req, res, next) {
+  const userId = req.params.id;
+  const budget = await Budget.totalBudget(userId);
+  return res.status(200).json({ database : budget })
+});
+
 app.post('/api/chat', async (req, res) => {
   const prompt = req.body.prompt;
   const response = await openai.createCompletion({
@@ -201,7 +231,6 @@ app.get("/", function (req, res) {
     if (!config.IS_TESTING) console.error(err.stack)
     const status = err.status || 500
     const message = err.message
-  
     return res.status(status).json({
       error: { message, status },
     })

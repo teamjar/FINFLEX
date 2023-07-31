@@ -1,6 +1,6 @@
 "use strict"
 
-const { use } = require("../app");
+// const { use } = require("../app");
 const db = require("../db")
 const { BadRequestError, UnauthorizedError } = require("../utils/errors")
 
@@ -34,6 +34,32 @@ class Budget {
                 userid,
                 earnings,
                 budget
+            FROM budget
+            WHERE userid = $1`,
+            [id]
+        );
+
+        const user = result.rows;
+
+        return user;
+    }
+
+    static async totalEarnings(id) {
+        const result = await db.query(
+            `SELECT SUM(earnings)
+            FROM budget
+            WHERE userid = $1`,
+            [id]
+        );
+
+        const user = result.rows;
+
+        return user;
+    }
+
+    static async totalBudget(id) {
+        const result = await db.query(
+            `SELECT SUM(budget)
             FROM budget
             WHERE userid = $1`,
             [id]

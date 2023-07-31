@@ -7,17 +7,20 @@ import StockCarousel from '../StockCarousel/StockCarousel';
 
 function StockDashboard() {
   return (
+  <div>
+    <StockSide />
   <div className='plz'>
     {/* <Navbar /> */}
     <StockProvider>
       <div className='stock-dashboard'>
       <div className="Navbar"><Navbar/></div>
       <div className="StockSearch"> <StockSearch/></div>
-      <div className="StockSide"> <StockSide/> </div>
+
       <div className="StockCarousel"> <StockCarousel/></div>
       </div>
     </StockProvider>
   </div>
+</div>
   );
 }
 

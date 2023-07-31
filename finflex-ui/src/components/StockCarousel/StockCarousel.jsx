@@ -65,3 +65,4 @@ function StockCarousel() {
 }
 
 export default StockCarousel;
+

@@ -17,37 +17,44 @@
     
 .stock-card {
     width: 200px;
-    border: 1px solid #ffffff; 
+    border: 2px solid #ffffff; 
     margin: 10px;
     padding: 10px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+
     flex: 0 0 auto;
     scroll-snap-align: start;
     backdrop-filter: blur(10px);
     background-color: rgba(255, 255, 255, 0.1); 
-    border-radius: 10px;
+    border-radius: 30px;
     transition: 0.3s; 
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
   }
 
   .stock-card:hover {
     transform: scale(1.02); 
-    box-shadow: 0px 5px 15px rgba(0,0,0,0.2); 
+ 
   }
 
   .color-1 {
     background-color: rgb(213, 136, 111);
+    box-shadow: 10px 10px 10px grey;
   }
   
   .color-2 {
     background-color: rgb(112, 162, 136);
+    box-shadow: 10px 10px 20px grey;
   }
   
   .color-3 {
     background-color: rgb(4, 57, 94);
+    box-shadow: 10px 10px 20px grey;
   }
   
   .color-4 {
     background-color: #dab785;
+    box-shadow: 10px 10px 20px grey;
   }
   
   .scroll-button {
@@ -67,3 +74,24 @@
   .scroll-button.right {
     right: 0;
   }
+  
+  /* .stock-logo {
+    height: 50px;
+    width: 50px;
+    margin-left: auto; 
+ } */
+
+ .stock-logo {
+  height: 50px;
+  width: 50px;
+  margin-left: auto;
+  mix-blend-mode: multiply;
+  border-radius: 30px;
+}
+
+.green {
+  color: green;
+}
+.red {
+  color: red;
+}
