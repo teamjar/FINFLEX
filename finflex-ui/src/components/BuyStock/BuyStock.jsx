@@ -13,6 +13,7 @@ function BuyStock() {
     const [investment, setInvestment] = useState("");
     const [stockPrice, setStockPrice] = useState(0);
     const [companyName, setName] = useState('');
+    const [logo, setLogo] = useState('');
     const [change, setChange] = useState(0.0);
     const [array, setArray] = useState([]);
 
@@ -21,6 +22,7 @@ function BuyStock() {
             try {
                 const quote = await fetchQuote(symbol);
                 const details = await fetchStockDetails(symbol);
+                setLogo(details.logo);
                 setName(details.name);
                 setStockPrice(quote.c);
                 setChange(quote.dp);
@@ -69,7 +71,9 @@ function BuyStock() {
                 companyName: companyName,
                 stockPrice: stockPrice,
                 quantity: quantity,
-                change: change
+                change: change,
+                investment: investment,
+                logo: logo
             })
             if (res.data && res.data.user) {
                 const newArray = [...array, res.data.user];
