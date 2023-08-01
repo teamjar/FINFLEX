@@ -15,8 +15,15 @@ function StockCarousel() {
  useEffect(() => {
   const fetchStocks = async () => {
     try {
+      const token = localStorage.getItem('token');
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        };
+
       const userId = localStorage.getItem('userId');
-      const res = await axios.get(`${remoteHostURL}/stocks/${userId}`);
+      const res = await axios.get(`${remoteHostURL}/stocks/${userId}`, config);
       if (res?.data?.database) {
         const updatedStocks = await Promise.all(
           res.data.database.map(async (stock) => {

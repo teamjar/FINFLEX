@@ -12,11 +12,18 @@ const InfoTile = () => {
     useEffect(() => {
         const authUser = async () => {
           try {
+            const token = localStorage.getItem('token');
+            const config = {
+              headers: {
+                Authorization: `Bearer ${token}` // Include the token in the 'Authorization' header as 'Bearer <token>'
+              }
+            };
+
             const userId = localStorage.getItem('userId');
-            const earn = await axios.get(`${remoteHostURL}/budget/earnings/${userId}`);
-            const bud = await axios.get(`${remoteHostURL}/budget/total/${userId}`);
-            const bills = await axios.get(`${remoteHostURL}/bills/due/${userId}`);
-            const expenses = await axios.get(`${remoteHostURL}/expense/spent/${userId}`);
+            const earn = await axios.get(`${remoteHostURL}/budget/earnings/${userId}`, config);
+            const bud = await axios.get(`${remoteHostURL}/budget/total/${userId}`, config);
+            const bills = await axios.get(`${remoteHostURL}/bills/due/${userId}`, config);
+            const expenses = await axios.get(`${remoteHostURL}/expense/spent/${userId}`, config);
             if (earn?.data?.database && bud?.data?.database && bills?.data?.database) {
               setEarnings(earn.data.database[0].sum);
               setSpent(expenses.data.database[0].sum);

@@ -34,6 +34,7 @@ const RegisterForm = () => {
       });
       localStorage.setItem('userId', response.data.user.id);
       localStorage.setItem('name', response.data.user.firstName);
+      localStorage.setItem('token', response.data.token);
       nav('/personal');
     } catch(err) {
       console.log(err);

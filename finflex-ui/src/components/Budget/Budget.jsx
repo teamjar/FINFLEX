@@ -19,8 +19,15 @@ export function BudgetForm() {
   useEffect(() => {
     const authUser = async () => {
       try {
+        const token = localStorage.getItem('token');
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        };
+
         const userId = localStorage.getItem('userId');
-        const res = await axios.get(`${remoteHostURL}/budget/${userId}`);
+        const res = await axios.get(`${remoteHostURL}/budget/${userId}`, config);
         if (res?.data?.database) {
           setArray(res.data.database);
         }

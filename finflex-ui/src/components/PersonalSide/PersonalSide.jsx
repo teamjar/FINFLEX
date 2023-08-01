@@ -8,6 +8,7 @@ function PersonalSide() {
   const handleLogOut = () => {
     localStorage.removeItem("name");
     localStorage.removeItem('userId');
+    localStorage.removeItem('token');
     nav('/');
   }
   return (

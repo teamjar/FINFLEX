@@ -16,8 +16,15 @@ export default function Expense({ searchQuery }) {
   useEffect(() => {
     const authUser = async () => {
       try {
+        const token = localStorage.getItem('token');
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        };
+
         const userId = localStorage.getItem('userId');
-        const res = await axios.get(`${remoteHostURL}/expenses/${userId}`);
+        const res = await axios.get(`${remoteHostURL}/expenses/${userId}`, config);
         if (res?.data?.database) {
           setArray(res.data.database);
 
