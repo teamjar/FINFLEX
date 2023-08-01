@@ -1,28 +1,6 @@
-/* .stock-dashboard {  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  gap: 5px 5px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "StockSide Navbar Navbar Navbar Navbar Navbar Navbar"
-    "StockSide StockSearch StockSearch StockSearch StockSearch StockSearch StockSearch"
-    "StockSide StockCarousel StockCarousel StockCarousel StockCarousel StockCarousel StockCarousel"
-    "StockSide . . . . . .";
-    background-color: #F2EFE9;
-}
-
-.Navbar { grid-area: Navbar; }
-
-.StockSearch { grid-area: StockSearch; }
-
-.StockSide { grid-area: StockSide; }
-
-.StockCarousel { grid-area: StockCarousel; }
- */
-
- .stock-dashboard {  display: grid;
+.stock-dashboard {
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
-
   gap: 5px 5px;
   grid-auto-flow: row;
   grid-template-areas:
@@ -31,20 +9,15 @@
     " StockCarousel StockCarousel StockCarousel StockCarousel StockCarousel StockCarousel"
     " Balance Balance NewsFeed NewsFeed WatchList WatchList"
     " Balance Balance NewsFeed NewsFeed WatchList WatchList";
-    background-color: #F2EFE9;
+  background-color: #F2EFE9;
 }
 
+
 .Navbar { grid-area: Navbar; }
-
 .StockSearch { grid-area: StockSearch; }
-
 .StockCarousel { grid-area: StockCarousel; }
-
 .StockSide { grid-area: StockSide; }
-
-.Balance { grid-area: Balance; }
-
+/* .Balance { grid-area: Balance; } */
 .NewsFeed { grid-area: NewsFeed; }
-
 .WatchList { grid-area: WatchList; }
-
+.Card { grid-area: Balance; }
