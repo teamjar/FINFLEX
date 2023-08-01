@@ -187,7 +187,7 @@ app.get("/bills/:id", async function (req, res, next) {
     return res.status(200).json({ database : bills })
 })
 
-app.delete("/bills/:id", async function (req, res, next) {
+app.delete("/bills/:id", authenticateToken, async function (req, res, next) {
   const userId = req.params.id;
 
   if (req.user && req.user.user.id !== userId) {
