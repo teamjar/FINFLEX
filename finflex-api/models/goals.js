@@ -6,7 +6,7 @@ const { BadRequestError, UnauthorizedError } = require("../utils/errors")
 
 class Goals {
     static async add(creds) {
-        const {userId, gName, gDesc, target, dateDue, category} = creds;
+        const {userId, gName, gDesc, target, dateDue, category, towardsGoal} = creds;
         const requiredCreds = ['userId', 'gName', 'gDesc', 'target', 'dateDue', 'category'];
 
         const result = await db.query(
@@ -16,9 +16,10 @@ class Goals {
                 gdesc,
                 target,
                 datedue,
-                category
+                category, 
+                towardsgoal
             )
-            VALUES ($1, $2, $3, $4, $5, $6)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING
                 userid,
                 gname,
@@ -26,8 +27,9 @@ class Goals {
                 target,
                 datecreated,
                 datedue,
-                category`,
-            [userId, gName, gDesc, target, dateDue, category]
+                category,
+                towardsgoal`,
+            [userId, gName, gDesc, target, dateDue, category, 0]
         );
 
         const goals = result.rows[0];
@@ -44,7 +46,8 @@ class Goals {
                 target,
                 datecreated,
                 datedue,
-                category
+                category,
+                towardsgoal
             FROM goals
             WHERE userid = $1`,
             [id]
@@ -52,6 +55,33 @@ class Goals {
 
         const user = result.rows;
 
+        return user;
+    }
+
+    static async changeTowardsGoal(creds) {
+        const {userId, gName, gDesc, towardsGoal} = creds;
+
+        const result = await db.query(
+            `UPDATE goals
+            SET towardsgoal = $1
+            WHERE userid = $2 AND gname = $3 AND gdesc = $4`,
+            [towardsGoal, userId, gName, gDesc]
+        );
+
+        const user = result.rows;
+
+        return user;
+    }
+
+    static async delete(id) {
+        const result = db.query(
+            `DELETE FROM goals
+            WHERE userid = $1 AND target >= towardsgoal AND datedue < CURRENT_DATE`, 
+            [id]
+        );
+        
+        const user = result.rows;
+   
         return user;
     }
     

@@ -74,6 +74,21 @@ class Stock {
         return user;
     }
 
+    static async changeStockChange(creds) {
+        const {userId, ticker, change} = creds;
+
+        const result = await db.query(
+            `UPDATE stocks
+            SET change = $1
+            WHERE userid = $2 AND ticker = $3`,
+            [change, userId, ticker]
+        );
+
+        const user = result.rows;
+
+        return user;
+    }
+
 }
 
 

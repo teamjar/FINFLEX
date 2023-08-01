@@ -1,3 +1,5 @@
+--DROP TABLE users,stocks,watchlist,budget,goals,bills,expense;
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username TEXT NOT NULL,
@@ -47,7 +49,8 @@ CREATE TABLE goals (
     target NUMERIC(10,2) NOT NULL,
     dateCreated DATE DEFAULT NOW() NOT NULL,
     dateDue DATE NOT NULL,
-    category TEXT NOT NULL
+    category TEXT NOT NULL,
+    towardsGoal NUMERIC(10,2) NOT NULL
 );
 
 CREATE TABLE bills (
@@ -57,7 +60,8 @@ CREATE TABLE bills (
     billDesc TEXT NOT NULL,
     due DATE NOT NULL,
     status TEXT NOT NULL,
-    price NUMERIC(10,2) NOT NULL
+    price NUMERIC(10,2) NOT NULL,
+    towardsBill NUMERIC(10,2) NOT NULL
 );
 
 CREATE TABLE help (
@@ -72,4 +76,4 @@ CREATE TABLE budget (
     userId INT NOT NULL,
     earnings NUMERIC(10,2) NOT NULL,
     budget NUMERIC(10,2) NOT NULL
-)
+);

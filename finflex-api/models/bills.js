@@ -16,17 +16,19 @@ class Bill {
                 billdesc,
                 due,
                 status,
-                price
+                price,
+                towardsBill
             )
-            VALUES ($1, $2, $3, $4, $5, $6)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING
                     userid,
                     billname,
                     billdesc,
                     due,
                     status,
-                    price
-            `, [userId, billName, billDesc, due, status, price]
+                    price,
+                    towardsBill
+            `, [userId, billName, billDesc, due, status, price, 0]
         );
 
         const bill = result.rows[0];
@@ -41,7 +43,8 @@ class Bill {
                     billdesc,
                     due,
                     status,
-                    price
+                    price,
+                    towardsBill
                 FROM bills
                 WHERE userid = $1`,
                 [id]
@@ -64,6 +67,50 @@ class Bill {
 
         return user;
     }
+
+    static async changeTowardsBill(creds) {
+        const {userId, billName, towardsBill} = creds;
+
+        const result = await db.query(
+            `UPDATE bills
+            SET towardsBill = $1
+            WHERE userid = $2 AND billname = $3`,
+            [towardsBill, userId, billName]
+        );
+
+        const user = result.rows;
+
+        return user;
+    }
+
+    static async changeStatus(creds) {
+        const {userId, billName, status} = creds;
+
+        const result = await db.query(
+            `UPDATE bills
+            SET status = $1
+            WHERE userid = $2 AND billname = $3`,
+            [status, userId, billName]
+        );
+
+        const user = result.rows;
+
+        return user;
+    }
+
+    static async delete(id) {
+        const result = db.query(
+            `DELETE FROM bills
+            WHERE userid = $1 AND status = 'paid' AND due < CURRENT_DATE AND towardsBill = price`, 
+            [id]
+        );
+        
+        const user = result.rows;
+   
+        return user;
+    }
+
+    
     
 }
 
