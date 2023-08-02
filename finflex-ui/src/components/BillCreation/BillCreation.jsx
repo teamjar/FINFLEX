@@ -32,6 +32,12 @@ export default function BillCreation({ searchQuery }) {
     event.preventDefault();
 
     try {
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
       const userId = localStorage.getItem('userId');
       const res = await axios.post(`${remoteHostURL}/bills`, {
         userId: userId,
@@ -40,7 +46,7 @@ export default function BillCreation({ searchQuery }) {
         due: due,
         status: status,
         price: price
-      });
+      }, config);
 
       console.log(res.data);
 

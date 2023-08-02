@@ -64,7 +64,7 @@ app.post("/login", async function (req, res, next) {
           id: user.id
         }
       };
-      const token = jwt.sign(payload, config.jwtSecret);
+      const token = jwt.sign(payload, config.jwtSecret, { expiresIn: '3h' });
       //const token = jwt.sign(payload, config.jwtSecret, { expiresIn: '1h' });
       return res.status(200).json({ user, token })
     } catch (err) {
@@ -89,7 +89,7 @@ app.post("/register", async function (req, res, next) {
     }
 })
 
-app.post("/stocks", async function (req, res, next) {
+app.post("/stocks", authenticateToken, async function (req, res, next) {
     try {
         const user = await Stock.add(req.body);
         return res.status(201).json({user});
@@ -98,7 +98,7 @@ app.post("/stocks", async function (req, res, next) {
     }
 });
 
-app.put("/stocks", async function (req, res, next) {
+app.put("/stocks", authenticateToken, async function (req, res, next) {
   try {
     const user = await Stock.changeStockChange(req.body);
     return res.status(201).json({user});
@@ -129,7 +129,7 @@ app.get("/stocks/investment/:id", authenticateToken, async function (req, res, n
   return res.status(200).json({ database : stock })
 })
 
-app.post("/watchlist", async function (req, res, next) {
+app.post("/watchlist", authenticateToken, async function (req, res, next) {
     try {
         const user = await Watchlist.add(req.body);
         return res.status(201).json({user});
@@ -149,7 +149,7 @@ app.get("/watchlist/:id", authenticateToken, async function (req, res, next) {
     return res.status(200).json({ database : watchlist })
 })
 
-app.post("/bills", async function (req, res, next) {
+app.post("/bills", authenticateToken, async function (req, res, next) {
     try {
         const user = await Bill.add(req.body);
         return res.status(201).json({user});
@@ -158,7 +158,7 @@ app.post("/bills", async function (req, res, next) {
     }
 });
 
-app.put("/toward/bills", async function (req, res, next) {
+app.put("/toward/bills", authenticateToken, async function (req, res, next) {
   try {
     const user = await Bill.changeTowardsBill(req.body);
     return res.status(201).json({user});
@@ -167,7 +167,7 @@ app.put("/toward/bills", async function (req, res, next) {
   }
 })
 
-app.put("/status/bills", async function (req, res, next) {
+app.put("/status/bills", authenticateToken, async function (req, res, next) {
   try {
     const user = await Bill.changeStatus(req.body);
     return res.status(201).json({user});
@@ -176,7 +176,7 @@ app.put("/status/bills", async function (req, res, next) {
   }
 })
 
-app.get("/bills/:id", async function (req, res, next) {
+app.get("/bills/:id", authenticateToken, async function (req, res, next) {
     const userId = req.params.id;
 
     // if (req.user && req.user.user.id !== userId) {
@@ -209,7 +209,7 @@ app.get("/bills/due/:id", authenticateToken, async function (req, res, next) {
   return res.status(200).json({ database : bills })
 })
 
-app.post("/expenses", async function (req, res, next) {
+app.post("/expenses", authenticateToken, async function (req, res, next) {
     try {
         const user = await Expenses.add(req.body);
         return res.status(201).json({user});
@@ -240,7 +240,7 @@ app.get("/expense/spent/:id", authenticateToken, async function (req, res, next)
   return res.status(200).json({ database : expenses })
 })
 
-app.post("/goals", async function (req, res, next) {
+app.post("/goals", authenticateToken, async function (req, res, next) {
     try {
         const user = await Goals.add(req.body);
         return res.status(201).json({user});
@@ -249,7 +249,7 @@ app.post("/goals", async function (req, res, next) {
     }
 });
 
-app.put("/goals", async function (req, res, next) {
+app.put("/goals", authenticateToken, async function (req, res, next) {
   try {
     const user = await Goals.changeTowardsGoal(req.body);
     return res.status(201).json({user});
@@ -275,7 +275,7 @@ app.get("/goals/:id", authenticateToken, async function (req, res, next) {
     return res.status(200).json({ database : goals })
 })
 
-app.post("/help", async function (req, res, next) {
+app.post("/help", authenticateToken, async function (req, res, next) {
     try {
         const user = await Help.add(req.body);
         return res.status(201).json({user});
@@ -295,7 +295,7 @@ app.get("/help/:id", authenticateToken, async function (req, res, next) {
     return res.status(200).json({ database : help })
 });
 
-app.post("/budget", async function (req, res, next) {
+app.post("/budget", authenticateToken, async function (req, res, next) {
   try {
       const user = await Budget.add(req.body);
       return res.status(201).json({user});
@@ -337,7 +337,7 @@ app.get("/budget/total/:id",authenticateToken, async function (req, res, next) {
   return res.status(200).json({ database : budget })
 });
 
-app.post('/api/chat', async (req, res) => {
+app.post('/api/chat', authenticateToken, async (req, res) => {
   const prompt = req.body.prompt;
   const response = await openai.createCompletion({
     model: "text-davinci-003",

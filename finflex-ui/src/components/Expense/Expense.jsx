@@ -48,6 +48,12 @@ export default function Expense({ searchQuery }) {
     window.location.reload();
 
     try {
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
       const userId = localStorage.getItem('userId');
       const res = await axios.post(`${remoteHostURL}/expenses`, {
         userId: userId,
@@ -56,7 +62,7 @@ export default function Expense({ searchQuery }) {
         pPrice: price,
         pDate: date,
         category: category
-      });
+      }, config);
       const newArray = [...array, res.data.user];
       setArray(newArray);
       console.log(newArray);

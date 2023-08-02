@@ -89,6 +89,19 @@ class Stock {
         return user;
     }
 
+    static async addBalance(id) {
+        const result = await db.query(
+            `SELECT SUM(balance)
+            FROM stocks
+            WHERE userid = $1`,
+            [id]
+        );
+
+        const user = result.rows;
+
+        return user;
+    }
+
 }
 
 

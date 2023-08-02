@@ -42,6 +42,12 @@ function BuyStock() {
         e.preventDefault();
         console.log(`Purchasing ${quantity} shares with an investment of ${investment}...`);
         try {
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
             const userId = localStorage.getItem('userId');
             const res = await axios.post(`${remoteHostURL}/stocks`, {
                 userId: userId,
@@ -52,7 +58,7 @@ function BuyStock() {
                 change: change,
                 investment: investment,
                 logo: logo
-            })
+            }, config)
             if (res.data && res.data.user) {
                 const newArray = [...array, res.data.user];
                 setArray(newArray);

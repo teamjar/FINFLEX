@@ -47,6 +47,12 @@ export default function GoalCreation({ searchQuery }) {
     event.preventDefault();
 
     try {
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
       const userId = localStorage.getItem('userId');
       const res = await axios.post(`${remoteHostURL}/goals`, {
         userId: userId,
@@ -55,7 +61,7 @@ export default function GoalCreation({ searchQuery }) {
         target: amount,
         dateDue: deadline,
         category: category
-      });
+      }, config);
 
       console.log(res.data);
 

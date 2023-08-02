@@ -43,12 +43,18 @@ export function BudgetForm() {
     event.preventDefault();
 
     try {
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
       const userId = localStorage.getItem('userId');
       const res = await axios.post(`${remoteHostURL}/budget`, {
         userId: userId,
         earnings: earnings,
         budget: budget
-      })
+      }, config)
       const newArray = [...array, res.data.user];
       setArray(newArray);
 
