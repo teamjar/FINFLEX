@@ -1,26 +1,4 @@
-/* .stock-dashboard {  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  gap: 5px 5px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "StockSide Navbar Navbar Navbar Navbar Navbar Navbar"
-    "StockSide StockSearch StockSearch StockSearch StockSearch StockSearch StockSearch"
-    "StockSide StockCarousel StockCarousel StockCarousel StockCarousel StockCarousel StockCarousel"
-    "StockSide . . . . . .";
-    background-color: #F2EFE9;
-}
-
-.Navbar { grid-area: Navbar; }
-
-.StockSearch { grid-area: StockSearch; }
-
-.StockSide { grid-area: StockSide; }
-
-.StockCarousel { grid-area: StockCarousel; }
- */
-
- .stock-dashboard {  display: grid;
+.stock-dashboard {  display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
 
   gap: 5px 5px;
@@ -29,9 +7,10 @@
     " Navbar Navbar Navbar Navbar Navbar Navbar"
     " StockSearch StockSearch StockSearch StockSearch StockSearch StockSearch"
     " StockCarousel StockCarousel StockCarousel StockCarousel StockCarousel StockCarousel"
-    " Balance Balance NewsFeed NewsFeed WatchList WatchList"
-    " Balance Balance NewsFeed NewsFeed WatchList WatchList";
-    background-color: #F2EFE9;
+    " MarketOverview MarketOverview Balance Balance WatchList WatchList"
+    " MarketOverview MarketOverview Balance Balance WatchList WatchList";
+    background-color: white;
+
 }
 
 .Navbar { grid-area: Navbar; }
@@ -42,9 +21,20 @@
 
 .StockSide { grid-area: StockSide; }
 
-.Balance { grid-area: Balance; }
+.MarketOverview { 
+  grid-area: MarketOverview; 
+  margin-left: 20px;
+  margin-right: 20px;
+  height: 630px;
+}
 
-.NewsFeed { grid-area: NewsFeed; }
+.Balance { 
+  grid-area: Balance; 
+}
 
 .WatchList { grid-area: WatchList; }
+
+.market {
+  display:flex;
+}
 
