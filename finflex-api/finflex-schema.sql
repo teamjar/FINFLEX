@@ -1,4 +1,4 @@
---DROP TABLE users,stocks,watchlist,budget,goals,bills,expense;
+--DROP TABLE users,stocks,watchlist,budget,goals,bills,expense,help;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
