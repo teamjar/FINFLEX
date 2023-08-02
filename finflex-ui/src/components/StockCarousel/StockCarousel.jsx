@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { remoteHostURL } from '../../apiClient';
 import { fetchQuote } from '../api/stock-api';
+import { StockProvider } from '../../Context/StockContext';
+import Chart from '../Chart/Chart';
 
 function StockCarousel() {
  const [stocks, setStocks] = useState([]);
@@ -50,26 +52,44 @@ function StockCarousel() {
 }, []);
 
 
- return (
-   <div className="carousel-container">
-     <button className="scroll-button left" onClick={() => scroll(-200)}>←</button>
-     <div className="carousel">
-     {stocks.map((stock, index) => (
-       <Link to={`/stock-details/${stock.ticker}`} key={stock.ticker}>
-         <div key={stock.id} className={`stock-card ${colors[index % 4]}`}>
-           <h4 style={{color:"white", textAlign:"center", fontWeight:"bolder"}}>{stock.companyname}</h4>
-           <p style={{fontWeight:"bolder"}}>Price: ${stock.stockprice}</p>
-           <p className={stock.change > 0 ? "green" : "red"} style={{fontWeight:"bolder"}}>Change: {stock.change} {stock.change > 0 ? '↑' : '↓'}</p>
-           <img src={stock.logo} alt={`${stock.companyname} logo`} className="stock-logo" />
-         </div>
-       </Link>
-    
-       ))}
-     </div>
-     <button className="scroll-button right" onClick={() => scroll(200)}>→</button>
-   </div>
- );
+
+return (
+  <div className="carousel-container">  
+    <button className="scroll-button left" onClick={() => scroll(-200)}>←</button>
+    <div className="carousel">
+      {stocks.map((stock, index) => (
+        <Link to={`/stock-details/${stock.ticker}`} key={stock.ticker}>
+          <div key={stock.id} className="stock-card">
+            <div className= "companyInfo">
+              <div className= "companyLogo">
+                <img style={{borderRadius:"50%"}} src={stock.logo}/>
+              </div>
+              <div className = "companyT&N">
+                {stock.ticker}
+                <br/>
+                {stock.companyname}
+              </div>
+            </div>
+            <div className = "companyPandC">
+              <p style={{color:"black", fontSize: "20px"}}>{stock.stockprice.toFixed(2)}</p>
+              <p className={stock.change > 0 ? "green" : "red"} style={{fontWeight:"bolder"}}>{stock.change > 0 ? '↑' : '↓'} {stock.change.toFixed(2)}% </p>
+            </div>
+          </div>
+        </Link>      
+      ))}
+     </div> 
+  </div>
+);
+
+
+
 }
 
 export default StockCarousel;
+
+
+
+
+
+
 
