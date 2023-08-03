@@ -1,11 +1,19 @@
 import { useState } from "react";
 import "./OnboardForm2.css";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { remoteHostURL } from "../../apiClient";
 
 const OnboardForm2 = () => {
   const [hasFinancialGoals, setHasFinancialGoals] = useState("");
   const [numberOfGoals, setNumberOfGoals] = useState(0);
   const [error, setError] = useState("");
+  const [gName, setName] = useState('');
+  const [gDesc, setDesc] = useState('');
+  const [amount, setAmount] = useState('');
+  const [deadline, setDeadline] = useState('');
+  const [category, setCat] = useState('');
+  let post = [];
   const nav = useNavigate();
 
   const handleGoalSelection = (event) => {
@@ -15,7 +23,7 @@ const OnboardForm2 = () => {
     }
   };
 
-  const handleNumberOfGoals = (event) => {
+  const handleNumberOfGoals = async (event) => {
     setNumberOfGoals(parseInt(event.target.value));
   };
 
@@ -48,6 +56,28 @@ const OnboardForm2 = () => {
         setError("Please fill out all the form fields.");
         return;
       }
+    }
+
+    try {
+      const token = localStorage.getItem('token');
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        };
+      const userId = localStorage.getItem('userId');
+      for(const p in post) {
+        await axios.post(`${remoteHostURL}/goals`, {
+          userId: userId,
+          gName: p.gName,
+          gDesc: p.gDesc,
+          target: p.amount,
+          dateDue: p.deadline,
+          category: p.category
+        }, config)
+      }
+    } catch(err) {
+      console.log(err);
     }
 
     setError(""); 
@@ -87,35 +117,45 @@ const OnboardForm2 = () => {
                 <div className="form-group">
                   <div className="lol">
                     <label>What is the name of your goal?</label>
-                    <input id={`goalName-${index}`} />
+                    <input id={`goalName-${index}`} 
+                    value={gName}
+                    onChange={(e) => setName(e.target.value)}/>
                   </div>
                 </div>
 
                 <div className="form-group">
                   <div className="lol">
                     <label>Provide a short description</label>
-                    <input id={`description-${index}`} />
+                    <input id={`description-${index}`} 
+                    value={gDesc}
+                    onChange={(e) => setDesc(e.target.value)}/>
                   </div>
                 </div>
 
                 <div className="form-group">
                   <div className="lol">
                     <label>What is your intended goal amount?</label>
-                    <input id={`goalAmount-${index}`} />
+                    <input id={`goalAmount-${index}`} 
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}/>
                   </div>
                 </div>
 
                 <div className="form-group">
                   <div className="lol">
                     <label>By when do you want this to be due?</label>
-                    <input type="date" id={`dueDate-${index}`} />
+                    <input type="date" id={`dueDate-${index}`} 
+                    value={deadline}
+                    onChange={(e) => setDeadline(e.target.value)}/>
                   </div>
                 </div>
 
                 <div className="form-group">
                   <div className="lol">
                     <label>What category does this fall under?</label>
-                    <select id={`category-${index}`}>
+                    <select id={`category-${index}`}
+                    value={category}
+                    onChange={(e) => setCat(e.target.value)}>
                       <option></option>
                       <option value="Food">Food</option>
                       <option value="Housing">Housing</option>
@@ -132,6 +172,13 @@ const OnboardForm2 = () => {
                 </div>
               </div>
             ))}
+            {post.push({
+              gName: gName,
+              gDesc: gDesc,
+              amount: amount,
+              deadline: deadline,
+              category: category
+            })}
           </div>
         )}
 

@@ -98,9 +98,18 @@ app.post("/stocks", async function (req, res, next) {
     }
 });
 
-app.put("/stocks", async function (req, res, next) {
+app.put("/stocks", authenticateToken, async function (req, res, next) {
   try {
     const user = await Stock.changeStockChange(req.body);
+    return res.status(201).json({user});
+  } catch(err) {
+    next(err);
+  }
+})
+
+app.put("/stocks/price", authenticateToken, async function (req, res, next) {
+  try {
+    const user = await Stock.changeStockPrice(req.body);
     return res.status(201).json({user});
   } catch(err) {
     next(err);
