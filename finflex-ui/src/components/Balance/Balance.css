@@ -4,20 +4,22 @@
     align-items: center;
     justify-content: center;
     /* min-height: 100vh; */
-    
     font-family: 'Roboto', sans-serif;
 }
 
 .Balance {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2em;
-    border-radius: 1em;
-    background-color: black;
-    box-shadow:  -20px -20px 60px #cacaca, 
-     20px 20px 60px #ffffff;
-    width: 80%;
+  padding: 2rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(100px);
+  border-radius: .375rem;
+  position: relative;
+  box-shadow: 0 8px 32px 0 rgb(112, 162, 136, 0.5);
+  box-sizing: border-box; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+
 }
 

@@ -10,6 +10,7 @@ export default function GoalCreation({ searchQuery }) {
   const [amount, setAmount] = useState('');
   const [deadline, setDeadline] = useState('');
   const [category, setCat] = useState('');
+  
   const [array, setArray] = useState([]); // gname, gdesc, target(amount), datedue(deadline), category
   const [filterCategory, setFilterCategory] = useState('');
 
@@ -132,6 +133,7 @@ export default function GoalCreation({ searchQuery }) {
             <option value="entertainment">Entertainment</option>
             <option value="personal">Personal Care</option>
             <option value="debt">Debt/Loans</option>
+            <option value="bills">Bills</option>
             <option value="misc">Miscellaneous</option>
           </select>
         </div>
@@ -140,7 +142,7 @@ export default function GoalCreation({ searchQuery }) {
           Add
         </button>
       </div>
-      {/* Add the new filter dropdown */}
+   
       <div className="si">
         <div className="flow">
           <select
@@ -184,6 +186,9 @@ export default function GoalCreation({ searchQuery }) {
                 </th>
                 <th style={{ border: "2px solid rgb(4, 57, 94)" }}>
                   <span>{a.datedue.substring(0, a.datedue.indexOf('T'))}</span>
+                </th>
+                <th style={{ border: "2px solid rgb(4, 57, 94)" }}>
+                  <span>${a.towardsgoal}</span>
                 </th>
               </tr>
             </table>

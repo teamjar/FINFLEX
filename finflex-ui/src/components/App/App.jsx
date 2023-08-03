@@ -9,7 +9,11 @@ import Help from '../Help/Help'
 import StockDashboard from '../StockDashboard/StockDashboard'
 import StockDetails from '../StockDetails/StockDetails'
 import BuyStockPage from '../BuyStockPage/BuyStockPage'
+import OnboardPage from '../OnboardPage/OnboardPage'
+import OnboardPage2 from '../OnboardPage2/OnboardPage2'
+import OnboardPage3 from '../OnboardPage3/OnboardPage3'
 import NewsFeed from '../NewsFeed/NewsFeed'
+import NewsPage from '../NewsPage/NewsPage'
 import { QueryClient, QueryClientProvider } from "react-query"
 
 const queryClient = new QueryClient();
@@ -30,7 +34,10 @@ function App() {
             <Route path="/stocks" element={<StockDashboard />} />
             <Route path="/stock-details/:symbol" element={<StockDetails />} />
             <Route path="/stock-details/:symbol/buy" element={<BuyStockPage />} /> 
-            <Route path="/news" element={<NewsFeed />} />
+            <Route path="/onboard" element={<OnboardPage />} />
+            <Route path="/onboard/2" element={<OnboardPage2 />} />
+            <Route path="/onboard/3" element={<OnboardPage3 />} />
+            <Route path="/news" element={<NewsPage />} />
 
           </Routes>
         </Router>

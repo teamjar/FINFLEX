@@ -105,7 +105,6 @@ export default function BillCreation({ searchQuery }) {
             <option></option>
             <option value="unpaid">Unpaid</option>
             <option value="paid">Paid</option>
-            <option value="overdue">Overdue</option>
           </select>
         </div>
 
@@ -129,6 +128,7 @@ export default function BillCreation({ searchQuery }) {
                 <th style={{ border: "2px solid #dab785" }}><span>{a.billdesc}</span></th>
                 <th style={{ border: "2px solid #dab785" }}><span>${a.price}</span></th>
                 <th style={{ border: "2px solid #dab785" }}><span>{a.due.substring(0, a.due.indexOf('T'))}</span></th>
+                <th style={{ border: "2px solid #dab785" }}><span>${a.towardsbill}</span></th>
               </tr>
             </table>
           </div>

@@ -37,16 +37,15 @@ function Balance() {
 
     return (
         <div >
-
-                <h1>Your Portfolio</h1>
-                <h2>Total Investment: ${totalInvestment}</h2>
+                <h2 style={{color:"black", textAlign:"center", margin:"5px"}}>Your Portfolio</h2>
+                {/*<h2 style={{color:"black"}}>Total Investment: ${totalInvestment}</h2>*/}
                 {stocks.map((stock, index) => (
                     <div key={index}>
-                        <h3>{stock.companyName}</h3>
-                        <p>Ticker: {stock.ticker}</p>
-                        <p>Investment: ${stock.investment}</p>
-                        <p>Quantity: {stock.quantity}</p>
-                        <p>Stock Price: ${stock.stockPrice}</p>
+                        <h3 style={{color:"black"}}>{stock.companyName}</h3>
+                        <p style={{color:"black"}}>Ticker: {stock.ticker}</p>
+                        <p style={{color:"black"}}>Investment: ${stock.investment}</p>
+                        <p style={{color:"black"}}>Quantity: {stock.quantity}</p>
+                        <p style={{color:"black"}}>Stock Price: ${stock.stockPrice}</p>
                     </div>
                 ))}
   
