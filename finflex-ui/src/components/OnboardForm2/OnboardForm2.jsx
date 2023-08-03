@@ -8,12 +8,7 @@ const OnboardForm2 = () => {
   const [hasFinancialGoals, setHasFinancialGoals] = useState("");
   const [numberOfGoals, setNumberOfGoals] = useState(0);
   const [error, setError] = useState("");
-  const [gName, setName] = useState('');
-  const [gDesc, setDesc] = useState('');
-  const [amount, setAmount] = useState('');
-  const [deadline, setDeadline] = useState('');
-  const [category, setCat] = useState('');
-  let post = [];
+  const [formData, setFormData] = useState({});
   const nav = useNavigate();
 
   const handleGoalSelection = (event) => {
@@ -27,6 +22,13 @@ const OnboardForm2 = () => {
     setNumberOfGoals(parseInt(event.target.value));
   };
 
+  const handleChange = (event, field, index) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [`${field}-${index}`]: event.target.value,
+    }));
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -34,18 +36,18 @@ const OnboardForm2 = () => {
       // Check if all the forms are filled out for visible questions
       let errorFound = false;
       for (let i = 0; i < numberOfGoals; i++) {
-        const goalName = document.getElementById(`goalName-${i}`).value;
-        const description = document.getElementById(`description-${i}`).value;
-        const goalAmount = document.getElementById(`goalAmount-${i}`).value;
-        const dueDate = document.getElementById(`dueDate-${i}`).value;
-        const category = document.getElementById(`category-${i}`).value;
+        const goalName = formData[`goalName-${i}`];
+        const description = formData[`description-${i}`];
+        const goalAmount = formData[`goalAmount-${i}`];
+        const dueDate = formData[`dueDate-${i}`];
+        const category = formData[`category-${i}`];
 
         if (
-          !goalName.trim() ||
-          !description.trim() ||
-          !goalAmount.trim() ||
-          !dueDate.trim() ||
-          !category.trim()
+          !goalName?.trim() ||
+          !description?.trim() ||
+          !goalAmount?.trim() ||
+          !dueDate?.trim() ||
+          !category?.trim()
         ) {
           errorFound = true;
           break;
@@ -66,15 +68,21 @@ const OnboardForm2 = () => {
           }
         };
       const userId = localStorage.getItem('userId');
-      for(const p in post) {
+      for (let i = 0; i < numberOfGoals; i++) {
+        const goalName = formData[`goalName-${i}`];
+        const description = formData[`description-${i}`];
+        const goalAmount = formData[`goalAmount-${i}`];
+        const dueDate = formData[`dueDate-${i}`];
+        const category = formData[`category-${i}`];
+
         await axios.post(`${remoteHostURL}/goals`, {
           userId: userId,
-          gName: p.gName,
-          gDesc: p.gDesc,
-          target: p.amount,
-          dateDue: p.deadline,
-          category: p.category
-        }, config)
+          gName: goalName,
+          gDesc: description,
+          target: goalAmount,
+          dateDue: dueDate,
+          category: category
+        }, config);
       }
     } catch(err) {
       console.log(err);
@@ -117,45 +125,51 @@ const OnboardForm2 = () => {
                 <div className="form-group">
                   <div className="lol">
                     <label>What is the name of your goal?</label>
-                    <input id={`goalName-${index}`} 
-                    value={gName}
-                    onChange={(e) => setName(e.target.value)}/>
+                    <input
+                      value={formData[`goalName-${index}`] || ""}
+                      onChange={(e) => handleChange(e, 'goalName', index)}
+                    />
                   </div>
                 </div>
 
                 <div className="form-group">
                   <div className="lol">
                     <label>Provide a short description</label>
-                    <input id={`description-${index}`} 
-                    value={gDesc}
-                    onChange={(e) => setDesc(e.target.value)}/>
+                    <input
+                      value={formData[`description-${index}`] || ""}
+                      onChange={(e) => handleChange(e, 'description', index)}
+                    />
                   </div>
                 </div>
 
                 <div className="form-group">
                   <div className="lol">
                     <label>What is your intended goal amount?</label>
-                    <input id={`goalAmount-${index}`} 
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}/>
+                    <input
+                      value={formData[`goalAmount-${index}`] || ""}
+                      onChange={(e) => handleChange(e, 'goalAmount', index)}
+                    />
                   </div>
                 </div>
 
                 <div className="form-group">
                   <div className="lol">
                     <label>By when do you want this to be due?</label>
-                    <input type="date" id={`dueDate-${index}`} 
-                    value={deadline}
-                    onChange={(e) => setDeadline(e.target.value)}/>
+                    <input
+                      type="date"
+                      value={formData[`dueDate-${index}`] || ""}
+                      onChange={(e) => handleChange(e, 'dueDate', index)}
+                    />
                   </div>
                 </div>
 
                 <div className="form-group">
                   <div className="lol">
                     <label>What category does this fall under?</label>
-                    <select id={`category-${index}`}
-                    value={category}
-                    onChange={(e) => setCat(e.target.value)}>
+                    <select
+                      value={formData[`category-${index}`] || ""}
+                      onChange={(e) => handleChange(e, 'category', index)}
+                    >
                       <option></option>
                       <option value="Food">Food</option>
                       <option value="Housing">Housing</option>
@@ -172,13 +186,6 @@ const OnboardForm2 = () => {
                 </div>
               </div>
             ))}
-            {post.push({
-              gName: gName,
-              gDesc: gDesc,
-              amount: amount,
-              deadline: deadline,
-              category: category
-            })}
           </div>
         )}
 

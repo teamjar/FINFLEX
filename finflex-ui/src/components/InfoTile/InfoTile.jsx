@@ -8,6 +8,7 @@ const InfoTile = () => {
     const [spent, setSpent] = useState(0.00);
     const [budget, setBudget] = useState(0.00);
     const [due, setDue] = useState(0.00);
+    const [balance, setBalance] = useState(0.00);
 
     useEffect(() => {
         const authUser = async () => {
@@ -24,11 +25,14 @@ const InfoTile = () => {
             const bud = await axios.get(`${remoteHostURL}/budget/total/${userId}`, config);
             const bills = await axios.get(`${remoteHostURL}/bills/due/${userId}`, config);
             const expenses = await axios.get(`${remoteHostURL}/expense/spent/${userId}`, config);
+            const balance = await axios.get(`${remoteHostURL}/balance/${userId}`, config);
+            //const put = await axios.put(`${remoteHostURL}/balance`, config);
             if (earn?.data?.database && bud?.data?.database && bills?.data?.database) {
-              setEarnings(earn.data.database[0].sum);
-              setSpent(expenses.data.database[0].sum);
-              setBudget(bud.data.database[0].sum);
-              setDue(bills.data.database[0].sum);
+              setEarnings(earn.data.database[0].sum.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+              setSpent(expenses.data.database[0].sum.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+              setBudget(bud.data.database[0].sum.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+              setDue(bills.data.database[0].sum.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+              setBalance(balance.data.database[0].balance.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
             }
           } catch (err) {
             console.log(err);
@@ -62,7 +66,7 @@ const InfoTile = () => {
 
             <div className="tile square5">
             <h3>Balance</h3>
-            <h1 style={{fontSize:"30px"}}>$</h1>
+            <h1 style={{fontSize:"30px"}}>${balance}</h1>
             </div>
 
         </div>

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./OnboardForm.css";
+import axios from 'axios';
+import { remoteHostURL } from "../../apiClient";
 
 const OnboardForm = () => {
   const [employmentStatus, setEmploymentStatus] = useState("");
@@ -8,6 +10,9 @@ const OnboardForm = () => {
   const [hasSavingsBudget, setHasSavingsBudget] = useState("");
   const [showSetAsideInput, setShowSetAsideInput] = useState(false);
   const [showProvidedInput, setShowProvidedInput] = useState(false);
+  const [earnings, setEarnings] = useState(0);
+  const [budget, setBudget] = useState(0);
+  const [balance, setBalance] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
 
   const nav = useNavigate();
@@ -28,6 +33,28 @@ const OnboardForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    try {
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+      const userId = localStorage.getItem('userId');
+      await axios.post(`${remoteHostURL}/budget`, {
+        userId: userId,
+        earnings: earnings,
+        budget: budget
+      }, config);
+
+      await axios.post(`${remoteHostURL}/balance`, {
+        userId: userId,
+        balance: balance
+      }, config);
+
+    } catch (error) {
+      console.log(error)
+    }
  
     if (
       (showPaydayInput && !event.target.payday.value) ||
@@ -72,14 +99,18 @@ const OnboardForm = () => {
         <div className="form-group">
           <div className="lol">
             <label>What is your total earnings per week?</label>
-            <input name="earnings" />
+            <input name="earnings" 
+            value={earnings}
+            onChange={(e) => setEarnings(e.target.value)}/>
           </div>
         </div>
 
         <div className="form-group">
           <div className="lol">
             <label>What is your current account balance?</label>
-            <input name="balance" />
+            <input name="balance" 
+            value={balance}
+            onChange={(e) => setBalance(e.target.value)}/>
           </div>
         </div>
 
@@ -98,7 +129,9 @@ const OnboardForm = () => {
           <div className="form-group">
             <div className="lol">
               <label>How much do you plan to set aside?</label>
-              <input name="setAside" />
+              <input name="setAside" 
+              value={budget}
+              onChange={(e) => setBudget(e.target.value)}/>
             </div>
           </div>
         )}
