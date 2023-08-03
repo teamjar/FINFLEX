@@ -151,6 +151,7 @@ const OnboardForm = () => {
 
         <button type="submit" className="login-btn">Next</button>
       </form>
+      
     </div>
   );
 };

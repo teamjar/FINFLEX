@@ -64,9 +64,9 @@ const LoginForm = () => {
                     <button type="submit" className="login-btn">Login</button>
                 </form>
                 <p style={{ textAlign: "center" }}>
-                    Don't have an account yet? 
-                    <Link to="/registration" style={{color:"rgba( 69, 162, 158)"}}> Register here.</Link> 
+                Don't have an account yet? 
                 </p>
+                <Link to="/registration" style={{color:"rgba( 69, 162, 158)"}}> Register here.</Link> 
             </div>
         </div>
     )

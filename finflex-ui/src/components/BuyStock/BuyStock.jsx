@@ -98,12 +98,16 @@ function BuyStock() {
         }
     }
 
+
+
     return (
         <div className="container">
+        <div className='bff'>
+             <h1 style={{textAlign:"center"}}>Buy Stocks</h1>
             <div className="BuyStock">
-                <h1>Buy Stocks</h1>
                 <form onSubmit={handleBuyClick}>
                     <label htmlFor="investment">Investment Amount</label>
+                <div className='lol'>
                     <input 
                         type="number"
                         id="investment"
@@ -111,6 +115,7 @@ function BuyStock() {
                         value={investment}
                         onChange={handleInvestmentChange}
                     />
+                </div>
                     <label htmlFor="quantity">Quantity Amount</label>
                     <input
                         type="number"
@@ -119,12 +124,14 @@ function BuyStock() {
                         value={quantity}
                         readOnly
                     />
-                    <button type="submit">Buy</button>
+                    <button type="submit" className='login-btn'>Buy</button>
                 </form>
             </div>
+     
+           
             
         </div>
-
+    </div>
     )
 }
 
