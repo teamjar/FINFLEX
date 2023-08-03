@@ -355,6 +355,16 @@ app.post('/api/chat', async (req, res) => {
   console.log(response)
 });
 
+app.get("/stocks/balance/:id", async (req, res, next) => {
+  try {
+      const balance = await Stock.getSumBalance(req.params.id);
+      return res.status(200).json({ balance });
+  } catch (e) {
+      return next(e);
+  }
+});
+
+
 // health check
 app.get("/", function (req, res) {
     return res.status(200).json({

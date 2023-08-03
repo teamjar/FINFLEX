@@ -7,38 +7,51 @@ const { BadRequestError, UnauthorizedError } = require("../utils/errors")
 class Stock {
     static async add(creds) {
         const {userId, ticker, companyName, stockPrice, quantity, change, investment, logo} = creds;
-        //const requiredCreds = ['userId', 'ticker', 'companyName', 'stockPrice', 'quantity', 'change'];
-
-        const result = await db.query(
-            `INSERT INTO stocks (
-                userid,
-                ticker,
-                companyname,
-                stockprice, 
-                quantity,
-                change,
-                investment, 
-                logo
-            )
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-            RETURNING
+ 
+        let existingStock = await this.findByUserAndTicker(userId, ticker);
+ 
+        let stock;
+ 
+        if (existingStock) {
+            const newQuantity = existingStock.quantity + quantity;
+            const newInvestment = existingStock.investment + investment;
+ 
+            const result = await db.query(
+                `UPDATE stocks
+                 SET quantity = $1,
+                     investment = $2,
+                     stockprice = $3
+                 WHERE userid = $4 AND ticker = $5
+                 RETURNING *
+                 `,
+                [newQuantity, newInvestment, stockPrice, userId, ticker]
+            );
+ 
+            stock = result.rows[0];
+        } else {
+            const result = await db.query(
+                `INSERT INTO stocks (
                     userid,
                     ticker,
                     companyname,
                     stockprice,
                     quantity,
                     change,
-                    balance,
                     investment,
                     logo
-                    `,
-                    [userId, ticker, companyName, stockPrice, quantity, change, investment, logo]
-        );
-
-        const stock = result.rows[0];
-
+                )
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                RETURNING *
+                `,
+                [userId, ticker, companyName, stockPrice, quantity, change, investment, logo]
+            );
+ 
+            stock = result.rows[0];
+        }
+ 
         return stock;
     }
+ 
 
     static async fetchById(id) {
         const result = await db.query(
@@ -74,6 +87,23 @@ class Stock {
         return user;
     }
 
+    static async getSumBalance(id) {
+        const result = await db.query(
+            `SELECT SUM(balance)
+            FROM stocks
+            WHERE userid = $1`,
+            [id]
+        );
+ 
+        // const sumBalance = result.rows[0];
+ 
+        // return sumBalance;
+
+        const user = result.rows;
+
+        return user;
+    }
+
     static async changeStockChange(creds) {
         const {userId, ticker, change} = creds;
 
@@ -89,6 +119,23 @@ class Stock {
         return user;
     }
 
+
+    static async findByUserAndTicker(id, ticker) {
+        const result = await db.query(
+            `SELECT *
+             FROM stocks
+             WHERE userid = $1 AND ticker = $2`,
+            [id, ticker]
+        );
+ 
+        const stock = result.rows[0];
+ 
+        return stock;
+    }
+
+
+ 
+ 
     static async changeStockPrice(creds) {
         const {userId, ticker, stockPrice} = creds;
 
@@ -103,6 +150,7 @@ class Stock {
 
         return user;
     }
+
 
 }
 
