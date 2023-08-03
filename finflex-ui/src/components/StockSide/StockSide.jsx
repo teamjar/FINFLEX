@@ -23,12 +23,12 @@ function StockSide() {
 
         <div className='navigation-route'>
         <img className='my-stocks' src="https://www.pngarts.com/files/17/Finance-Silhouette-PNG-Picture.png"/>
-        <li><Link to="/mystocks" style={{color:"#031D44"}}>My Stocks</Link></li>
+        <li><Link to="/mystocks" style={{color:"#031D44"}}>Watch List</Link></li>
         </div>
 
         <div className='navigation-route'>
-        <img className='watch-list' src="https://cdn-icons-png.flaticon.com/128/1118/1118301.png" />
-        <li><Link to="/watch" style={{color:"#031D44"}}>Watch List</Link></li>
+        <img className='watch-list' style={{width:"30px"}} src="https://static.thenounproject.com/png/2989017-200.png" />
+        <li><Link to="/news" style={{color:"#031D44"}}>News Feed</Link></li>
         </div>
 
         <div className='navigation-route' style={{position:"absolute", bottom:"0"}}>

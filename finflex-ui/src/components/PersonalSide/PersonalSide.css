@@ -5,7 +5,7 @@
     left: 0; /* Stick it to the left */
     top: 0; /* Align it to the top */
     bottom: 0; /* Align it to the bottom to stretch its height */
-
+    box-shadow: 2px 0px 15px rgb(0 0 0 / 10%);
     overflow-x: hidden;
 }
 

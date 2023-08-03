@@ -10,6 +10,7 @@ const BillDetail = () => {
             <th style={{backgroundColor:"#dab785", border:"2px solid #dab785"}}><span>Description</span></th>
             <th style={{backgroundColor:"#dab785", border:"2px solid #dab785"}}><span>Price</span></th>
             <th style={{backgroundColor:"#dab785", border:"2px solid #dab785"}}><span>Due</span></th>
+            <th style={{backgroundColor:"#dab785", border:"2px solid #dab785"}}><span>Funds</span></th>
         </table>
         </div>
         

@@ -130,6 +130,7 @@ export default function Expense({ searchQuery }) {
             <option value="Entertainment">Entertainment</option>
             <option value="Personal">Personal Care</option>
             <option value="Debt/Loans">Debt/Loans</option>
+            <option value="bills">Bills</option>
             <option value="Miscellaneous">Miscellaneous</option>
           </select>
         </div>

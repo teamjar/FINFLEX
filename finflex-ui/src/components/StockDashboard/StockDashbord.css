@@ -13,7 +13,14 @@
 
 }
 
-.Navbar { grid-area: Navbar; }
+.Navbar { grid-area: Navbar; 
+
+}
+
+.fuh{
+
+    background-color: white;
+}
 
 .StockSearch { grid-area: StockSearch; }
 

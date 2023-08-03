@@ -1,6 +1,6 @@
 import { StockProvider } from '../../Context/StockContext'; 
 import StockSide from '../StockSide/StockSide';
-import Navbar from '../Navbar/Navbar';
+import Navbar2 from '../Navbar2/Navbar2';
 import './StockDashbord.css';
 import StockSearch from '../StockSearch/StockSearch';
 import StockCarousel from '../StockCarousel/StockCarousel';
@@ -15,7 +15,7 @@ function StockDashboard() {
     <div className='plz'>
       <StockProvider>
         <div className='stock-dashboard'>
-          <div className="Navbar"><Navbar/></div>
+          <div className="Navbar fuh"><Navbar2/></div>
           <div className="StockSearch"> <StockSearch/></div>
           <div className="StockCarousel"> <StockCarousel/></div>
           <div className='market'>
