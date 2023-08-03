@@ -15,15 +15,15 @@ class Stock {
         if (existingStock) {
             const newQuantity = existingStock.quantity + quantity;
             const newInvestment = existingStock.investment + investment;
- 
             const result = await db.query(
                 `UPDATE stocks
                  SET quantity = $1,
                      investment = $2,
-                     stockprice = $3
+                     stockprice = COALESCE(stockprice, $3),
+                     timestamp = CURRENT_TIMESTAMP
                  WHERE userid = $4 AND ticker = $5
                  RETURNING *
-                 `,
+                `,
                 [newQuantity, newInvestment, stockPrice, userId, ticker]
             );
  
@@ -51,19 +51,43 @@ class Stock {
  
         return stock;
     }
+
  
 
+    // static async fetchById(id) {
+    //     const result = await db.query(
+    //         `SELECT userid,
+    //                 ticker,
+    //                 companyname,
+    //                 stockprice, 
+    //                 quantity,
+    //                 change,
+    //                 balance,
+    //                 investment,
+    //                 logo
+    //             FROM stocks
+    //             WHERE userid = $1`,
+    //             [id]
+    //     );
+
+    //     const user = result.rows;
+
+    //     return user;
+    // }
+
+    //Create for Portfolio Chart
     static async fetchById(id) {
         const result = await db.query(
             `SELECT userid,
                     ticker,
                     companyname,
-                    stockprice, 
+                    LAST_VALUE(stockprice) OVER (PARTITION BY ticker ORDER BY timestamp ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW),
                     quantity,
                     change,
                     balance,
                     investment,
-                    logo
+                    logo,
+                    timestamp
                 FROM stocks
                 WHERE userid = $1`,
                 [id]
@@ -119,6 +143,23 @@ class Stock {
         return user;
     }
 
+    //Created for Portfolio Chart
+    static async changeStockPrice(creds) {
+        const {userId, ticker, stockPrice} = creds;
+        const result = await db.query(
+            `UPDATE stocks
+             SET stockprice = COALESCE(stockprice, $1),
+                timestamp = CURRENT_TIMESTAMP
+            WHERE userid = $2 AND ticker = $3
+            RETURNING *
+            `,
+            [stockPrice, userId, ticker]
+        );
+        const user = result.rows;
+        return user;
+    }
+
+
 
     static async findByUserAndTicker(id, ticker) {
         const result = await db.query(
@@ -150,6 +191,8 @@ class Stock {
 
         return user;
     }
+
+
 
 
 }
