@@ -28,11 +28,11 @@ const InfoTile = () => {
             const balance = await axios.get(`${remoteHostURL}/balance/${userId}`, config);
             //const put = await axios.put(`${remoteHostURL}/balance`, config);
             if (earn?.data?.database && bud?.data?.database && bills?.data?.database) {
-              setEarnings(earn.data.database[0].sum.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
-              setSpent(expenses.data.database[0].sum.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
-              setBudget(bud.data.database[0].sum.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
-              setDue(bills.data.database[0].sum.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
-              setBalance(balance.data.database[0].balance.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+              setEarnings(earn.data.database[0].sum);
+              setSpent(expenses.data.database[0].sum);
+              setBudget(bud.data.database[0].sum);
+              setDue(bills.data.database[0].sum);
+              setBalance(balance.data.database[0].balance);
             }
           } catch (err) {
             console.log(err);

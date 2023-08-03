@@ -3,6 +3,7 @@ import axios from 'axios';
 import './RegisterForm.css'
 import { remoteHostURL } from '../../apiClient';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
 
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
@@ -39,6 +40,7 @@ const RegisterForm = () => {
       localStorage.setItem('name', response.data.user.firstName);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('expiredTime', expirationTimestamp);
+      
       nav('/onboard');
     } catch(err) {
       console.log(err);
@@ -131,6 +133,12 @@ const RegisterForm = () => {
         </div>
         <button type="submit" className="login-btn">Register</button>
       </form>
+    
+      <p style={{ textAlign: "center" }}>
+                Already have an account? 
+        </p>
+         <Link to="/login" style={{color:"rgba( 69, 162, 158)"}}> Sign in here.</Link> 
+
     </div>
   );
 };
