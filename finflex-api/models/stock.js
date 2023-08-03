@@ -119,6 +119,7 @@ class Stock {
         return user;
     }
 
+
     static async findByUserAndTicker(id, ticker) {
         const result = await db.query(
             `SELECT *
@@ -135,6 +136,21 @@ class Stock {
 
  
  
+    static async changeStockPrice(creds) {
+        const {userId, ticker, stockPrice} = creds;
+
+        const result = await db.query(
+            `UPDATE stocks
+            SET stockprice = $1
+            WHERE userid = $2 AND ticker = $3`,
+            [stockPrice, userId, ticker]
+        );
+
+        const user = result.rows;
+
+        return user;
+    }
+
 
 }
 

@@ -3,6 +3,7 @@ import StockSide from "../StockSide/StockSide";
 import NewsFeed from "../NewsFeed/NewsFeed"
 
 const NewsPage = () => {
+  const name = localStorage.getItem('name');
     return (
         <div className="plz">
             <Navbar2 />

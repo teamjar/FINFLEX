@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios'
+import { remoteHostURL } from "../../apiClient";
 
 const OnboardForm3 = () => {
   const [hasFinancialGoals, setHasFinancialGoals] = useState("");
   const [numberOfGoals, setNumberOfGoals] = useState(0);
   const [error, setError] = useState("");
+  const [name, setName] = useState('');
+  const [desc, setDesc] = useState('');
+  const [price, setPrice] = useState('');
+  const [due, setDue] = useState('');
+  let post = [];
   const nav = useNavigate();
 
   const handleGoalSelection = (event) => {
@@ -40,6 +47,28 @@ const OnboardForm3 = () => {
         setError("Please fill out all the form fields for visible questions.");
         return;
       }
+    }
+
+    try {
+      const token = localStorage.getItem('token');
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        };
+      const userId = localStorage.getItem('userId');
+      for(const p in post) {
+        await axios.post(`${remoteHostURL}/goals`, {
+          userId: userId,
+          billName: p.name,
+          billDesc: p.desc,
+          due: p.due,
+          status: p.status,
+          price: p.price
+        }, config)
+      }
+    } catch(err) {
+      console.log(err);
     }
 
     setError(""); // Clear any previous error
@@ -79,32 +108,47 @@ const OnboardForm3 = () => {
                 <div className="form-group">
                   <div className="lol">
                     <label>What is the name of your bill?</label>
-                    <input id={`billName-${index}`} />
+                    <input id={`billName-${index}`}
+                    value={name}
+                    onChange={e => setName(e.target.value)} />
                   </div>
                 </div>
 
                 <div className="form-group">
                   <div className="lol">
                     <label>Provide a short bill description</label>
-                    <input id={`description-${index}`} />
+                    <input id={`description-${index}`}
+                    value={desc}
+                    onChange={e => setDesc(e.target.value)}  />
                   </div>
                 </div>
 
                 <div className="form-group">
                   <div className="lol">
                     <label>What is your due amount?</label>
-                    <input id={`dueAmount-${index}`} />
+                    <input id={`dueAmount-${index}`} 
+                    value={price}
+                    onChange={e => setPrice(e.target.value)}/>
                   </div>
                 </div>
 
                 <div className="form-group">
                   <div className="lol">
                     <label>When is this bill due?</label>
-                    <input type="date" id={`dueDate-${index}`} />
+                    <input type="date" id={`dueDate-${index}`} 
+                    value={due}
+                    onChange={e => setDue(e.target.value)} />
                   </div>
                 </div>
               </div>
             ))}
+            {post.push({
+              name: name,
+              desc: desc,
+              price: price,
+              due: due,
+              status: "Unpaid"
+            })}
           </div>
         )}
 

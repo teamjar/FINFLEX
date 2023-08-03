@@ -12,13 +12,14 @@ import BuyStockPage from '../BuyStockPage/BuyStockPage'
 import OnboardPage from '../OnboardPage/OnboardPage'
 import OnboardPage2 from '../OnboardPage2/OnboardPage2'
 import OnboardPage3 from '../OnboardPage3/OnboardPage3'
-import NewsFeed from '../NewsFeed/NewsFeed'
+//import NewsFeed from '../NewsFeed/NewsFeed'
 import NewsPage from '../NewsPage/NewsPage'
 import { QueryClient, QueryClientProvider } from "react-query"
 
 const queryClient = new QueryClient();
 
 function App() {
+
   return (
     <QueryClientProvider client={queryClient}>
       <div className='back'>
@@ -46,4 +47,38 @@ function App() {
   )
 }
 
-export default App
+export default App;
+
+// useEffect(() => {
+//   const checkTokenExpiration = () => {
+//     const token = localStorage.getItem('token');
+//     const expirationTime = localStorage.getItem('expiredTime');
+
+//     if (token && expirationTime) {
+//       const currentTime = Date.now();
+//       const expirationTimestamp = parseInt(expirationTime, 10);
+
+//       if (currentTime > expirationTimestamp) {
+//         Swal.fire({
+//           title: 'Token Expired',
+//           text: 'Your session has expired. Please log in again.',
+//           icon: 'warning',
+//           confirmButtonColor: '#3085d6',
+//           confirmButtonText: 'OK',
+//         }).then((result) => {
+//           if (result.isConfirmed) {
+//             navigate('/');
+//           }
+//         });
+//       }
+//     } else {
+//       navigate('/');
+//     }
+//   };
+
+//   checkTokenExpiration();
+
+//   const interval = setInterval(checkTokenExpiration, 30000);
+
+//   return () => clearInterval(interval);
+// }, [navigate])

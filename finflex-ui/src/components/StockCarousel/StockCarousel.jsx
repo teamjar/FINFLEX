@@ -4,54 +4,73 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { remoteHostURL } from '../../apiClient';
 import { fetchQuote } from '../api/stock-api';
-import { StockProvider } from '../../Context/StockContext';
-import Chart from '../Chart/Chart';
+// import { StockProvider } from '../../Context/StockContext';
+// import Chart from '../Chart/Chart';
 
 function StockCarousel() {
  const [stocks, setStocks] = useState([]);
- const colors = ['color-1', 'color-2', 'color-3', 'color-4'];
+ //const colors = ['color-1', 'color-2', 'color-3', 'color-4'];
   const scroll = (scrollOffset) => {
    document.querySelector('.carousel').scrollLeft += scrollOffset;
  };
 
- useEffect(() => {
-  const fetchStocks = async () => {
-    try {
-      const token = localStorage.getItem('token');
+  useEffect(() => {
+    const fetchStocks = async () => {
+      try {
+        const token = localStorage.getItem('token');
         const config = {
           headers: {
             Authorization: `Bearer ${token}`
           }
         };
 
-      const userId = localStorage.getItem('userId');
-      const res = await axios.get(`${remoteHostURL}/stocks/${userId}`, config);
-      if (res?.data?.database) {
-        const updatedStocks = await Promise.all(
-          res.data.database.map(async (stock) => {
-            const quote = await fetchQuote(stock.ticker);
-            return {
-              ...stock,
-              stockprice: quote.c,
-              change: quote.dp,
-            };
-          }),
-        );
-        setStocks(updatedStocks);
+        const userId = localStorage.getItem('userId');
+        const res = await axios.get(`${remoteHostURL}/stocks/${userId}`, config);
+        if (res?.data?.database) {
+          const updatedStocks = await Promise.all(
+            res.data.database.map(async (stock) => {
+              const quote = await fetchQuote(stock.ticker);
+
+              const updatedStockPrice = quote.c;
+              const updatedChange = quote.dp;
+
+              try {
+                await axios.put(`${remoteHostURL}/stocks`, {
+                  userId: userId,
+                  ticker: stock.ticker,
+                  change: updatedChange,
+                }, config);
+                await axios.put(`${remoteHostURL}/stocks/price`, {
+                  userId: userId,
+                  ticker: stock.ticker,
+                  stockPrice: updatedStockPrice,
+                }, config);
+              } catch (error) {
+                console.log('Error updating stock:', error);
+              }
+
+              const updatedStock = {
+                ...stock,
+                stockprice: updatedStockPrice,
+                change: updatedChange,
+              };
+
+              return updatedStock;
+            }),
+          );
+          setStocks(updatedStocks);
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    };
 
-  fetchStocks();
+    fetchStocks();
 
-  const interval = setInterval(fetchStocks, 30000); 
+    const interval = setInterval(fetchStocks, 30000);
 
-  return () => clearInterval(interval);
-}, []);
-
-
+    return () => clearInterval(interval);
+  }, []);
 
 return (
   <div className="carousel-container">  
@@ -59,7 +78,7 @@ return (
     <div className="carousel">
       {stocks.map((stock, index) => (
         <Link to={`/stock-details/${stock.ticker}`} key={stock.ticker}>
-          <div key={stock.id} className="stock-card">
+          <div key={stock.id + index} className="stock-card">
             <div className= "companyInfo">
               <div className= "companyLogo">
                 <img style={{borderRadius:"50%"}} src={stock.logo}/>
@@ -89,6 +108,42 @@ export default StockCarousel;
 
 
 
+// useEffect(() => {
+//   const fetchStocks = async () => {
+//     try {
+//       const token = localStorage.getItem('token');
+//         const config = {
+//           headers: {
+//             Authorization: `Bearer ${token}`
+//           }
+//         };
+
+//       const userId = localStorage.getItem('userId');
+//       const res = await axios.get(`${remoteHostURL}/stocks/${userId}`, config);
+//       if (res?.data?.database) {
+//         const updatedStocks = await Promise.all(
+//           res.data.database.map(async (stock) => {
+//             const quote = await fetchQuote(stock.ticker);
+//             return {
+//               ...stock,
+//               stockprice: quote.c,
+//               change: quote.dp,
+//             };
+//           }),
+//         );
+//         setStocks(updatedStocks);
+//       }
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   };
+
+//   fetchStocks();
+
+//   const interval = setInterval(fetchStocks, 30000); 
+
+//   return () => clearInterval(interval);
+// }, []);
 
 
 

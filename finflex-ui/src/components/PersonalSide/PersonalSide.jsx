@@ -9,6 +9,7 @@ function PersonalSide() {
     localStorage.removeItem("name");
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
+    localStorage.removeItem('expiredTime');
     nav('/');
   }
   return (
