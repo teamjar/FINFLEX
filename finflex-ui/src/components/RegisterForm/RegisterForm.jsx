@@ -25,6 +25,9 @@ const RegisterForm = () => {
     };
 
     try {
+      const expirationTimeInHours = 3;
+      const currentTime = new Date();
+      const expirationTimestamp = currentTime.getTime() + expirationTimeInHours * 60 * 60 * 1000;
       const response = await axios.post(`${remoteHostURL}/register`, {
         email: user.email,
         username: user.username,
@@ -35,7 +38,8 @@ const RegisterForm = () => {
       localStorage.setItem('userId', response.data.user.id);
       localStorage.setItem('name', response.data.user.firstName);
       localStorage.setItem('token', response.data.token);
-      nav('/personal');
+      localStorage.setItem('expiredTime', expirationTimestamp);
+      nav('/onboard');
     } catch(err) {
       console.log(err);
     }

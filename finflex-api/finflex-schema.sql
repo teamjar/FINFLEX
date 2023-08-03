@@ -77,3 +77,9 @@ CREATE TABLE budget (
     earnings NUMERIC(10,2) NOT NULL,
     budget NUMERIC(10,2) NOT NULL
 );
+
+CREATE TABLE balance (
+    balanceId SERIAL PRIMARY KEY,
+    userId INT NOT NULL,
+    balance NUMERIC(10,2) NOT NULL
+)
