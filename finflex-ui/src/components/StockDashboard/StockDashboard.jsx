@@ -6,7 +6,8 @@ import StockSearch from '../StockSearch/StockSearch';
 import StockCarousel from '../StockCarousel/StockCarousel';
 import MarketOverview from '../MarketOverview/MarketOverview';
 import Balance from '../Balance/Balance';
-// import TradingSnapshot from '../TradingSnapshot/TradingSnapshot';
+import PortfolioChart from '../PortfolioChart/PortfolioChart';
+
 
 function StockDashboard() {
   return (
@@ -21,6 +22,8 @@ function StockDashboard() {
           <div className='market'>
             <div className="MarketOverview"><MarketOverview/></div> 
             <div className="Balance"><Balance/></div>
+            <div className="PortfolioChart"><PortfolioChart/></div>
+            
           </div>
         </div>
       </StockProvider>

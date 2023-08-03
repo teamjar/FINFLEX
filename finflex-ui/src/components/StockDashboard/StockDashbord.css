@@ -7,8 +7,8 @@
     " Navbar Navbar Navbar Navbar Navbar Navbar"
     " StockSearch StockSearch StockSearch StockSearch StockSearch StockSearch"
     " StockCarousel StockCarousel StockCarousel StockCarousel StockCarousel StockCarousel"
-    " MarketOverview MarketOverview Balance Balance WatchList WatchList"
-    " MarketOverview MarketOverview Balance Balance WatchList WatchList";
+    " MarketOverview MarketOverview Balance Balance PortfolioChart PortfolioChart"
+    " MarketOverview MarketOverview Balance Balance PortfolioChart PortfolioChart";
     background-color: white;
 
 }
@@ -39,9 +39,16 @@
   grid-area: Balance; 
 }
 
-.WatchList { grid-area: WatchList; }
+.PortfolioChart { 
+  grid-area: PortfolioChart;
+  margin-left: 20px;
+  margin-right: 20px;
+
+}
+ 
 
 .market {
   display:flex;
+  justify-content: center;
 }
 
