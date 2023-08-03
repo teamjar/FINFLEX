@@ -7,7 +7,7 @@ const { BadRequestError, UnauthorizedError } = require("../utils/errors")
 class Budget {
     static async add(creds) {
         const {userId, earnings, budget} = creds;
-        const requiredCreds = ['userId', 'earnings', 'budget'];
+        const requiredCreds = ['userId', 'earnings', 'budget', 'balance'];
 
         const result = await db.query(
         `INSERT INTO budget (
@@ -69,6 +69,8 @@ class Budget {
 
         return user;
     }
+
+    stat
 }
 
 module.exports = Budget

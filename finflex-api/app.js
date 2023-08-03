@@ -15,6 +15,7 @@ const Watchlist = require('./models/watchlist');
 const Help = require('./models/help');
 const Bill = require("./models/bills");
 const Budget = require('./models/budget');
+const Balance = require('./models/balance');
 
 const { NotFoundError } = require("./utils/errors");
 const config = require("./config");
@@ -81,8 +82,8 @@ app.post("/register", async function (req, res, next) {
           id: user.id
         }
       };
-      //const token = jwt.sign(payload, config.jwtSecret);
-      const token = jwt.sign(payload, config.jwtSecret, { expiresIn: '3h' });
+      const token = jwt.sign(payload, config.jwtSecret);
+      //const token = jwt.sign(payload, config.jwtSecret, { expiresIn: '3h' });
       return res.status(201).json({ user, token })
     } catch (err) {
       next(err)
@@ -345,6 +346,27 @@ app.get("/budget/total/:id",authenticateToken, async function (req, res, next) {
   const budget = await Budget.totalBudget(userId);
   return res.status(200).json({ database : budget })
 });
+
+app.post("/balance", authenticateToken, async function (req,res,next) {
+  try {
+    const user = await Balance.add(req.body);
+    return res.status(201).json({user});
+} catch(err) {
+    next(err);
+}
+} )
+
+app.get("/balance/:id", authenticateToken, async function (req, res, next) {
+  const userId = req.params.id;
+  const balance = await Balance.fetchById(userId);
+  return res.status(200).json({ database : balance })
+})
+
+app.put("/balance", authenticateToken, async function (req, res, next) {
+  const userId = req.params.id;
+  const balance = await Balance.update();
+  return res.status(200).json({ database : balance })
+})
 
 app.post('/api/chat', async (req, res) => {
   const prompt = req.body.prompt;
