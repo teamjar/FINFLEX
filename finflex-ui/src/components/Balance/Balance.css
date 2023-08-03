@@ -1,12 +1,3 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* min-height: 100vh; */
-    font-family: 'Roboto', sans-serif;
-}
-
 .Balance {
   padding: 2rem;
   border: 2px solid rgba(255, 255, 255, 0.2);
@@ -15,11 +6,34 @@
   border-radius: .375rem;
   position: relative;
   box-shadow: 0 8px 32px 0 rgb(112, 162, 136, 0.5);
-  box-sizing: border-box; 
+  box-sizing: border-box;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 300px;
-
 }
 
+.B_I {
+  border: 1px solid #E1E4EB;
+  border-radius: .1rem;
+  height: 500px;
+}
+
+.Portfolio {
+  text-align: center;
+}
+
+.balance,
+.investment {
+  text-align: center;
+}
+
+.B-container,
+.I-container {
+  display: inline-block;
+  border: 1px solid #E1E4EB;
+  border-radius: 1rem;
+  height: 50px;  /* change this to your desired height */
+  width: 200px;  /* change this to your desired width */
+  margin: 0 auto;
+}
