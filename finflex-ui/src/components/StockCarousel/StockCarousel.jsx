@@ -90,7 +90,7 @@ return (
               </div>
             </div>
             <div className = "companyPandC">
-              <p style={{color:"black", fontSize: "20px"}}>{stock.stockprice.toFixed(2)}</p>
+              <p style={{color:"black", fontSize: "20px"}}>${stock.stockprice.toFixed(2)}</p> 
               <p className={stock.change > 0 ? "green" : "red"} style={{fontWeight:"bolder"}}>{stock.change > 0 ? '↑' : '↓'} {stock.change.toFixed(2)}% </p>
             </div>
           </div>

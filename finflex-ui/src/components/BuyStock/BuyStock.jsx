@@ -10,7 +10,7 @@ function BuyStock() {
     const { symbol } = useParams();
     const navigate = useNavigate();
     const [quantity, setQuantity] = useState(0);
-    const [investment, setInvestment] = useState(0);
+    const [investment, setInvestment] = useState("");
     const [stockPrice, setStockPrice] = useState(0);
     const [companyName, setName] = useState('');
     const [logo, setLogo] = useState('');
@@ -34,15 +34,37 @@ function BuyStock() {
     }, [symbol]);
 
     const handleInvestmentChange = (e) => {
-        setInvestment(e.target.value);
-        setQuantity(Math.floor(e.target.value / stockPrice));
+        let investmentValue = e.target.value;
+        if (investmentValue === "") {  // if input is empty
+            setInvestment("");
+            setQuantity(0);
+        } else {
+            investmentValue = parseFloat(investmentValue);
+            if (!isNaN(investmentValue)) { // ensure the parsed value is a valid number
+                setInvestment(investmentValue);
+                setQuantity(Math.floor(investmentValue / stockPrice));
+            } else {
+                // handle the error
+                console.error('Invalid input: not a number');
+                setInvestment(""); // reset investment
+                setQuantity(0); // reset quantity
+            }
+        }
     }
+    
+    
+
 
     const handleBuyClick = async (e) => {
         e.preventDefault();
+
+
         console.log(`Purchasing ${quantity} shares with an investment of ${investment}...`);
         try {
             const userId = localStorage.getItem('userId');
+            console.log(typeof investment); // check the type of investment
+            console.log(typeof quantity); // check the type of quantity
+
             const res = await axios.post(`${remoteHostURL}/stocks`, {
                 userId: userId,
                 ticker: symbol,
