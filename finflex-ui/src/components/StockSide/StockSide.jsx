@@ -24,7 +24,7 @@ function StockSide() {
 
         <div className='navigation-route'>
         <img className='my-stocks' src="https://www.pngarts.com/files/17/Finance-Silhouette-PNG-Picture.png"/>
-        <li><Link to="/mystocks" style={{color:"#031D44"}}>Watch List</Link></li>
+        <li><Link to="/watchlist" style={{color:"#031D44"}}>Watch List</Link></li>
         </div>
 
         <div className='navigation-route'>
