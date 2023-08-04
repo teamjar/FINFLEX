@@ -41,20 +41,25 @@ class Balance {
         return user;
     }
 
-    static async update() {
+    static async subtract(creds) {
+        const {userId, price} = creds;
         const result = await db.query(`
-            WITH balance_updates AS (
-                SELECT userId, COALESCE(SUM(exp.pPrice), 0) - COALESCE(SUM(bud.earnings), 0) AS new_balance
-                FROM expense exp
-                LEFT JOIN budget bud ON exp.userId = bud.userId
-                GROUP BY exp.userId
-            )
-            UPDATE balance AS b
-            SET balance = bu.new_balance
-            FROM balance_updates bu
-            WHERE b.userId = bu.userId
-            RETURNING b.*
-        `);
+            UPDATE balance
+            SET balance = balance - $1
+            WHERE userid = $2
+        `, [price, userId]);
+    
+        const users = result.rows;
+        return users;
+    }
+
+    static async plus(creds) {
+        const {userId, price} = creds;
+        const result = await db.query(`
+            UPDATE balance
+            SET balance = balance + $1
+            WHERE userid = $2
+        `, [price, userId]);
     
         const users = result.rows;
         return users;

@@ -17,9 +17,39 @@ import NewsPage from '../NewsPage/NewsPage'
 import { QueryClient, QueryClientProvider } from "react-query"
 import Watchlist from '../WatchList/WatchList.jsx'
 import { useEffect } from 'react'
+import { remoteHostURL } from '../../apiClient'
+import axios from 'axios';
 
 const queryClient = new QueryClient();
+
 function App() {
+  useEffect (() => {
+    const first = async () => {
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+
+      const userId = localStorage.getItem('userId');
+      await axios.delete(`${remoteHostURL}/goals/${userId}`, config);
+      const expenses = await axios.get(`${remoteHostURL}/expenses/${userId}`, config);
+      for(const ex in expenses.data.database) {
+        const res = await axios.get(`${remoteHostURL}/expense/spent/${expenses.data.database[ex].category}/${userId}`, config);
+        if(res?.data?.database) {
+          const response = await axios.put(`${remoteHostURL}/goals`, {
+            userId: userId,
+            category: expenses.data.database[ex].category,
+            towardsGoal: res.data.database[0].sum
+          }, config)
+        }
+      }
+    }
+
+    first();
+
+  }, [])
   return (
     <QueryClientProvider client={queryClient}>
       <div className='back'>
