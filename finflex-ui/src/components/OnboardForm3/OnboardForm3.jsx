@@ -8,7 +8,7 @@ const OnboardForm3 = () => {
   const [numberOfGoals, setNumberOfGoals] = useState(0);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({});
-  const nav = useNavigate();
+  const navigate1 = useNavigate();
 
   const handleGoalSelection = (event) => {
     setHasFinancialGoals(event.target.value);
@@ -81,8 +81,14 @@ const OnboardForm3 = () => {
     }
 
     setError(""); // Clear any previous error
-    nav("/personal");
+    navigate1("/personal");
   };
+
+  const handleGoBack = () => {
+    navigate1("/onboard/2"); // Navigate back to "/onboard" route
+  };
+
+
 
   return (
     <div className="haha">
@@ -159,9 +165,13 @@ const OnboardForm3 = () => {
           </div>
         )}
 
+
+
         <button className="login-btn" onClick={handleSubmit}>
           Finish
         </button>
+
+  
       </form>
     </div>
   );

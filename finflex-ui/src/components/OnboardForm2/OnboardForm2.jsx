@@ -9,7 +9,7 @@ const OnboardForm2 = () => {
   const [numberOfGoals, setNumberOfGoals] = useState(0);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({});
-  const nav = useNavigate();
+  const navigate = useNavigate(); // Use a different variable name for the navigate function
 
   const handleGoalSelection = (event) => {
     setHasFinancialGoals(event.target.value);
@@ -62,11 +62,11 @@ const OnboardForm2 = () => {
 
     try {
       const token = localStorage.getItem('token');
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        };
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
       const userId = localStorage.getItem('userId');
       for (let i = 0; i < numberOfGoals; i++) {
         const goalName = formData[`goalName-${i}`];
@@ -84,18 +84,22 @@ const OnboardForm2 = () => {
           category: category
         }, config);
       }
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
 
-    setError(""); 
-    nav("/onboard/3");
+    setError("");
+    navigate("/onboard/3"); // Navigate to the next step after successful form submission
+  };
+
+  const handleGoBack = () => {
+    navigate("/onboard"); // Navigate back to "/onboard" route
   };
 
   return (
     <div className="haha">
       <h1 style={{ textAlign: "center" }}>Optimize Your Experience</h1>
-      {error && <div className="error-message" style={{fontWeight:'bolder', margin:"5px", padding:"5px"}}>{error}</div>}
+      {error && <div className="error-message" style={{ fontWeight: 'bolder', margin: "5px", padding: "5px" }}>{error}</div>}
       <form
         className="login-form1"
         style={{ width: hasFinancialGoals === "Yes" ? "1500px" : "300px" }}
@@ -189,9 +193,13 @@ const OnboardForm2 = () => {
           </div>
         )}
 
-        <button className="login-btn" onClick={handleSubmit}>
-          Next
-        </button>
+
+     
+          <button className="login-btn" onClick={handleSubmit}>
+            Next
+          </button>
+       
+
       </form>
     </div>
   );

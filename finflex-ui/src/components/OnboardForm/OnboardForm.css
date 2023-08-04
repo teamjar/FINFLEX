@@ -11,3 +11,9 @@
     color: #031D44;
 
 }
+
+.hot {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
