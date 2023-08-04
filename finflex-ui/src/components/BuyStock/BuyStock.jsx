@@ -65,6 +65,13 @@ function BuyStock() {
             console.log(typeof investment); // check the type of investment
             console.log(typeof quantity); // check the type of quantity
 
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
+
             const res = await axios.post(`${remoteHostURL}/stocks`, {
                 userId: userId,
                 ticker: symbol,
@@ -74,6 +81,14 @@ function BuyStock() {
                 change: change,
                 investment: investment,
                 logo: logo
+            }, config).then(async () => {
+                await axios.post(`${remoteHostURL}/expenses`, {
+                    userId: userId,
+                    pName: symbol,
+                    pDesc: `Purchased ${quantity} shares of ${companyName} stock`,
+                    pPrice: investment,
+                    category: "Investments"
+                }, config)
             })
             if (res.data && res.data.user) {
                 const newArray = [...array, res.data.user];
@@ -83,6 +98,7 @@ function BuyStock() {
                     text: `You purchased ${quantity} shares.`,
                     icon: 'success'
                 }).then(() => {
+
                     navigate('/stocks'); // Navigate to stocks route after closing the Swal alert
                 });
             } else {
@@ -98,12 +114,16 @@ function BuyStock() {
         }
     }
 
+
+
     return (
         <div className="container">
+        <div className='bff'>
+             <h1 style={{textAlign:"center"}}>Buy Stocks</h1>
             <div className="BuyStock">
-                <h1>Buy Stocks</h1>
                 <form onSubmit={handleBuyClick}>
                     <label htmlFor="investment">Investment Amount</label>
+                <div className='lol'>
                     <input 
                         type="number"
                         id="investment"
@@ -111,6 +131,7 @@ function BuyStock() {
                         value={investment}
                         onChange={handleInvestmentChange}
                     />
+                </div>
                     <label htmlFor="quantity">Quantity Amount</label>
                     <input
                         type="number"
@@ -119,12 +140,14 @@ function BuyStock() {
                         value={quantity}
                         readOnly
                     />
-                    <button type="submit">Buy</button>
+                    <button type="submit" className='login-btn'>Buy</button>
                 </form>
             </div>
+     
+           
             
         </div>
-
+    </div>
     )
 }
 

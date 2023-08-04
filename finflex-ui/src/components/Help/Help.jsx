@@ -2,9 +2,21 @@ import "./Help.css"
 import Navbar from '../Navbar/Navbar'
 import PersonalSide from "../PersonalSide/PersonalSide"
 import FAQPage from "../FAQPage/FAQPage"
+import React, { useState } from "react";
 
 const Help = () => {
     const name = localStorage.getItem('name');
+    const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  
 
     return (
         <div className="personal">
@@ -20,11 +32,21 @@ const Help = () => {
             
             <div className="top1">
             <div className="search-bar">
-                <input type="text" className="enter" placeholder="Search for transactions and more" />
+                <input type="text" className="enter" placeholder="Search for help" />
                 <button type="submit" className="btn">Search</button>
             </div>
             <div className="pic2">
-            <img style={{width:"40px", marginLeft:"10px", padding:"10px"}} src="https://cdn-icons-png.flaticon.com/512/1827/1827504.png" />
+              <img
+                style={{
+                  width: "40px",
+                  marginLeft: "10px",
+                  padding: "10px",
+                  cursor: "pointer",
+                }}
+                src="https://cdn-icons-png.flaticon.com/512/1827/1827504.png"
+                alt="Icon 1"
+                onClick={openModal}
+              />
             </div>
             <div className="pic2">
             <img style={{width:"50px", marginRight:"10px", padding:"10px"}} src="https://cdn-icons-png.flaticon.com/512/6522/6522516.png" />
@@ -45,9 +67,27 @@ const Help = () => {
             <br></br>
             <br></br>
             <br></br>
-            
+
+
         </div>
+
+
+        
         </div>
+
+        {showModal && (
+      <div className="clock">
+        <div className="modal1">
+          <div className="modal-content1">
+            <span onClick={closeModal} className="close-button1">
+            ✕</span>
+            <h2 style={{color:"black", fontSize:"30px", textAlign:"center", backgroundColor:"#ece8df"}}>View Your Notification Center</h2>
+   
+          </div>
+        </div>
+      </div>
+      )}
+        
     </div>
     )
  }

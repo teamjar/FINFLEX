@@ -1,4 +1,4 @@
---DROP TABLE users,stocks,watchlist,budget,goals,bills,expense,help;
+--DROP TABLE users,stocks,watchlist,budget,goals,bills,expense,help, balance;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -24,16 +24,17 @@ CREATE TABLE users (
 
 -- Changed for the Portfolio Chart
 CREATE TABLE stocks (
-   stockid SERIAL PRIMARY KEY,
-   userid INT NOT NULL,
-   ticker TEXT NOT NULL,
-   companyName TEXT NOT NULL,
-   stockPrice FLOAT NOT NULL,
-   quantity INT NOT NULL,
-   change FLOAT NOT NULL,
-   balance FLOAT GENERATED ALWAYS AS (quantity * stockPrice) STORED,
-   investment FLOAT NOT NULL,
-    logo TEXT NOT NULL
+  stockid SERIAL PRIMARY KEY,
+  userid INT NOT NULL,
+  ticker TEXT NOT NULL,
+  companyName TEXT NOT NULL,
+  stockPrice FLOAT NOT NULL,
+  quantity INT NOT NULL,
+  change FLOAT NOT NULL,
+  balance FLOAT GENERATED ALWAYS AS (quantity * stockPrice) STORED,
+  investment FLOAT NOT NULL,
+  logo TEXT NOT NULL,
+  timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -94,7 +95,13 @@ CREATE TABLE budget (
 );
 
 CREATE TABLE balance (
-    balanceId SERIAL PRIMARY KEY,
+    budgetId SERIAL PRIMARY KEY,
     userId INT NOT NULL,
     balance NUMERIC(10,2) NOT NULL
+);
+
+CREATE TABLE market (
+    marketId: SERIAL PRIMARY KEY,
+    userId: INT NOT NULL,
+    ticker: TEXT NOT NULL
 )

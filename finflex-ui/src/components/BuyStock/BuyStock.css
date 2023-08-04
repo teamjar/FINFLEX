@@ -1,56 +1,4 @@
-/* .BuyStock {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    border-radius: 8px;
-    width: 80%;
-    margin: 0 auto;
-}
 
-.BuyStock h1 {
-    color: #333;
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-.BuyStock form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.BuyStock label {
-    margin-bottom: 0.5rem;
-    color: #333;
-    font-size: 1.2rem;
-}
-
-.BuyStock input {
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 60%;
-}
-
-.BuyStock button {
-    padding: 0.7rem 1rem;
-    font-size: 1.1rem;
-    color: white;
-    background-color: #2196f3;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.BuyStock button:hover {
-    background-color: #0b75c3;
-} */
 
 
 .container {
@@ -60,6 +8,7 @@
     min-height: 100vh; 
     margin: 0;
     padding: 0;
+    
 }
 
 .BuyStock {
@@ -69,12 +18,12 @@
     align-items: center;
     padding: 30px;
     background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     width: 300px;
+    text-align: center;
 }
 
 .form-group {
@@ -110,11 +59,47 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 }
 
 .form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    
+}
+
+#investment{
+    width: 300px;
+    background-color: white;
+    margin: 10px;
+    color: #031D44;
+    padding: 10px;
+    margin: 10px;
+    width: 250px;
+    border: none;
+    background: white;
+    border-radius: 5px;
+    backdrop-filter: blur(4px);
+}
+
+#quantity{
+    width: 300px;
+    background-color: white;
+    margin: 10px;
+    color: #031D44;
+    padding: 10px;
+    margin: 10px;
+    width: 250px;
+    border: none;
+    background: white;
+    border-radius: 5px;
+    backdrop-filter: blur(4px);
+}
+
+.bff{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
 }

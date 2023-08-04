@@ -15,6 +15,7 @@ const Watchlist = require('./models/watchlist');
 const Help = require('./models/help');
 const Bill = require("./models/bills");
 const Budget = require('./models/budget');
+const Balance = require('./models/balance');
 
 const { NotFoundError } = require("./utils/errors");
 const config = require("./config");
@@ -81,8 +82,8 @@ app.post("/register", async function (req, res, next) {
           id: user.id
         }
       };
-      //const token = jwt.sign(payload, config.jwtSecret);
-      const token = jwt.sign(payload, config.jwtSecret, { expiresIn: '3h' });
+      const token = jwt.sign(payload, config.jwtSecret);
+      //const token = jwt.sign(payload, config.jwtSecret, { expiresIn: '3h' });
       return res.status(201).json({ user, token })
     } catch (err) {
       next(err)
@@ -198,22 +199,12 @@ app.get("/bills/:id", async function (req, res, next) {
 
 app.delete("/bills/:id", authenticateToken, async function (req, res, next) {
   const userId = req.params.id;
-
-  // if (req.user && req.user.user.id !== userId) {
-  //   return res.status(403).json({ message: 'You are not authorized to access this resource.' });
-  // }
-
   const bills = await Bill.delete(userId);
   return res.status(200).json({ database : bills })
 })
 
 app.get("/bills/due/:id", authenticateToken, async function (req, res, next) {
   const userId = req.params.id;
-
-  // if (req.user && req.user.user.id !== userId) {
-  //   return res.status(403).json({ message: 'You are not authorized to access this resource.' });
-  // }
-
   const bills = await Bill.totalDue(userId);
   return res.status(200).json({ database : bills })
 })
@@ -246,6 +237,13 @@ app.get("/expense/spent/:id", authenticateToken, async function (req, res, next)
   // }
 
   const expenses = await Expenses.totalSpent(userId);
+  return res.status(200).json({ database : expenses })
+})
+
+app.get("/expense/spent/:category/:id", authenticateToken, async function (req, res, next) {
+  const userId = req.params.id;
+  const category = req.params.category;
+  const expenses = await Expenses.totalCategorySpent(category, userId);
   return res.status(200).json({ database : expenses })
 })
 
@@ -345,6 +343,31 @@ app.get("/budget/total/:id",authenticateToken, async function (req, res, next) {
   const budget = await Budget.totalBudget(userId);
   return res.status(200).json({ database : budget })
 });
+
+app.post("/balance", authenticateToken, async function (req,res,next) {
+  try {
+    const user = await Balance.add(req.body);
+    return res.status(201).json({user});
+} catch(err) {
+    next(err);
+}
+} )
+
+app.get("/balance/:id", authenticateToken, async function (req, res, next) {
+  const userId = req.params.id;
+  const balance = await Balance.fetchById(userId);
+  return res.status(200).json({ database : balance })
+})
+
+app.put("/subtract/balance", authenticateToken, async function (req, res, next) {
+  const balance = await Balance.subtract(req.body);
+  return res.status(200).json({ database : balance })
+})
+
+app.put("/plus/balance", authenticateToken, async function (req, res, next) {
+  const balance = await Balance.plus(req.body);
+  return res.status(200).json({ database : balance })
+})
 
 app.post('/api/chat', async (req, res) => {
   const prompt = req.body.prompt;
