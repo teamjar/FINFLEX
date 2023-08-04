@@ -81,7 +81,7 @@ function BuyStock() {
                 change: change,
                 investment: investment,
                 logo: logo
-            }, config).then(async () => {
+            }, config)
                 await axios.post(`${remoteHostURL}/expenses`, {
                     userId: userId,
                     pName: symbol,
@@ -89,13 +89,11 @@ function BuyStock() {
                     pPrice: investment,
                     pDate: new Date(),
                     category: "Investments"
-                }, config).then(async () => {
-                    await axios.put(`${remoteHostURL}/subtract/balance`, {
+                }, config)
+                await axios.put(`${remoteHostURL}/subtract/balance`, {
                         userId: userId,
                         price: investment
                     }, config)
-                })
-            })
             if (res.data && res.data.user) {
                 const newArray = [...array, res.data.user];
                 setArray(newArray);
