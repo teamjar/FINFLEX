@@ -59,13 +59,13 @@ class Goals {
     }
 
     static async changeTowardsGoal(creds) {
-        const {userId, gName, gDesc, towardsGoal} = creds;
+        const {userId, category, towardsGoal} = creds;
 
         const result = await db.query(
             `UPDATE goals
             SET towardsgoal = $1
-            WHERE userid = $2 AND gname = $3 AND gdesc = $4`,
-            [towardsGoal, userId, gName, gDesc]
+            WHERE userid = $2 AND category = $3`,
+            [towardsGoal, userId, category]
         );
 
         const user = result.rows;

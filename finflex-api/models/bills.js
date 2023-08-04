@@ -98,10 +98,35 @@ class Bill {
         return user;
     }
 
+    static async notification(id) {
+        const result = await db.query(`
+        SELECT userid,
+            billname,
+            billdesc,
+            due,
+            status,
+            price,
+            towardsBill
+        WHERE price > towardsBill AND due > CURRENT_DATE AND userid = $1`,
+        [id]);
+
+        const user = result.rows;
+   
+        return user;
+    }
+
     static async delete(id) {
-        const result = db.query(
+        const result = await db.query(
             `DELETE FROM bills
-            WHERE userid = $1 AND status = 'paid' AND due < CURRENT_DATE AND towardsBill = price`, 
+            WHERE userid = $1 AND due < CURRENT_DATE AND towardsBill = price
+            RETURNING
+                    userid,
+                    billname,
+                    billdesc,
+                    due,
+                    status,
+                    price,
+                    towardsBill`, 
             [id]
         );
         

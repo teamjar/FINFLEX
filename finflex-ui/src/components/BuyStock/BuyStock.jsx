@@ -65,6 +65,13 @@ function BuyStock() {
             console.log(typeof investment); // check the type of investment
             console.log(typeof quantity); // check the type of quantity
 
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
+
             const res = await axios.post(`${remoteHostURL}/stocks`, {
                 userId: userId,
                 ticker: symbol,
@@ -74,6 +81,14 @@ function BuyStock() {
                 change: change,
                 investment: investment,
                 logo: logo
+            }, config).then(async () => {
+                await axios.post(`${remoteHostURL}/expenses`, {
+                    userId: userId,
+                    pName: symbol,
+                    pDesc: `Purchased ${quantity} shares of ${companyName} stock`,
+                    pPrice: investment,
+                    category: "Investments"
+                }, config)
             })
             if (res.data && res.data.user) {
                 const newArray = [...array, res.data.user];
@@ -83,6 +98,7 @@ function BuyStock() {
                     text: `You purchased ${quantity} shares.`,
                     icon: 'success'
                 }).then(() => {
+
                     navigate('/stocks'); // Navigate to stocks route after closing the Swal alert
                 });
             } else {
