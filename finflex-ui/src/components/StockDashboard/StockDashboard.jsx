@@ -10,6 +10,7 @@ import PortfolioChart from '../PortfolioChart/PortfolioChart';
 
 
 function StockDashboard() {
+  
   return (
   <div>
     <StockSide />
@@ -19,6 +20,7 @@ function StockDashboard() {
           <div className="Navbar fuh"><Navbar2/></div>
           <div className="StockSearch"> <StockSearch/></div>
           <div className="StockCarousel"> <StockCarousel/></div>
+  
           <div className='market'>
             <div className="MarketOverview"><MarketOverview/></div> 
             <div className="Balance"><Balance/></div>

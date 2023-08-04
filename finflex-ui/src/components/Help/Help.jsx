@@ -32,7 +32,7 @@ const Help = () => {
             
             <div className="top1">
             <div className="search-bar">
-                <input type="text" className="enter" placeholder="Search for transactions and more" />
+                <input type="text" className="enter" placeholder="Search for help" />
                 <button type="submit" className="btn">Search</button>
             </div>
             <div className="pic2">

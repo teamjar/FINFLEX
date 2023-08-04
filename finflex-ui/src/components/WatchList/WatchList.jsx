@@ -55,13 +55,20 @@ export default function TradingViewWidget() {
 
   return (
 
+
     <div className='tradingview-widget-container'>
+    <div className='plz'>
+      
       <div className="Navbar">
         <Navbar2 />
        </div>
+       <br></br>
       <div id='tradingview_18b9e' />
+      <br></br>
       <div className="StockSide">
           <StockSide />
+        </div>
+        
         </div>
     </div>
 

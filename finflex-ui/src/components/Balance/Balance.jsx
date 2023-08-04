@@ -69,13 +69,13 @@ function Balance() {
             </div>
             <div className='B_I'>
                 <div className="balance">
-                    <p style={{color: "black"}}>Total Balance</p>
+                <p style={{color: "black"}}>Total Balance:</p>
                     <div className = "B-container">
                         <p style={{color: "black"}}>${totalBalance}</p>
                     </div>
                 </div>
                 <div className="investment">
-                    <p style={{color: "black"}}>Total Investment</p>
+                    <p style={{color: "black"}}>Total Investment:</p>
                     <div className = "I-container">
                         <p style={{color: "black"}}>${totalInvestment}</p>
                     </div>
