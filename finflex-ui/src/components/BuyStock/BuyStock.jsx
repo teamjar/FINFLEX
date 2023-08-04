@@ -87,6 +87,7 @@ function BuyStock() {
                     pName: symbol,
                     pDesc: `Purchased ${quantity} shares of ${companyName} stock`,
                     pPrice: investment,
+                    pDate: new Date(),
                     category: "Investments"
                 }, config)
             })

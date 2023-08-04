@@ -125,16 +125,16 @@ export default function GoalCreation({ searchQuery }) {
             onChange={(e) => setCat(e.target.value)}
           >
             <option></option>
-            <option value="food">Food</option>
-            <option value="housing">Housing</option>
-            <option value="transportation">Transportation</option>
-            <option value="education">Education</option>
-            <option value="health">Health/Medical</option>
-            <option value="entertainment">Entertainment</option>
-            <option value="personal">Personal Care</option>
-            <option value="debt">Debt/Loans</option>
-            <option value="bills">Bills</option>
-            <option value="misc">Miscellaneous</option>
+            <option value="Food">Food</option>
+            <option value="Housing">Housing</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Education">Education</option>
+            <option value="Health">Health/Medical</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Personal">Personal Care</option>
+            <option value="Debt">Debt/Loans</option>
+            <option value="Bills">Bills</option>
+            <option value="Misc">Miscellaneous</option>
           </select>
         </div>
 

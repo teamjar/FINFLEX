@@ -6,18 +6,15 @@ const { BadRequestError, UnauthorizedError } = require("../utils/errors")
 
 class Watchlist {
     static async add(creds) {
-        const {userId, ticker, companyName, stockPrice, change} = creds;
+        const {userId, ticker} = creds;
         const requiredCreds = ['userId', 'ticker', 'companyName', 'stockPrice', 'quantity', 'change'];
 
         const result = await db.query(
             `INSERT INTO watchlist (
                 userid,
-                ticker,
-                companyname,
-                stockprice,
-                change
+                ticker
             )
-            VALUES ($1, $2, $3, $4, $5)
+            VALUES ($1, $2)
             RETURNING
                     userid,
                     ticker,
@@ -25,7 +22,7 @@ class Watchlist {
                     stockprice,
                     change
                     `,
-                    [userId, ticker, companyName, stockPrice, change]
+                    [userId, ticker]
         );
 
         const stock = result.rows[0];
@@ -36,10 +33,7 @@ class Watchlist {
     static async fetchById(id) {
         const result = await db.query(
             `SELECT userid,
-                    ticker,
-                    companyname,
-                    stockprice,
-                    change
+                    ticker
                 FROM watchlist
                 WHERE userid = $1`,
                 [id]
