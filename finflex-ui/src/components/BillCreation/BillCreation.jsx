@@ -103,8 +103,8 @@ export default function BillCreation({ searchQuery }) {
           <label className="ti">Status</label>
           <select id="status" name="status" defaultValue="unpaid" value={status} onChange={e => setStatus(e.target.value)}>
             <option></option>
-            <option value="unpaid">Unpaid</option>
-            <option value="paid">Paid</option>
+            <option value="Unpaid">Unpaid</option>
+            <option value="Paid">Paid</option>
           </select>
         </div>
 

@@ -41,10 +41,7 @@ CREATE TABLE stocks (
 CREATE TABLE watchlist (
     watchid SERIAL PRIMARY KEY,
     userid INT NOT NULL,
-    ticker TEXT NOT NULL,
-    companyName TEXT NOT NULL,
-    stockPrice FLOAT NOT NULL,
-    change FLOAT NOT NULL
+    ticker TEXT NOT NULL
 );
 
 CREATE TABLE expense (
