@@ -67,7 +67,7 @@ const OnboardForm3 = () => {
         const dueAmount = formData[`dueAmount-${i}`];
         const dueDate = formData[`dueDate-${i}`];
 
-        await axios.post(`${remoteHostURL}/bills`, {
+        await axios.post(`${remoteHostURL}/api/bills`, {
           userId: userId,
           billName: billName,
           billDesc: description,

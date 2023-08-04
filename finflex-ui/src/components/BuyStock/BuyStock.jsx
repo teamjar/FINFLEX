@@ -72,7 +72,7 @@ function BuyStock() {
                 }
             };
 
-            const res = await axios.post(`${remoteHostURL}/stocks`, {
+            const res = await axios.post(`${remoteHostURL}/api/stocks`, {
                 userId: userId,
                 ticker: symbol,
                 companyName: companyName,
@@ -82,7 +82,7 @@ function BuyStock() {
                 investment: investment,
                 logo: logo
             }, config)
-                await axios.post(`${remoteHostURL}/expenses`, {
+                await axios.post(`${remoteHostURL}/api/expenses`, {
                     userId: userId,
                     pName: symbol,
                     pDesc: `Purchased ${quantity} shares of ${companyName} stock`,
@@ -90,7 +90,7 @@ function BuyStock() {
                     pDate: new Date(),
                     category: "Investments"
                 }, config)
-                await axios.put(`${remoteHostURL}/subtract/balance`, {
+                await axios.put(`${remoteHostURL}/api/subtract/balance`, {
                         userId: userId,
                         price: investment
                     }, config)

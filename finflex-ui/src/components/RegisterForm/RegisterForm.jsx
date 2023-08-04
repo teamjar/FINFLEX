@@ -40,7 +40,7 @@ const RegisterForm = () => {
       const expirationTimeInHours = 3;
       const currentTime = new Date();
       const expirationTimestamp = currentTime.getTime() + expirationTimeInHours * 60 * 60 * 1000;
-      const response = await axios.post(`${remoteHostURL}/register`, {
+      const response = await axios.post(`${remoteHostURL}/api/register`, {
         email: user.email,
         username: user.username,
         firstName: user.firstName,

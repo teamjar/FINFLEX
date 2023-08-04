@@ -51,13 +51,13 @@ const OnboardForm = () => {
           }
         };
         const userId = localStorage.getItem('userId');
-        await axios.post(`${remoteHostURL}/budget`, {
+        await axios.post(`${remoteHostURL}/api/budget`, {
           userId: userId,
           earnings: earningsValue,
           budget: setAsideValue
         }, config);
 
-        await axios.post(`${remoteHostURL}/balance`, {
+        await axios.post(`${remoteHostURL}/api/balance`, {
           userId: userId,
           balance: balanceValue
         }, config);

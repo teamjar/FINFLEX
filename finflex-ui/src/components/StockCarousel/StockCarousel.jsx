@@ -25,7 +25,7 @@ function StockCarousel() {
         };
 
         const userId = localStorage.getItem('userId');
-        const res = await axios.get(`${remoteHostURL}/stocks/${userId}`, config);
+        const res = await axios.get(`${remoteHostURL}/api/stocks/${userId}`, config);
         if (res?.data?.database) {
           const updatedStocks = await Promise.all(
             res.data.database.map(async (stock) => {
@@ -35,12 +35,12 @@ function StockCarousel() {
               const updatedChange = quote.dp;
 
               try {
-                await axios.put(`${remoteHostURL}/stocks`, {
+                await axios.put(`${remoteHostURL}/api/stocks`, {
                   userId: userId,
                   ticker: stock.ticker,
                   change: updatedChange,
                 }, config);
-                await axios.put(`${remoteHostURL}/stocks/price`, {
+                await axios.put(`${remoteHostURL}/api/stocks/price`, {
                   userId: userId,
                   ticker: stock.ticker,
                   stockPrice: updatedStockPrice,

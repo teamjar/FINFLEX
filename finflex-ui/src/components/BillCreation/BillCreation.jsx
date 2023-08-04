@@ -16,7 +16,7 @@ export default function BillCreation({ searchQuery }) {
     const authUser = async () => {
       try {
         const userId = localStorage.getItem('userId');
-        const res = await axios.get(`${remoteHostURL}/bills/${userId}`);
+        const res = await axios.get(`${remoteHostURL}/api/bills/${userId}`);
         if (res?.data?.database) {
           setArray(res.data.database);
         }
@@ -33,7 +33,7 @@ export default function BillCreation({ searchQuery }) {
 
     try {
       const userId = localStorage.getItem('userId');
-      const res = await axios.post(`${remoteHostURL}/bills`, {
+      const res = await axios.post(`${remoteHostURL}/api/bills`, {
         userId: userId,
         billName: name,
         billDesc: desc,

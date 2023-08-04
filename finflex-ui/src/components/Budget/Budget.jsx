@@ -27,7 +27,7 @@ export function BudgetForm() {
         };
 
         const userId = localStorage.getItem('userId');
-        const res = await axios.get(`${remoteHostURL}/budget/${userId}`, config);
+        const res = await axios.get(`${remoteHostURL}/api/budget/${userId}`, config);
         if (res?.data?.database) {
           setArray(res.data.database);
         }
@@ -44,7 +44,7 @@ export function BudgetForm() {
 
     try {
       const userId = localStorage.getItem('userId');
-      const res = await axios.post(`${remoteHostURL}/budget`, {
+      const res = await axios.post(`${remoteHostURL}/api/budget`, {
         userId: userId,
         earnings: earnings,
         budget: budget

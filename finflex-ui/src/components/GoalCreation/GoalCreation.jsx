@@ -25,7 +25,7 @@ export default function GoalCreation({ searchQuery }) {
         };
 
         const userId = localStorage.getItem('userId');
-        const res = await axios.get(`${remoteHostURL}/goals/${userId}`, config);
+        const res = await axios.get(`${remoteHostURL}/api/goals/${userId}`, config);
         if (res?.data?.database) {
           setArray(res.data.database);
 
@@ -49,7 +49,7 @@ export default function GoalCreation({ searchQuery }) {
 
     try {
       const userId = localStorage.getItem('userId');
-      const res = await axios.post(`${remoteHostURL}/goals`, {
+      const res = await axios.post(`${remoteHostURL}/api/goals`, {
         userId: userId,
         gName: gName,
         gDesc: gDesc,

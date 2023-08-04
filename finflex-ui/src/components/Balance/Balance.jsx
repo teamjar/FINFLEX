@@ -17,7 +17,7 @@ function Balance() {
 
         const fetchUserStocks = async () => {
             try {
-                const res = await axios.get(`${remoteHostURL}/stocks/${userId}`, config);
+                const res = await axios.get(`${remoteHostURL}/api/stocks/${userId}`, config);
                 if (res.data && res.data.user) {
                     setStocks(res.data.user);
                 }
@@ -28,7 +28,7 @@ function Balance() {
         
         const fetchTotalInvestment = async () => {
             try {
-                const res = await axios.get(`${remoteHostURL}/stocks/investment/${userId}`, config);
+                const res = await axios.get(`${remoteHostURL}/api/stocks/investment/${userId}`, config);
                 // if (res.data && res.data.database) {
                 //     setTotalInvestment(res.data.database[0].sum);
                 // }
@@ -43,7 +43,7 @@ function Balance() {
 
         const fetchTotalBalance = async () => {
             try {
-                const res = await axios.get(`${remoteHostURL}/stocks/balance/${userId}`, config);
+                const res = await axios.get(`${remoteHostURL}/api/stocks/balance/${userId}`, config);
                 console.log('Response:', JSON.stringify(res.data, null, 2));
 
                 if (res.data && res.data.balance) {

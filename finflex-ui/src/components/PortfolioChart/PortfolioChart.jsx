@@ -17,7 +17,7 @@ function PortfolioChart() {
       const config = {
         headers: { Authorization: `Bearer ${token}` }
       };
-      const res = await axios.get(`${remoteHostURL}/stocks/${userId}`, config);
+      const res = await axios.get(`${remoteHostURL}/api/stocks/${userId}`, config);
       const stocksData = res.data.database.map(stock => ({
         ...stock,
         timestamp: moment(stock.timestamp).format('YYYY-MM-DD HH:mm'),

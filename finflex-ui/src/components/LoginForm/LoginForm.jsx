@@ -16,7 +16,7 @@ const LoginForm = () => {
             const expirationTimeInHours = 3;
             const currentTime = new Date();
             const expirationTimestamp = currentTime.getTime() + expirationTimeInHours * 60 * 60 * 1000;
-            const response = await axios.post(`${remoteHostURL}/login`, {
+            const response = await axios.post(`${remoteHostURL}/api/login`, {
                 email: email,
                 password: password
             });

@@ -24,7 +24,7 @@ export default function Expense({ searchQuery }) {
         };
 
         const userId = localStorage.getItem('userId');
-        const res = await axios.get(`${remoteHostURL}/expenses/${userId}`, config);
+        const res = await axios.get(`${remoteHostURL}/api/expenses/${userId}`, config);
         if (res?.data?.database) {
           setArray(res.data.database);
 
@@ -56,7 +56,7 @@ export default function Expense({ searchQuery }) {
       };
 
       const userId = localStorage.getItem('userId');
-      const res = await axios.post(`${remoteHostURL}/expenses`, {
+      const res = await axios.post(`${remoteHostURL}/api/expenses`, {
         userId: userId,
         pName: pName,
         pDesc: pDesc,
@@ -64,7 +64,7 @@ export default function Expense({ searchQuery }) {
         pDate: date,
         category: category
       }, config).then(async () => {
-        await axios.put(`${remoteHostURL}/subtract/balance`, {
+        await axios.put(`${remoteHostURL}/api/subtract/balance`, {
           userId: userId,
           price: price
         }, config)

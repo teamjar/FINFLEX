@@ -21,11 +21,11 @@ const InfoTile = () => {
             };
 
             const userId = localStorage.getItem('userId');
-            const earn = await axios.get(`${remoteHostURL}/budget/earnings/${userId}`, config);
-            const bud = await axios.get(`${remoteHostURL}/budget/total/${userId}`, config);
-            const bills = await axios.get(`${remoteHostURL}/bills/due/${userId}`, config);
-            const expenses = await axios.get(`${remoteHostURL}/expense/spent/${userId}`, config);
-            const balance = await axios.get(`${remoteHostURL}/balance/${userId}`, config);
+            const earn = await axios.get(`${remoteHostURL}/api/budget/earnings/${userId}`, config);
+            const bud = await axios.get(`${remoteHostURL}/api/budget/total/${userId}`, config);
+            const bills = await axios.get(`${remoteHostURL}/api/bills/due/${userId}`, config);
+            const expenses = await axios.get(`${remoteHostURL}/api/expense/spent/${userId}`, config);
+            const balance = await axios.get(`${remoteHostURL}/api/balance/${userId}`, config);
             //const put = await axios.put(`${remoteHostURL}/balance`, config);
             if (earn?.data?.database && bud?.data?.database && bills?.data?.database) {
               setEarnings(earn.data.database[0].sum);

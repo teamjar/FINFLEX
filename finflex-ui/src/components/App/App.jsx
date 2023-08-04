@@ -33,12 +33,12 @@ function App() {
       };
 
       const userId = localStorage.getItem('userId');
-      await axios.delete(`${remoteHostURL}/goals/${userId}`, config);
-      const expenses = await axios.get(`${remoteHostURL}/expenses/${userId}`, config);
+      await axios.delete(`${remoteHostURL}/api/goals/${userId}`, config);
+      const expenses = await axios.get(`${remoteHostURL}/api/expenses/${userId}`, config);
       for(const ex in expenses.data.database) {
-        const res = await axios.get(`${remoteHostURL}/expense/spent/${expenses.data.database[ex].category}/${userId}`, config);
+        const res = await axios.get(`${remoteHostURL}/api/expense/spent/${expenses.data.database[ex].category}/${userId}`, config);
         if(res?.data?.database) {
-          const response = await axios.put(`${remoteHostURL}/goals`, {
+          const response = await axios.put(`${remoteHostURL}/api/goals`, {
             userId: userId,
             category: expenses.data.database[ex].category,
             towardsGoal: res.data.database[0].sum

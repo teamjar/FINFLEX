@@ -75,7 +75,7 @@ const OnboardForm2 = () => {
         const dueDate = formData[`dueDate-${i}`];
         const category = formData[`category-${i}`];
 
-        await axios.post(`${remoteHostURL}/goals`, {
+        await axios.post(`${remoteHostURL}/api/goals`, {
           userId: userId,
           gName: goalName,
           gDesc: description,
