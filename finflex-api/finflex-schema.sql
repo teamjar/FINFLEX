@@ -98,7 +98,7 @@ CREATE TABLE balance (
 );
 
 CREATE TABLE market (
-    marketId: SERIAL PRIMARY KEY,
-    userId: INT NOT NULL,
-    ticker: TEXT NOT NULL
+    marketId SERIAL PRIMARY KEY,
+    userId INT NOT NULL,
+    ticker TEXT NOT NULL
 )

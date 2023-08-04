@@ -27,6 +27,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const app = express();
+const cron = require('node-cron');
 
 // enable cross-origin resource sharing for all origins for all requests
 // NOTE: in production, we'll want to restrict this to only the origin
@@ -322,6 +323,17 @@ app.get("/budget/:id", authenticateToken, async function (req, res, next) {
   return res.status(200).json({ database : budget })
 });
 
+cron.schedule('0 0 * * 1', async () => {
+  try {
+    const users = await Budget.getAllUsers();
+    for (const user of users) {
+      await Budget.weeklyAdd(user.userid);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+})
+
 app.get("/budget/earnings/:id", authenticateToken, async function (req, res, next) {
   const userId = req.params.id;
 
@@ -343,6 +355,11 @@ app.get("/budget/total/:id",authenticateToken, async function (req, res, next) {
   const budget = await Budget.totalBudget(userId);
   return res.status(200).json({ database : budget })
 });
+
+app.put("/subtract/budget", authenticateToken, async function (req, res, next) {
+  const user = await Budget.subtract(req.body);
+  return res.status(200).json({ database : user });
+})
 
 app.post("/balance", authenticateToken, async function (req,res,next) {
   try {
@@ -378,7 +395,7 @@ app.post('/api/chat', async (req, res) => {
   console.log(response)
 });
 
-app.get("/stocks/balance/:id", async (req, res, next) => {
+app.get("/stocks/balance/:id", authenticateToken, async (req, res, next) => {
   try {
       const balance = await Stock.getSumBalance(req.params.id);
       return res.status(200).json({ balance });
@@ -386,7 +403,6 @@ app.get("/stocks/balance/:id", async (req, res, next) => {
       return next(e);
   }
 });
-
 
 // health check
 app.get("/", function (req, res) {

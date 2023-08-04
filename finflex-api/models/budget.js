@@ -28,6 +28,19 @@ class Budget {
         return budge;
     }
 
+    static async getAllUsers() {
+        const result = await db.query(
+            `SELECT
+                userid,
+                earnings,
+                budget
+            FROM budget`);
+
+        const user = result.rows;
+
+        return user;
+    }
+
     static async fetchById(id) {
         const result = await db.query(
             `SELECT
@@ -70,7 +83,30 @@ class Budget {
         return user;
     }
 
-    stat
+    static async subtract(creds) {
+        const {userId, subtract} = creds;
+        const result = await db.query(
+            `UPDATE budget 
+            SET budget = (SELECT SUM(budget) FROM budget)  - $1
+            WHERE userid = $2`,
+            [subtract, userId]
+        )
+    }
+
+    static async weeklyAdd(id) {
+        const result = await db.query(
+        `INSERT INTO budget (earnings, budget)
+        SELECT earnings, budget
+        FROM budget
+        WHERE userid = $1`, 
+        [id]
+        );
+
+        const budge = result.rows[0];
+
+        return budge;
+    }
+
 }
 
 module.exports = Budget
