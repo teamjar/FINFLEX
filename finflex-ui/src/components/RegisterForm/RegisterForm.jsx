@@ -12,10 +12,21 @@ const RegisterForm = () => {
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const nav = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    
+    if (password !== confirmPassword) {
+      setPasswordError('Passwords do not match.');
+      setPassword('');
+      setConfirmPassword('');
+      return;
+    }
+
+    setPasswordError('');
+
     const user = {
       username,
       email,
@@ -57,91 +68,90 @@ const RegisterForm = () => {
   return (
     <div className='haha'>
       <h1 style={{ textAlign: "center" }}>Sign Up</h1>
+      {passwordError && <p className="error-msg" style={{fontWeight:"bolder"}}>{passwordError}</p>}
       <form onSubmit={handleSubmit} className="login-form">
         <div className="form-group">
-        <div className='lol'>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-      </div>
-        </div>
-        <div className="form-group">
-        <div className='lol'>
-          <label htmlFor="firstName">User Name</label>
-          <input
-            type="text"
-            id="firstName"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
+          <div className='lol'>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
         </div>
         <div className="form-group">
-        <div className='lol'>
-          <label htmlFor="firstName">First Name</label>
-          <input
-            type="text"
-            id="firstName"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
+          <div className='lol'>
+            <label htmlFor="firstName">User Name</label>
+            <input
+              type="text"
+              id="firstName"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <div className='lol'>
+            <label htmlFor="firstName">First Name</label>
+            <input
+              type="text"
+              id="firstName"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
           </div>
         </div>
         
         <div className="form-group">
-        <div className='lol'>
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            type="text"
-            id="lastName"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
+          <div className='lol'>
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
           </div>
         </div>
         <div className="form-group">
-        <div className='lol'>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className='lol'>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
           </div>
         </div>
         <div className="form-group">
-        <div className='lol'>
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
+          <div className='lol'>
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
           </div>
         </div>
         <button type="submit" className="login-btn">Register</button>
       </form>
     
       <p style={{ textAlign: "center" }}>
-                Already have an account? 
-        </p>
-         <Link to="/login" style={{color:"rgba( 69, 162, 158)"}}> Sign in here.</Link> 
-
+        Already have an account? 
+      </p>
+      <Link to="/login" style={{color:"rgba(69, 162, 158)"}}> Sign in here.</Link> 
     </div>
   );
 };
 
 export default RegisterForm;
-
