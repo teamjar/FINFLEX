@@ -15,6 +15,7 @@ import OnboardPage3 from '../OnboardPage3/OnboardPage3'
 //import NewsFeed from '../NewsFeed/NewsFeed'
 import NewsPage from '../NewsPage/NewsPage'
 import { QueryClient, QueryClientProvider } from "react-query"
+import Watchlist from '../WatchList/WatchList.jsx'
 import { useEffect } from 'react'
 
 const queryClient = new QueryClient();
@@ -38,6 +39,8 @@ function App() {
             <Route path="/onboard/2" element={<OnboardPage2 />} />
             <Route path="/onboard/3" element={<OnboardPage3 />} />
             <Route path="/news" element={<NewsPage />} />
+            <Route path="/watchlist" element={<Watchlist />} />
+
 
           </Routes>
         </Router>

@@ -1,6 +1,9 @@
 // TradingViewWidget.jsx
 
+import StockSide from '../StockSide/StockSide';
+
 import React, { useEffect, useRef } from 'react';
+import Navbar2 from '../Navbar2/Navbar2';
 
 let tvScriptLoadingPromise;
 
@@ -28,23 +31,21 @@ export default function TradingViewWidget() {
       return () => onLoadScriptRef.current = null;
 
       function createWidget() {
-        if (document.getElementById('watchlist-chart-demo') && 'TradingView' in window) {
+        if (document.getElementById('tradingview_18b9e') && 'TradingView' in window) {
           new window.TradingView.widget({
-            container_id: "watchlist-chart-demo",
-            width: "100%",
-            height: "100%",
-            autosize: true,
+            width: 1200,
+            height: 900,
             symbol: "NASDAQ:AAPL",
             interval: "D",
-            timezone: "exchange",
+            timezone: "Etc/UTC",
             theme: "light",
             style: "1",
+            locale: "en",
             toolbar_bg: "#f1f3f6",
-            withdateranges: true,
+            enable_publishing: false,
             allow_symbol_change: true,
-            save_image: false,
-            watchlist: ["AAPL","IBM","TSLA","AMD","MSFT","GOOG"],
-            locale: "en"
+            watchlist: ["NYSE:JPM","NYSE:WFC","NYSE:BAC","NYSE:HSBC","NYSE:C"],
+            container_id: "tradingview_18b9e"
           });
         }
       }
@@ -53,11 +54,18 @@ export default function TradingViewWidget() {
   );
 
   return (
+
     <div className='tradingview-widget-container'>
-      <div id='watchlist-chart-demo' />
-      <div className="tradingview-widget-copyright">
-        <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span className="blue-text">Track all markets on TradingView</span></a>
-      </div>
+      <div className="Navbar">
+        <Navbar2 />
+       </div>
+      <div id='tradingview_18b9e' />
+      <div className="StockSide">
+          <StockSide />
+        </div>
     </div>
+
+
+
   );
 }
