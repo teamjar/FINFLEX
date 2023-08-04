@@ -1,5 +1,6 @@
 import "./LandingPage.css"
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from "react"
 
 const LandingPage = () => { 
     const navigate = useNavigate()
@@ -7,6 +8,10 @@ const LandingPage = () => {
     const handleClick = () => {
         navigate('/login')
     }
+
+    useEffect(() => {
+        console.log('Token: ', localStorage.getItem('token'));
+    }, [])
 //
     return (
         <div className = 'landing-page'>

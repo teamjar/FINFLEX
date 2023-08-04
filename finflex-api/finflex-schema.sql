@@ -1,4 +1,4 @@
---DROP TABLE users,stocks,watchlist,budget,goals,bills,expense,help;
+--DROP TABLE users,stocks,watchlist,budget,goals,bills,expense,help, balance;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -81,7 +81,7 @@ CREATE TABLE budget (
 );
 
 CREATE TABLE balance (
-    balanceId SERIAL PRIMARY KEY,
+    budgetId SERIAL PRIMARY KEY,
     userId INT NOT NULL,
     balance NUMERIC(10,2) NOT NULL
-)
+);

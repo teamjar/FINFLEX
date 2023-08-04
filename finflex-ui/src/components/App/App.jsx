@@ -16,11 +16,10 @@ import OnboardPage3 from '../OnboardPage3/OnboardPage3'
 import NewsPage from '../NewsPage/NewsPage'
 import { QueryClient, QueryClientProvider } from "react-query"
 import Watchlist from '../WatchList/WatchList.jsx'
+import { useEffect } from 'react'
 
 const queryClient = new QueryClient();
-
 function App() {
-
   return (
     <QueryClientProvider client={queryClient}>
       <div className='back'>

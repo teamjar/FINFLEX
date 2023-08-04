@@ -7,7 +7,16 @@ import GoalCreation from "../GoalCreation/GoalCreation";
 
 const Goals = () => {
   const name = localStorage.getItem('name');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('')
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <div className="personal">
@@ -35,7 +44,17 @@ const Goals = () => {
               </button>
             </div>
             <div className="pic2">
-              <img style={{ width: "40px", marginLeft: "10px", padding: "10px" }} src="https://cdn-icons-png.flaticon.com/512/1827/1827504.png" alt="Icon 1" />
+              <img
+                style={{
+                  width: "40px",
+                  marginLeft: "10px",
+                  padding: "10px",
+                  cursor: "pointer",
+                }}
+                src="https://cdn-icons-png.flaticon.com/512/1827/1827504.png"
+                alt="Icon 1"
+                onClick={openModal}
+              />
             </div>
             <div className="pic2">
               <img style={{ width: "50px", marginRight: "10px", padding: "10px" }} src="https://cdn-icons-png.flaticon.com/512/6522/6522516.png" alt="Icon 2" />
@@ -53,6 +72,20 @@ const Goals = () => {
           <GoalCreation searchQuery={searchQuery} />
         </div>
       </div>
+
+      {showModal && (
+      <div className="clock">
+        <div className="modal1">
+          <div className="modal-content1">
+            <span onClick={closeModal} className="close-button1">
+            ✕</span>
+            <h2 style={{color:"black", fontSize:"30px", textAlign:"center", backgroundColor:"#ece8df"}}>View Your Notification Center</h2>
+   
+          </div>
+        </div>
+      </div>
+      )}
+
     </div>
   );
 }
