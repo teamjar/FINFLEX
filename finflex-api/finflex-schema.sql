@@ -10,17 +10,19 @@ CREATE TABLE users (
 );
 
 CREATE TABLE stocks (
-    stockid SERIAL PRIMARY KEY,
-    userid INT NOT NULL,
-    ticker TEXT NOT NULL,
-    companyName TEXT NOT NULL,
-    stockPrice FLOAT NOT NULL,
-    quantity INT NOT NULL,
-    change FLOAT NOT NULL,
-    balance FLOAT GENERATED ALWAYS AS (quantity * stockPrice) STORED,
-    investment FLOAT NOT NULL,
-    logo TEXT NOT NULL
+  stockid SERIAL PRIMARY KEY,
+  userid INT NOT NULL,
+  ticker TEXT NOT NULL,
+  companyName TEXT NOT NULL,
+  stockPrice FLOAT NOT NULL,
+  quantity INT NOT NULL,
+  change FLOAT NOT NULL,
+  balance FLOAT GENERATED ALWAYS AS (quantity * stockPrice) STORED,
+  investment FLOAT NOT NULL,
+  logo TEXT NOT NULL,
+  timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
 
 CREATE TABLE watchlist (
     watchid SERIAL PRIMARY KEY,
