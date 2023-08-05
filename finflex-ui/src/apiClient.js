@@ -1,1 +1,1 @@
-export const remoteHostURL = "http://localhost:3001"
+export const remoteHostURL = "https://finflex-api.onrender.com/"
