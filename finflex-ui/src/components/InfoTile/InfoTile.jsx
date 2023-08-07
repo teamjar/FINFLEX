@@ -107,6 +107,8 @@ const InfoTile = () => {
               </div>
               </form>
 
+              <button className="btn" style={{marginTop:"10px"}}>Submit</button>
+
           </div>
         </div>
       </div>
