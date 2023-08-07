@@ -63,6 +63,16 @@ const Help = () => {
        
         <h2 style={{color:"#031D44", margin:"15px", padding:"15px", textAlign:"center"}} className="head"><span>Don't see a specific question answered above or want more financial assistance and advice? Ask the chat box below!</span></h2>
             
+      <div className="inh">
+        <input 
+        className="assi"
+        placeholder="Ask a question"
+   
+        />
+      </div>
+      
+
+
             <br></br>
             <br></br>
             <br></br>

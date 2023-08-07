@@ -17,3 +17,18 @@
     background-size:     cover;                     
     background-position: center bottom 60%; 
 }
+
+.assi{
+    border-radius: 30px;
+    border: 2px solid whitesmoke;
+    margin: 10px;
+    padding: 12px;
+    width: 800px;
+    height: 14px;
+}
+
+.inh{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

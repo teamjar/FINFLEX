@@ -25,6 +25,7 @@ const FAQPage = () => {
         question="What are some tips that can help me accurately track my spending habits?"
         answer="Start by inputting all your expenses accurately to get a clear picture of your financial situation, use the budget monitoring feature regularly to track your spending and identify areas where you can cut back, set realistic financial goals, such as saving a certain amount each month or paying off a debt by a specific date, and take advantage of FinFlex's categorization feature to understand how much you spend on different aspects of your life, such as groceries, entertainment, or transportation"
       />
+
       
     </div>
   );
