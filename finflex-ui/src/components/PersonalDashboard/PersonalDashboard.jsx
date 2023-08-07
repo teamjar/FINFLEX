@@ -92,8 +92,10 @@ const PersonalDashboard = () => {
             recording transactions.
           </span>
         </h2>
+ 
         <Expense searchQuery={searchQuery} />
-        <div className="personal2"></div>
+
+          
       </div>
 
       {/* Modal */}
@@ -109,6 +111,10 @@ const PersonalDashboard = () => {
         </div>
       </div>
       )}
+
+      
+
+
     </div>
   );
 };
