@@ -93,8 +93,9 @@ const PersonalDashboard = () => {
           </span>
         </h2>
  
+        <div className="beware">
         <Expense searchQuery={searchQuery} />
-
+        </div>
           
       </div>
 
@@ -111,7 +112,6 @@ const PersonalDashboard = () => {
         </div>
       </div>
       )}
-
       
 
 

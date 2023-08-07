@@ -10,7 +10,9 @@ export default function BillCreation({ searchQuery }) {
   const [price, setPrice] = useState('');
   const [due, setDue] = useState('');
   const [status, setStatus] = useState('');
-  const [array, setArray] = useState([]); //billname, billdesc, due, status, price
+  const [array, setArray] = useState([]);
+
+  const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
 
   useEffect(() => {
     const authUser = async () => {
@@ -54,7 +56,7 @@ export default function BillCreation({ searchQuery }) {
   return (
     <div>
       <div className="flow">
-      <div className="si">
+        <div className="si">
           <label className="ti">Bill Name</label>
           <input
             className="el"
@@ -122,14 +124,32 @@ export default function BillCreation({ searchQuery }) {
         .map((a, idx) => (
           <div key={idx}>
             <table>
-              <tr>
-                <th style={{ border: "2px solid #dab785" }}><span>{a.status}</span></th>
-                <th style={{ border: "2px solid #dab785" }}><span>{a.billname}</span></th>
-                <th style={{ border: "2px solid #dab785" }}><span>{a.billdesc}</span></th>
-                <th style={{ border: "2px solid #dab785" }}><span>${a.price}</span></th>
-                <th style={{ border: "2px solid #dab785" }}><span>{a.due.substring(0, a.due.indexOf('T'))}</span></th>
-                <th style={{ border: "2px solid #dab785" }}><span>${a.towardsbill}</span></th>
-              </tr>
+              <tbody>
+                <tr
+                  style={{
+                    border: "2px solid #dab785",
+                    backgroundColor:
+                      selectedRowIndex === idx ? "lightgray" : "transparent",
+                  }}
+                  onClick={() => setSelectedRowIndex(selectedRowIndex === idx ? -1 : idx)}
+                >
+                  <th style={{ border: "2px solid #dab785" }}><span>{a.status}</span></th>
+                  <th style={{ border: "2px solid #dab785" }}><span>{a.billname}</span></th>
+                  <th style={{ border: "2px solid #dab785" }}><span>{a.billdesc}</span></th>
+                  <th style={{ border: "2px solid #dab785" }}><span>${a.price}</span></th>
+                  <th style={{ border: "2px solid #dab785" }}><span>{a.due.substring(0, a.due.indexOf('T'))}</span></th>
+                  <th style={{ border: "2px solid #dab785" }}><span>${a.towardsbill}</span></th>
+                </tr>
+                {selectedRowIndex === idx && (
+                  <tr>
+                    <td colSpan="6" style={{ textAlign: "center", border: "2px solid #dab785" }}>
+                      <button>
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
             </table>
           </div>
         ))}
@@ -137,5 +157,3 @@ export default function BillCreation({ searchQuery }) {
     </div>
   );
 }
-
-

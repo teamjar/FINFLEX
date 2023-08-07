@@ -10,9 +10,10 @@ export default function GoalCreation({ searchQuery }) {
   const [amount, setAmount] = useState('');
   const [deadline, setDeadline] = useState('');
   const [category, setCat] = useState('');
-  
-  const [array, setArray] = useState([]); // gname, gdesc, target(amount), datedue(deadline), category
+
+  const [array, setArray] = useState([]);
   const [filterCategory, setFilterCategory] = useState('');
+  const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
 
   useEffect(() => {
     const authUser = async () => {
@@ -29,9 +30,8 @@ export default function GoalCreation({ searchQuery }) {
         if (res?.data?.database) {
           setArray(res.data.database);
 
-          // Extract unique categories for filter dropdown
           const uniqueCategories = Array.from(new Set(res.data.database.map(item => item.category)));
-          setFilterCategory(''); // Reset the filter category on new data load
+          setFilterCategory('');
           setCategoriesForFilter(uniqueCategories);
         }
       } catch (err) {
@@ -82,6 +82,7 @@ export default function GoalCreation({ searchQuery }) {
           />
         </div>
 
+        {/* Description Input */}
         <div className="si">
           <label className="ti">Description</label>
           <input
@@ -93,6 +94,7 @@ export default function GoalCreation({ searchQuery }) {
           />
         </div>
 
+        {/* Amount Input */}
         <div className="si">
           <label className="ti">Amount</label>
           <input
@@ -104,6 +106,7 @@ export default function GoalCreation({ searchQuery }) {
           />
         </div>
 
+        {/* Deadline Input */}
         <div className="si">
           <label className="ti">Deadline</label>
           <input
@@ -116,6 +119,7 @@ export default function GoalCreation({ searchQuery }) {
           />
         </div>
 
+        {/* Category Dropdown */}
         <div className="si">
           <label className="ti">Category</label>
           <select
@@ -138,11 +142,13 @@ export default function GoalCreation({ searchQuery }) {
           </select>
         </div>
 
+        {/* Add Button */}
         <button type="submit" className="btn2" onClick={handleSubmit}>
           Add
         </button>
       </div>
-   
+
+      {/* Filter Dropdown */}
       <div className="si">
         <div className="flow">
           <select
@@ -159,7 +165,7 @@ export default function GoalCreation({ searchQuery }) {
             ))}
           </select>
         </div>
-        </div>
+      </div>
       <GoalDetail />
       {array
         .filter(
@@ -171,26 +177,45 @@ export default function GoalCreation({ searchQuery }) {
         .map((a, idx) => (
           <div key={idx}>
             <table>
-              <tr>
-                <th style={{ border: "2px solid rgb(4, 57, 94)" }}>
-                  <span>{a.category}</span>
-                </th>
-                <th style={{ border: "2px solid rgb(4, 57, 94)" }}>
-                  <span>{a.gname}</span>
-                </th>
-                <th style={{ border: "2px solid rgb(4, 57, 94)" }}>
-                  <span>{a.gdesc}</span>
-                </th>
-                <th style={{ border: "2px solid rgb(4, 57, 94)" }}>
-                  <span>${a.target}</span>
-                </th>
-                <th style={{ border: "2px solid rgb(4, 57, 94)" }}>
-                  <span>{a.datedue.substring(0, a.datedue.indexOf('T'))}</span>
-                </th>
-                <th style={{ border: "2px solid rgb(4, 57, 94)" }}>
-                  <span>${a.towardsgoal}</span>
-                </th>
-              </tr>
+              <tbody>
+                <tr
+                  style={{
+                    border: "2px solid rgb(4, 57, 94)",
+                    backgroundColor:
+                      selectedRowIndex === idx ? "lightgray" : "transparent",
+                    cursor: "pointer", // Add this line to set the cursor style
+                  }}
+                  onClick={() => setSelectedRowIndex(selectedRowIndex === idx ? -1 : idx)}
+                >
+                  <th style={{border: "2px solid rgb(4, 57, 94)"}}>
+                    <span>{a.category}</span>
+                  </th>
+                  <th style={{border: "2px solid rgb(4, 57, 94)"}}>
+                    <span>{a.gname}</span>
+                  </th>
+                  <th style={{border: "2px solid rgb(4, 57, 94)"}}> 
+                    <span>{a.gdesc}</span>
+                  </th>
+                  <th style={{border: "2px solid rgb(4, 57, 94)"}}>
+                    <span>${a.target}</span>
+                  </th>
+                  <th style={{border: "2px solid rgb(4, 57, 94)"}}>
+                    <span>{a.datedue.substring(0, a.datedue.indexOf('T'))}</span>
+                  </th>
+                  <th style={{border: "2px solid rgb(4, 57, 94)"}}> 
+                    <span>${a.towardsgoal}</span>
+                  </th>
+                </tr>
+                {selectedRowIndex === idx && (
+                  <tr>
+                    <td colSpan="6" style={{ textAlign: "center", border: "2px solid rgb(4, 57, 94)" }}>
+                      <button>
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
             </table>
           </div>
         ))}
@@ -198,6 +223,3 @@ export default function GoalCreation({ searchQuery }) {
     </div>
   );
 }
-
-
-
