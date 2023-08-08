@@ -20,6 +20,7 @@ import { useEffect } from 'react'
 import { remoteHostURL } from '../../apiClient'
 import axios from 'axios';
 import HelpChat from '../../HelpChat/HelpChat'
+import Swal from 'sweetalert2'
 
 const queryClient = new QueryClient();
 
@@ -34,7 +35,6 @@ function App() {
       };
 
       const userId = localStorage.getItem('userId');
-      await axios.delete(`${remoteHostURL}/goals/${userId}`, config);
       const expenses = await axios.get(`${remoteHostURL}/expenses/${userId}`, config);
       for(const ex in expenses.data.database) {
         const res = await axios.get(`${remoteHostURL}/expense/spent/${expenses.data.database[ex].category}/${userId}`, config);

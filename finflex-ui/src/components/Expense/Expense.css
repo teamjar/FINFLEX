@@ -1,3 +1,7 @@
+.what {
+  background-color: white;
+}
+
 .si {
     display: flex;
     flex-direction: column;
@@ -48,7 +52,8 @@
 th, td {
   border: 2px solid rgb(112, 162, 136);
   width: 10%;
-  background-color: #ece8df;
+  /* background-color: #ece8df; */
+  background-color: white;
   padding: 20px;
 }
 

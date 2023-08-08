@@ -23,10 +23,10 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar__container">
-        <img
+        {/* <img
           className="pic"
           src="https://cdn.freebiesupply.com/logos/large/2x/starbucks-coffee-logo-black-and-white.png"
-        />
+        /> */}
         <div
           className={`navbar__item ${
             activeNavItem === "Personal" ? "active" : ""

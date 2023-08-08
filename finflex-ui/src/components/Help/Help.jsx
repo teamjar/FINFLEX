@@ -59,7 +59,7 @@ const Help = () => {
         <h3 style={{color:"white"}}>Some of the most commonly asked financial assistance questions provided, along with the ability to ask your own.</h3>
         </div>
         <br></br>
-        <div style={{backgroundColor:"#F2EFE9"}}>
+        <div style={{backgroundColor:"white"}}>
         <FAQPage />
        
         <h2 style={{color:"#031D44", margin:"15px", padding:"15px", textAlign:"center"}} className="head"><span>Don't see a specific question answered above or want more financial assistance and advice? Ask the chat box below!</span></h2>
