@@ -96,7 +96,6 @@ const PersonalDashboard = () => {
         <div className="beware">
         <Expense searchQuery={searchQuery} />
         </div>
-          
       </div>
 
       {/* Modal */}
