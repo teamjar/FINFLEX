@@ -64,6 +64,18 @@ class Balance {
         const users = result.rows;
         return users;
     }
+
+    static async update(creds) {
+        const {userId, price} = creds;
+        const result = await db.query(`
+            UPDATE balance
+            SET balance = $1
+            WHERE userid = $2
+        `, [price, userId]);
+    
+        const users = result.rows;
+        return users;
+    }
     
 }
 

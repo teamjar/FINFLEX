@@ -115,6 +115,14 @@ class Bill {
         return user;
     }
 
+    static async deleteGoal(userId, bName, bDesc) {
+        const result = db.query(
+            `DELETE FROM bills
+            WHERE userid = $1 AND billname = $2 AND billdesc = $3`, 
+            [userId, bName, bDesc]
+        );
+    }
+
     static async delete(id) {
         const result = await db.query(
             `DELETE FROM bills

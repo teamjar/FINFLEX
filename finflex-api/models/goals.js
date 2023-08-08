@@ -73,6 +73,14 @@ class Goals {
         return user;
     }
 
+    static async deleteGoal(userId, gName, gDesc, category) {
+        const result = db.query(
+            `DELETE FROM goals
+            WHERE userid = $1 AND gname = $2 AND gdesc = $3 AND category = $4`, 
+            [userId, gName, gDesc, category]
+        );
+    }
+
     static async delete(id) {
         const result = db.query(
             `DELETE FROM goals
