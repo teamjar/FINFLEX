@@ -53,3 +53,18 @@
   margin-left: 10%;
 }
 
+.chat-icon-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: black; /* just for visibility, change as needed */
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 9999; /* so it appears above other content */
+}
+
+.chat-icon-container svg {
+  width: 30px; /* adjust as needed */
+  height: 30px; /* adjust as needed */
+}

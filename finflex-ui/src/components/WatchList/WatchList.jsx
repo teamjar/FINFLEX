@@ -1,9 +1,13 @@
-// TradingViewWidget.jsx
+
 
 import StockSide from '../StockSide/StockSide';
 
 import React, { useEffect, useRef } from 'react';
 import Navbar2 from '../Navbar2/Navbar2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCommentDots, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { useState } from "react";
+import StockChat from '../StockChat/StockChat';
 
 let tvScriptLoadingPromise;
 
@@ -53,6 +57,7 @@ export default function TradingViewWidget() {
     []
   );
 
+  const [showChat, setShowChat] = useState(false);
   return (
 
 
@@ -70,6 +75,19 @@ export default function TradingViewWidget() {
         </div>
         
         </div>
+
+        {showChat ? (
+        <div className="chat-icon-container" onClick={() => setShowChat(false)}>
+          <FontAwesomeIcon icon={faTimes} />
+        </div>
+      ) : (
+        <div className="chat-icon-container" onClick={() => setShowChat(true)}>
+          <FontAwesomeIcon icon={faCommentDots} />
+        </div>
+      )}
+
+      {showChat && <StockChat onClose={() => setShowChat(false)} />}
+
     </div>
 
 

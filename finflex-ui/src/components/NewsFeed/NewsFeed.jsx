@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import './NewsFeed.css';  
+import StockChat from "../StockChat/StockChat";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCommentDots, faTimes } from '@fortawesome/free-solid-svg-icons';
+
 
 const fetchNews = async (key, sort = 'LATEST') => {
     const res = await fetch(`https://www.alphavantage.co/query?function=NEWS_SENTIMENT&topics=financial_markets&sort=${sort}&apikey=${import.meta.env.VITE_NEWS_FEED_API_KEY}`);
@@ -12,9 +16,12 @@ const fetchNews = async (key, sort = 'LATEST') => {
   return data;
 };
 
+
+
 const NewsFeed = () => {
   const [sort, setSort] = useState('LATEST');
   const { data, status } = useQuery(['newsData', sort], fetchNews);
+  const [showChat, setShowChat] = useState(false);
 
   const handleSortChange = (e) => {
     setSort(e.target.value);
@@ -49,6 +56,20 @@ const NewsFeed = () => {
             </div>
         </div>
         ))}
+
+        {showChat ? (
+          <div className="chat-icon-container" onClick={() => setShowChat(false)}>
+            <FontAwesomeIcon icon={faTimes} />
+          </div>
+        ) : (
+          <div className="chat-icon-container" onClick={() => setShowChat(true)}>
+            <FontAwesomeIcon icon={faCommentDots} />
+          </div>
+        )}
+
+        {showChat && <StockChat onClose={() => setShowChat(false)} />}
+
+
 
       </div>
     );
