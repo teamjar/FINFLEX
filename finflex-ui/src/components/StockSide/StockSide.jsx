@@ -32,6 +32,11 @@ function StockSide() {
         <li><Link to="/news" style={{color:"#031D44"}}>News Feed</Link></li>
         </div>
 
+        {/* <div className='navigation-route'>
+        <img className='icon2' src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Question_mark_alternate.svg" />
+        <li><Link to="/help" style={{color:"#031D44"}}>Ask Help</Link></li>
+        </div> */}
+
         <div className='navigation-route' style={{position:"absolute", bottom:"0"}}>
         <img className='icon3' src="https://static-00.iconduck.com/assets.00/log-out-icon-2048x2048-cru8zabe.png" />
         <li><Link onClick={handleLogOut} to={'/'}  style={{color:"#031D44"}}>Log Out</Link></li>
