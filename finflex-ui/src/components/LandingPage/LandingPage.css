@@ -3,7 +3,8 @@
     flex-direction: column;
     justify-content: flex-start; 
     text-align: center;
-    background-image: url('../../assets/LandingPage.jpg');
+    /* background-image: url('../../assets/LandingPage.jpg'); */
+    background-image: url('../../assets/LandingPage.svg');
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
@@ -19,10 +20,12 @@
 h1 {
     color: white;
     margin: 5px;
-    padding: 5px;
-
-    
+    padding: 5px;  
 }
+
+
+
+
 
 h2 {
     color: white;

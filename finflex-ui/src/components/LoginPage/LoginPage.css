@@ -1,5 +1,6 @@
    .font {
-    background-image: url('../../assets/L&R.jpg');
+    /* background-image: url('../../assets/L&R.jpg'); */
+    background-image: url('../../assets/L&R.svg');
     background-repeat: no-repeat;    
     background-size: cover;          
     height: 100vh;

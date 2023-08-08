@@ -20,6 +20,9 @@ import { useEffect } from 'react'
 import { remoteHostURL } from '../../apiClient'
 import axios from 'axios';
 import HelpChat from '../../HelpChat/HelpChat'
+import WelcomeOnboard from '../WelcomeOnboard/WelcomeOnboard'
+import PerosnalOnboard from '../PersonalOnboard/PerosnalOnbaord'
+import StockOnboard from '../StockOnboard/StockOnboard'
 
 const queryClient = new QueryClient();
 
@@ -66,12 +69,15 @@ function App() {
             <Route path="/stocks" element={<StockDashboard />} />
             <Route path="/stock-details/:symbol" element={<StockDetails />} />
             <Route path="/stock-details/:symbol/buy" element={<BuyStockPage />} /> 
-            <Route path="/onboard" element={<OnboardPage />} />
-            <Route path="/onboard/2" element={<OnboardPage2 />} />
-            <Route path="/onboard/3" element={<OnboardPage3 />} />
+            <Route path="/onboard/financials" element={<OnboardPage />} />
+            <Route path="/onboard/goals" element={<OnboardPage2 />} />
+            <Route path="/onboard/bills" element={<OnboardPage3 />} />
             <Route path="/news" element={<NewsPage />} />
             <Route path="/watchlist" element={<Watchlist />} />
             <Route path="/help-chat" element={<HelpChat/>} />
+            <Route path="/welcome-onboard" element={<WelcomeOnboard/>} />
+            <Route path="/personal-onboard" element={<PerosnalOnboard/>} />
+            <Route path="/stock-onboard" element={<StockOnboard/>} />
 
 
           </Routes>
@@ -83,36 +89,3 @@ function App() {
 
 export default App;
 
-// useEffect(() => {
-//   const checkTokenExpiration = () => {
-//     const token = localStorage.getItem('token');
-//     const expirationTime = localStorage.getItem('expiredTime');
-
-//     if (token && expirationTime) {
-//       const currentTime = Date.now();
-//       const expirationTimestamp = parseInt(expirationTime, 10);
-
-//       if (currentTime > expirationTimestamp) {
-//         Swal.fire({
-//           title: 'Token Expired',
-//           text: 'Your session has expired. Please log in again.',
-//           icon: 'warning',
-//           confirmButtonColor: '#3085d6',
-//           confirmButtonText: 'OK',
-//         }).then((result) => {
-//           if (result.isConfirmed) {
-//             navigate('/');
-//           }
-//         });
-//       }
-//     } else {
-//       navigate('/');
-//     }
-//   };
-
-//   checkTokenExpiration();
-
-//   const interval = setInterval(checkTokenExpiration, 30000);
-
-//   return () => clearInterval(interval);
-// }, [navigate])
