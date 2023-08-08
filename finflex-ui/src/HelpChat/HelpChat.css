@@ -3,6 +3,57 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    width: ;
 }
 
+.cs-message__content{
+    background-color: rgb(235, 172, 151);
+    padding: 15px;
+    font-weight: bold;
+    margin-top: 10px;
+
+}
+
+.cs-message-input__content-editor-wrapper{
+    background-color: rgb(235, 172, 151);
+}
+
+
+.cs-message-input__content-editor[data-placeholder]:empty:before {
+    background-color: rgb(235, 172, 151);
+}
+
+.cs-message-input__content-editor {
+    background-color: rgb(235, 172, 151);
+}
+
+.cs-message--outgoing .cs-message__content {
+    background-color: rgb(222, 144, 118);
+}
+
+.cs-typing-indicator__text{
+    color: rgb(235, 172, 151);
+
+}
+
+.cs-typing-indicator__dot{
+    color: rgb(235, 172, 151);
+    background-color: rgb(235, 172, 151);
+}
+
+.cs-typing-indicator{
+    background-color: rgb(235, 172, 151);
+}
+
+.cs-button--attachment{
+   color: rgb(235, 172, 151);
+}
+
+.cs-button--send{
+    color: rgb(235, 172, 151);
+}
+
+.cs-main-container {
+    height: 600px;
+
+}

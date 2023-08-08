@@ -9,8 +9,8 @@ function HelpChat() {
     const [typing, setTyping] = useState(false)
     const [messages, setMessages] = useState([
         {
-            message: "Hello, I am ChatGPT!",
-            sender: "ChatGPT"
+            message: "Hello, welcome to FinFlex!",
+            sender: "FinFlex AIT"
 
         }
     ])
@@ -37,7 +37,7 @@ function HelpChat() {
 
         let apiMessages = chatMessages.map((messageObject) => {
             let role = "";
-            if(messageObject.sender === "ChatGPT") {
+            if(messageObject.sender === "FinFlexAI") {
                 role="assistant"
             } else {
                 role="user"
@@ -76,7 +76,7 @@ function HelpChat() {
             setMessages (
                 [...chatMessages, {
                     message: parsedData.choices[0].message.content,
-                    sender: "ChatGPT"
+                    sender: "FinFlexAI"
                 }]
             );
             setTyping(false);
@@ -84,12 +84,12 @@ function HelpChat() {
     }
   return (
     <div className = 'help-chat'>
-        <div style = {{position: 'relative', height: "800px", width: "700px"}}>
+        <div style = {{position: 'relative', height: "600px", width: "1000px"}}>
             <MainContainer>
                 <ChatContainer>
                     <MessageList
                         scrollBehavior="smooth"
-                        typingIndicator = {typing ? <TypingIndicator content="ChatGPT is typing" /> : null}
+                        typingIndicator = {typing ? <TypingIndicator content="FinFlexAI is typing" /> : null}
                     >
                         {messages.map((message, i) => {
                             return <Message key={i} model={message} />
