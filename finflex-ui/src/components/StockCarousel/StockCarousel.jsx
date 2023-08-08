@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { remoteHostURL } from '../../apiClient';
 import { fetchQuote } from '../api/stock-api';
-// import { StockProvider } from '../../Context/StockContext';
-// import Chart from '../Chart/Chart';
+
 
 function StockCarousel() {
  const [stocks, setStocks] = useState([]);
@@ -105,46 +104,5 @@ return (
 }
 
 export default StockCarousel;
-
-
-
-// useEffect(() => {
-//   const fetchStocks = async () => {
-//     try {
-//       const token = localStorage.getItem('token');
-//         const config = {
-//           headers: {
-//             Authorization: `Bearer ${token}`
-//           }
-//         };
-
-//       const userId = localStorage.getItem('userId');
-//       const res = await axios.get(`${remoteHostURL}/stocks/${userId}`, config);
-//       if (res?.data?.database) {
-//         const updatedStocks = await Promise.all(
-//           res.data.database.map(async (stock) => {
-//             const quote = await fetchQuote(stock.ticker);
-//             return {
-//               ...stock,
-//               stockprice: quote.c,
-//               change: quote.dp,
-//             };
-//           }),
-//         );
-//         setStocks(updatedStocks);
-//       }
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-
-//   fetchStocks();
-
-//   const interval = setInterval(fetchStocks, 30000); 
-
-//   return () => clearInterval(interval);
-// }, []);
-
-
 
 

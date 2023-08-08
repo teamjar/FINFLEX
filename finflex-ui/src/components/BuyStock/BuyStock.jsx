@@ -51,9 +51,8 @@ function BuyStock() {
             }
         }
     }
-    
-    
 
+    
 
     const handleBuyClick = async (e) => {
         e.preventDefault();

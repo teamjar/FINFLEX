@@ -9,19 +9,6 @@ CREATE TABLE users (
     password TEXT NOT NULL
 );
 
--- CREATE TABLE stocks (
---     stockid SERIAL PRIMARY KEY,
---     userid INT NOT NULL,
---     ticker TEXT NOT NULL,
---     companyName TEXT NOT NULL,
---     stockPrice FLOAT NOT NULL,
---     quantity INT NOT NULL,
---     change FLOAT NOT NULL,
---     balance FLOAT GENERATED ALWAYS AS (quantity * stockPrice) STORED,
---     investment FLOAT NOT NULL,
---     logo TEXT NOT NULL
--- );
-
 -- Changed for the Portfolio Chart
 CREATE TABLE stocks (
   stockid SERIAL PRIMARY KEY,
@@ -101,4 +88,14 @@ CREATE TABLE market (
     marketId SERIAL PRIMARY KEY,
     userId INT NOT NULL,
     ticker TEXT NOT NULL
-)
+);
+
+--  create a table notifications in database schema to store notifications.
+CREATE TABLE notifications (
+  id SERIAL PRIMARY KEY,
+  userid INT NOT NULL,
+  notification TEXT NOT NULL,
+  read BOOLEAN DEFAULT FALSE,
+  timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
