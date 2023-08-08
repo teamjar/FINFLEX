@@ -35,6 +35,12 @@ export default function BillCreation({ searchQuery }) {
     event.preventDefault();
 
     try {
+      const token = localStorage.getItem('token');
+            const config = {
+              headers: {
+                Authorization: `Bearer ${token}` 
+              }
+            };
       const userId = localStorage.getItem('userId');
       const res = await axios.post(`${remoteHostURL}/bills`, {
         userId: userId,
@@ -43,7 +49,16 @@ export default function BillCreation({ searchQuery }) {
         due: due,
         status: status,
         price: price
-      });
+      }, config);
+
+      await axios.post(`${remoteHostURL}/goals`, {
+        userId: userId,
+        gName: name,
+        gDesc: desc,
+        target: price,
+        dateDue: due,
+        category: "Bill"
+      }, config)
 
       console.log(res.data);
 
@@ -57,7 +72,7 @@ export default function BillCreation({ searchQuery }) {
   const confirmDelete = (bName, bDesc) => {
     Swal.fire({
       title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
+      text: 'Did you pay it or do you wish to simply remove it?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
@@ -93,7 +108,7 @@ export default function BillCreation({ searchQuery }) {
   };
 
   return (
-    <div>
+    <div className="what">
       <div className="flow">
         <div className="si">
           <label className="ti">Bill Name</label>

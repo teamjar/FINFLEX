@@ -1,5 +1,6 @@
 .side {
-    background-color: #ece8df;
+    /* background-color: #ece8df; */
+    background-color: white;
     width: 14%;
     position: fixed; /* Add fixed positioning */
     left: 0; /* Stick it to the left */

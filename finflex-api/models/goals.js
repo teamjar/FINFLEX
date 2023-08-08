@@ -84,7 +84,8 @@ class Goals {
     static async delete(id) {
         const result = db.query(
             `DELETE FROM goals
-            WHERE userid = $1 AND target >= towardsgoal AND datedue < CURRENT_DATE`, 
+            WHERE userid = $1 AND target >= towardsgoal AND datedue = CURRENT_DATE
+            RETURNING *`, 
             [id]
         );
         

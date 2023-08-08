@@ -35,6 +35,22 @@ export default function GoalCreation({ searchQuery }) {
           setFilterCategory('');
           setCategoriesForFilter(uniqueCategories);
         }
+
+        const name = localStorage.getItem('name');
+
+        const response = await axios.delete(`${remoteHostURL}/goals/${userId}`, config)
+
+        if(response?.data?.database) {
+          console.log(response?.data?.database);
+          for (const r in response.data.databse) {
+            Swal.fire({
+              title: `Congratulations ${name}!`,
+              text: `You have completed the ${r.gname} goal that was due with $${r.target - r.towardsgoal} to spare, keep up the good work!`
+            })
+
+
+        }
+        }
       } catch (err) {
         console.log(err);
       }
@@ -115,7 +131,7 @@ export default function GoalCreation({ searchQuery }) {
   
 
   return (
-    <div>
+    <div className="what">
       <div className="flow">
         <div className="si">
           <label className="ti">Goal Name</label>

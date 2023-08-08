@@ -84,7 +84,7 @@ export default function Expense({ searchQuery }) {
   };
 
   return (
-    <div>
+    <div className="what">
       <div className="flow">
         <div className="si">
           <label className="ti">Name</label>
