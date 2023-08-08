@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { remoteHostURL } from "../../apiClient";
 import axios from "axios";
 import GoalDetail from "../GoalDetail/GoalDetail";
+import Swal from "sweetalert2";
 
 export default function GoalCreation({ searchQuery }) {
   const [gName, setName] = useState('');
@@ -34,6 +35,22 @@ export default function GoalCreation({ searchQuery }) {
           setFilterCategory('');
           setCategoriesForFilter(uniqueCategories);
         }
+
+        const name = localStorage.getItem('name');
+
+        const response = await axios.delete(`${remoteHostURL}/goals/${userId}`, config)
+
+        if(response?.data?.database) {
+          console.log(response?.data?.database);
+          for (const r in response.data.databse) {
+            Swal.fire({
+              title: `Congratulations ${name}!`,
+              text: `You have completed the ${r.gname} goal that was due with $${r.target - r.towardsgoal} to spare, keep up the good work!`
+            })
+
+
+        }
+        }
       } catch (err) {
         console.log(err);
       }
@@ -49,6 +66,12 @@ export default function GoalCreation({ searchQuery }) {
 
     try {
       const userId = localStorage.getItem('userId');
+      const token = localStorage.getItem('token');
+            const config = {
+              headers: {
+                Authorization: `Bearer ${token}` 
+              }
+            };
       const res = await axios.post(`${remoteHostURL}/goals`, {
         userId: userId,
         gName: gName,
@@ -56,7 +79,7 @@ export default function GoalCreation({ searchQuery }) {
         target: amount,
         dateDue: deadline,
         category: category
-      });
+      }, config);
 
       console.log(res.data);
 
@@ -68,8 +91,47 @@ export default function GoalCreation({ searchQuery }) {
     }
   };
 
+  const confirmDelete = (gName, gDesc, category) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const userId = localStorage.getItem('userId');
+          const token = localStorage.getItem('token');
+            const config = {
+              headers: {
+                Authorization: `Bearer ${token}` 
+              }
+            };
+  
+          await axios.delete(`${remoteHostURL}/goals/${userId}/${gName}/${gDesc}/${category}`, config);
+
+          const res = await axios.get(`${remoteHostURL}/goals/${userId}`, config);
+
+          if(res?.data?.database) {
+            setArray(res.data.database);
+          }
+          Swal.fire('Deleted!', 'Your goal has been deleted.', 'success');
+        } catch (error) {
+          console.error('Error deleting goal:', error);
+          Swal.fire('Error', 'An error occurred while deleting the goal.', 'error');
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // User cancelled
+        Swal.fire('Cancelled', 'Your goal is safe :)', 'error');
+      }
+    });
+  };
+  
+
   return (
-    <div>
+    <div className="what">
       <div className="flow">
         <div className="si">
           <label className="ti">Goal Name</label>
@@ -209,7 +271,7 @@ export default function GoalCreation({ searchQuery }) {
                 {selectedRowIndex === idx && (
                   <tr>
                     <td colSpan="6" style={{ textAlign: "center", border: "2px solid rgb(4, 57, 94)" }}>
-                      <button>
+                      <button type="button" onClick={() => confirmDelete(a.gname, a.gdesc, a.category)}>
                         Remove
                       </button>
                     </td>

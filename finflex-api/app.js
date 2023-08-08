@@ -194,6 +194,14 @@ app.get("/bills/:id", async function (req, res, next) {
     return res.status(200).json({ database : bills })
 })
 
+app.delete("/goals/:id/:name/:desc", authenticateToken, async function (req, res, next) {
+  const userId = req.params.id;
+  const name = req.params.name;
+  const desc = req.params.desc;
+  const goals = await Bill.deleteGoal(userId,name,desc);
+  return res.status(200).json({ database : goals })
+})
+
 app.delete("/bills/:id", authenticateToken, async function (req, res, next) {
   const userId = req.params.id;
   const bills = await Bill.delete(userId);
@@ -244,7 +252,7 @@ app.get("/expense/spent/:category/:id", authenticateToken, async function (req, 
   return res.status(200).json({ database : expenses })
 })
 
-app.post("/goals", async function (req, res, next) {
+app.post("/goals", authenticateToken, async function (req, res, next) {
     try {
         const user = await Goals.add(req.body);
         return res.status(201).json({user});
@@ -253,13 +261,22 @@ app.post("/goals", async function (req, res, next) {
     }
 });
 
-app.put("/goals", async function (req, res, next) {
+app.put("/goals", authenticateToken, async function (req, res, next) {
   try {
     const user = await Goals.changeTowardsGoal(req.body);
     return res.status(201).json({user});
   } catch(err) {
     next(err);
   }
+})
+
+app.delete("/goals/:id/:name/:desc/:cat", authenticateToken, async function (req, res, next) {
+  const userId = req.params.id;
+  const name = req.params.name;
+  const desc = req.params.desc;
+  const cat = req.params.cat;
+  const goals = await Goals.deleteGoal(userId,name,desc,cat);
+  return res.status(200).json({ database : goals })
 })
 
 app.delete("/goals/:id", authenticateToken, async function (req, res, next) {
@@ -369,6 +386,11 @@ app.post("/balance", authenticateToken, async function (req,res,next) {
 app.get("/balance/:id", authenticateToken, async function (req, res, next) {
   const userId = req.params.id;
   const balance = await Balance.fetchById(userId);
+  return res.status(200).json({ database : balance })
+})
+
+app.put("/balance", authenticateToken, async function (req, res, next) {
+  const balance = await Balance.update(req.body);
   return res.status(200).json({ database : balance })
 })
 

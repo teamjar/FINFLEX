@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { remoteHostURL } from "../../apiClient";
 import axios from "axios";
 import BillDetail from '../BillDetail/BillDetail';
+import Swal from "sweetalert2";
 
 export default function BillCreation({ searchQuery }) {
   const [name, setName] = useState('');
@@ -34,6 +35,12 @@ export default function BillCreation({ searchQuery }) {
     event.preventDefault();
 
     try {
+      const token = localStorage.getItem('token');
+            const config = {
+              headers: {
+                Authorization: `Bearer ${token}` 
+              }
+            };
       const userId = localStorage.getItem('userId');
       const res = await axios.post(`${remoteHostURL}/bills`, {
         userId: userId,
@@ -42,7 +49,16 @@ export default function BillCreation({ searchQuery }) {
         due: due,
         status: status,
         price: price
-      });
+      }, config);
+
+      await axios.post(`${remoteHostURL}/goals`, {
+        userId: userId,
+        gName: name,
+        gDesc: desc,
+        target: price,
+        dateDue: due,
+        category: "Bill"
+      }, config)
 
       console.log(res.data);
 
@@ -53,8 +69,46 @@ export default function BillCreation({ searchQuery }) {
     }
   }
 
+  const confirmDelete = (bName, bDesc) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Did you pay it or do you wish to simply remove it?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const userId = localStorage.getItem('userId');
+          const token = localStorage.getItem('token');
+            const config = {
+              headers: {
+                Authorization: `Bearer ${token}` 
+              }
+            };
+  
+          await axios.delete(`${remoteHostURL}/goals/${userId}/${bName}/${bDesc}`, config);
+
+          const res = await axios.get(`${remoteHostURL}/goals/${userId}`, config);
+
+          if(res?.data?.database) {
+            setArray(res.data.database);
+          }
+          Swal.fire('Deleted!', 'Your goal has been deleted.', 'success');
+        } catch (error) {
+          console.error('Error deleting goal:', error);
+          Swal.fire('Error', 'An error occurred while deleting the goal.', 'error');
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // User cancelled
+        Swal.fire('Cancelled', 'Your goal is safe :)', 'error');
+      }
+    });
+  };
+
   return (
-    <div>
+    <div className="what">
       <div className="flow">
         <div className="si">
           <label className="ti">Bill Name</label>
@@ -143,7 +197,7 @@ export default function BillCreation({ searchQuery }) {
                 {selectedRowIndex === idx && (
                   <tr>
                     <td colSpan="6" style={{ textAlign: "center", border: "2px solid #dab785" }}>
-                      <button>
+                      <button type="button" onClick={() => confirmDelete(a.billname, a.billdesc)}>
                         Remove
                       </button>
                     </td>

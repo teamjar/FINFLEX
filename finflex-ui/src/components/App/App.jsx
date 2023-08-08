@@ -23,6 +23,8 @@ import HelpChat from '../../HelpChat/HelpChat'
 import WelcomeOnboard from '../WelcomeOnboard/WelcomeOnboard'
 import PerosnalOnboard from '../PersonalOnboard/PerosnalOnbaord'
 import StockOnboard from '../StockOnboard/StockOnboard'
+import Swal from 'sweetalert2'
+
 
 const queryClient = new QueryClient();
 
@@ -37,7 +39,6 @@ function App() {
       };
 
       const userId = localStorage.getItem('userId');
-      await axios.delete(`${remoteHostURL}/goals/${userId}`, config);
       const expenses = await axios.get(`${remoteHostURL}/expenses/${userId}`, config);
       for(const ex in expenses.data.database) {
         const res = await axios.get(`${remoteHostURL}/expense/spent/${expenses.data.database[ex].category}/${userId}`, config);

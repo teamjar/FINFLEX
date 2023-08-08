@@ -2,6 +2,7 @@ import "./InfoTile.css";
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import { remoteHostURL } from "../../apiClient";
+import { useNavigate } from "react-router-dom";
 
 const InfoTile = () => {
     const [earnings, setEarnings] = useState(0.00);
@@ -9,16 +10,11 @@ const InfoTile = () => {
     const [budget, setBudget] = useState(0.00);
     const [due, setDue] = useState(0.00);
     const [balance, setBalance] = useState(0.00);
-
+    const [newEarnings, setNewEarnings] = useState(0.00);
+    const [newBudget, setNewBudget] = useState(0.00);
+    const [newBalance, setNewBalance] = useState(0.00);
     const [showModal1, setShowModal1] = useState(false);
-
-    const openModal1 = () => {
-      setShowModal1(true);
-    };
-  
-    const closeModal1 = () => {
-      setShowModal1(false);
-    };
+    const navigate = useNavigate();
 
     useEffect(() => {
         const authUser = async () => {
@@ -26,7 +22,7 @@ const InfoTile = () => {
             const token = localStorage.getItem('token');
             const config = {
               headers: {
-                Authorization: `Bearer ${token}` // Include the token in the 'Authorization' header as 'Bearer <token>'
+                Authorization: `Bearer ${token}` 
               }
             };
 
@@ -51,6 +47,41 @@ const InfoTile = () => {
     
         authUser();
       }, [])
+
+      const openModal1 = () => {
+        setShowModal1(true);
+      };
+    
+      const closeModal1 = () => {
+        setShowModal1(false);
+      };
+
+      const handleSumbit = async (event) => {
+        event.preventDefault();
+        setShowModal1(false);
+
+        try {
+          const token = localStorage.getItem('token');
+            const config = {
+              headers: {
+                Authorization: `Bearer ${token}` // Include the token in the 'Authorization' header as 'Bearer <token>'
+              }
+            };
+
+          await axios.post(`${remoteHostURL}/budget`, {
+            userId: localStorage.getItem('userId'),
+            earnings: newEarnings,
+            budget: newBudget
+          }, config);
+          await axios.post(`${remoteHostURL}/balance`, {
+            userId: localStorage.getItem('userId'),
+            balance: newBalance
+          }, config)
+          navigate('/personal');
+        } catch (error) {
+          console.error(error);
+        }
+      }
 
     return (
         <div className="tile2">
@@ -92,22 +123,31 @@ const InfoTile = () => {
               <div className="lol">
 
               <label style={{marginTop:"10px", fontWeight:"bolder"}}>Set your new earnings:</label>
-              <input 
+              <input
+              type="text"
+              value={newEarnings}
+              onChange={(e) => setNewEarnings(e.target.value)}
               />
               
               <label style={{marginTop:"10px", fontWeight:"bolder"}}>Set a new weekly budget:</label>
               <input 
+              type="text"
+              value={newBudget}
+              onChange={(e) => setNewBudget(e.target.value)}
               />
 
               <label style={{marginTop:"10px", fontWeight:"bolder"}}>Update your account balance:</label>
-              <input 
+              <input
+              type="text"
+              value={newBalance}
+              onChange={(e) => setNewBalance(e.target.value)}
               />
 
               </div>
               </div>
               </form>
 
-              <button className="btn" style={{marginTop:"10px"}}>Submit</button>
+              <button type="submit" onSubmit={handleSumbit} className="btn" style={{marginTop:"10px"}}>Submit</button>
 
           </div>
         </div>
