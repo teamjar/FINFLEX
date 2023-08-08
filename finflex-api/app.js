@@ -20,11 +20,6 @@ const Balance = require('./models/balance');
 const { NotFoundError } = require("./utils/errors");
 const config = require("./config");
 const jwt = require('jsonwebtoken');
-const { Configuration, OpenAIApi } = require("openai");
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
 
 const app = express();
 const cron = require('node-cron');
@@ -57,6 +52,7 @@ function authenticateToken(req, res, next) {
 }
 
 // routes
+
 app.post("/login", async function (req, res, next) {
     try {
       const user = await User.authenticate(req.body)

@@ -1,8 +1,7 @@
 .idk {
-  background: rgb(0, 0, 0);
-  background: linear-gradient(360deg, rgba(0, 0, 0, 1) 0%, rgba(3, 29, 68, 1) 0%, rgba(4, 57, 94, 1) 25%, rgba(112, 162, 136, 1) 50%, rgba(218, 183, 133, 1) 75%, rgba(213, 137, 111, 1) 100%);
+  background-image: url('../../assets/L&R.jpg');
+  background-repeat: no-repeat;    
+  background-size: cover;          
   height: 100vh;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
+  width: 100vw;  
 }

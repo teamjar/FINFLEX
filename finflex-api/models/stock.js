@@ -1,6 +1,5 @@
 "use strict"
 
-// const { use } = require("../app");
 const db = require("../db")
 const { BadRequestError, UnauthorizedError } = require("../utils/errors")
 
@@ -52,30 +51,7 @@ class Stock {
         return stock;
     }
 
- 
 
-    // static async fetchById(id) {
-    //     const result = await db.query(
-    //         `SELECT userid,
-    //                 ticker,
-    //                 companyname,
-    //                 stockprice, 
-    //                 quantity,
-    //                 change,
-    //                 balance,
-    //                 investment,
-    //                 logo
-    //             FROM stocks
-    //             WHERE userid = $1`,
-    //             [id]
-    //     );
-
-    //     const user = result.rows;
-
-    //     return user;
-    // }
-
-    //Create for Portfolio Chart
     static async fetchById(id) {
         const result = await db.query(
             `SELECT userid,
@@ -119,10 +95,6 @@ class Stock {
             [id]
         );
  
-        // const sumBalance = result.rows[0];
- 
-        // return sumBalance;
-
         const user = result.rows;
 
         return user;
@@ -159,8 +131,6 @@ class Stock {
         return user;
     }
 
-
-
     static async findByUserAndTicker(id, ticker) {
         const result = await db.query(
             `SELECT *
@@ -174,9 +144,6 @@ class Stock {
         return stock;
     }
 
-
- 
- 
     static async changeStockPrice(creds) {
         const {userId, ticker, stockPrice} = creds;
 
@@ -191,10 +158,6 @@ class Stock {
 
         return user;
     }
-
-
-
-
 }
 
 

@@ -1,0 +1,37 @@
+.landingpagenavbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.navbar__left h1 {
+    margin: 0;
+}
+
+.navbar__right {
+    display: flex;
+}
+
+.navbar__button {
+    margin-left: 20px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.navbar__button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Modify the second button specifically */
+.navbar__right :nth-child(2) {
+    background: linear-gradient(90deg, #18C8FF, #933FFE);
+}

@@ -19,6 +19,7 @@ import Watchlist from '../WatchList/WatchList.jsx'
 import { useEffect } from 'react'
 import { remoteHostURL } from '../../apiClient'
 import axios from 'axios';
+import HelpChat from '../../HelpChat/HelpChat'
 
 const queryClient = new QueryClient();
 
@@ -70,6 +71,7 @@ function App() {
             <Route path="/onboard/3" element={<OnboardPage3 />} />
             <Route path="/news" element={<NewsPage />} />
             <Route path="/watchlist" element={<Watchlist />} />
+            <Route path="/help-chat" element={<HelpChat/>} />
 
 
           </Routes>
