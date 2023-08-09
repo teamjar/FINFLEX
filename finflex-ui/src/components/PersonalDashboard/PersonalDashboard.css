@@ -75,7 +75,9 @@ input {
 
 .enter {
     border-radius: 30px;
-    border: 2px solid whitesmoke;
+    border: 1px solid black;
+    box-shadow: 3px 3px 5px grey;
+ 
 }
 
 .modal1 {
@@ -89,7 +91,7 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
- 
+ /**/
   }
   
   .modal-content1 {
