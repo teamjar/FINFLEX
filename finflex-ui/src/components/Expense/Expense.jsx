@@ -14,6 +14,28 @@ export default function Expense({ searchQuery }) {
   const [filterCategory, setFilterCategory] = useState('');
 
   useEffect(() => {
+    const first = async () => {
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+
+      const userId = localStorage.getItem('userId');
+      const expenses = await axios.get(`${remoteHostURL}/expenses/${userId}`, config);
+      for(const ex in expenses.data.database) {
+        const res = await axios.get(`${remoteHostURL}/expense/spent/${expenses.data.database[ex].category}/${userId}`, config);
+        if(res?.data?.database) {
+          const response = await axios.put(`${remoteHostURL}/goals`, {
+            userId: userId,
+            category: expenses.data.database[ex].category,
+            towardsGoal: res.data.database[0].sum
+          }, config)
+        }
+      }
+    }
+
     const authUser = async () => {
       try {
         const token = localStorage.getItem('token');
@@ -39,6 +61,7 @@ export default function Expense({ searchQuery }) {
     };
 
     authUser();
+    first();
   }, []);
 
   const [categoriesForFilter, setCategoriesForFilter] = useState([]);
@@ -138,11 +161,10 @@ export default function Expense({ searchQuery }) {
             <option value="Housing">Housing</option>
             <option value="Transportation">Transportation</option>
             <option value="Education">Education</option>
-            <option value="Health/Medical">Health/Medical</option>
+            <option value="Health-Medical">Health-Medical</option>
             <option value="Entertainment">Entertainment</option>
             <option value="Personal">Personal Care</option>
-            <option value="Debt/Loans">Debt/Loans</option>
-            <option value="bills">Bills</option>
+            <option value="Debt-Loans">Debt-Loans</option>
             <option value="Miscellaneous">Miscellaneous</option>
           </select>
         </div>

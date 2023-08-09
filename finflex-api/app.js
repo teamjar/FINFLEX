@@ -204,7 +204,7 @@ app.get("/bills/:id", async function (req, res, next) {
     return res.status(200).json({ database : bills })
 })
 
-app.delete("/goals/:id/:name/:desc", authenticateToken, async function (req, res, next) {
+app.delete("/bills/:id/:name/:desc", authenticateToken, async function (req, res, next) {
   const userId = req.params.id;
   const name = req.params.name;
   const desc = req.params.desc;
@@ -351,6 +351,7 @@ cron.schedule('0 0 * * 1', async () => {
     const users = await Budget.getAllUsers();
     for (const user of users) {
       await Budget.weeklyAdd(user.userid);
+      //await Balance.plus(user.userid, );
     }
   } catch (err) {
     console.error(err);
