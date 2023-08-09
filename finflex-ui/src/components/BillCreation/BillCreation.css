@@ -21,3 +21,15 @@
     box-shadow: 3px 3px 5px grey;
     outline: 1px solid black;
   }
+
+  :root{
+    --toastify-color-info: #dab785;
+  }
+
+  .pa{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    padding-left: 10px;
+  }
