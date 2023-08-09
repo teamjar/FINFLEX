@@ -119,17 +119,18 @@ export default function BillCreation({ searchQuery }) {
                   autoClose: false, 
                   closeOnClick: false,
                   closeButton: (
-                    <div>
+                    <div className="pa">
                       <button
                         onClick={() => handlePaidClick(item)}
                         style={{
-                          backgroundColor: 'green',
+                          width:"140px",
                           color: 'white',
                           border: 'none',
-                          padding: '8px 16px',
-                          borderRadius: '4px',
+                          padding:"10px",
+                          borderRadius: '30px',
                           cursor: 'pointer',
-                          marginRight: '8px'
+                          marginRight: '8px',
+                          backgroundColor: 'green'
                         }}
                       >
                         Mark as Paid
@@ -137,11 +138,12 @@ export default function BillCreation({ searchQuery }) {
                       <button
                         onClick={() => handleNotPaidClick()}
                         style={{
-                          backgroundColor: 'red',
+                          backgroundColor: '#031D44',
+                          width:"140px",
                           color: 'white',
                           border: 'none',
-                          padding: '8px 16px',
-                          borderRadius: '4px',
+                          padding:"10px",
+                          borderRadius: '30px',
                           cursor: 'pointer',
                           marginRight: '8px'
                         }}
