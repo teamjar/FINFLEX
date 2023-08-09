@@ -4,6 +4,9 @@ import { remoteHostURL } from "../../apiClient";
 import axios from "axios";
 import GoalDetail from "../GoalDetail/GoalDetail";
 import Swal from "sweetalert2";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Confetti from 'react-confetti';
 
 export default function GoalCreation({ searchQuery }) {
   const [gName, setName] = useState('');
@@ -11,10 +14,10 @@ export default function GoalCreation({ searchQuery }) {
   const [amount, setAmount] = useState('');
   const [deadline, setDeadline] = useState('');
   const [category, setCat] = useState('');
-
   const [array, setArray] = useState([]);
   const [filterCategory, setFilterCategory] = useState('');
   const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
+  const [isConfettiActive, setIsConfettiActive] = useState(false);
 
   useEffect(() => {
     const authUser = async () => {
@@ -34,23 +37,12 @@ export default function GoalCreation({ searchQuery }) {
           const uniqueCategories = Array.from(new Set(res.data.database.map(item => item.category)));
           setFilterCategory('');
           setCategoriesForFilter(uniqueCategories);
+
+          res.data.database.forEach(item => {
+
+          })
         }
-
-        const name = localStorage.getItem('name');
-
-        const response = await axios.delete(`${remoteHostURL}/goals/${userId}`, config)
-
-        if(response?.data?.database) {
-          console.log(response?.data?.database);
-          for (const r in response.data.databse) {
-            Swal.fire({
-              title: `Congratulations ${name}!`,
-              text: `You have completed the ${r.gname} goal that was due with $${r.target - r.towardsgoal} to spare, keep up the good work!`
-            })
-
-
-        }
-        }
+        
       } catch (err) {
         console.log(err);
       }
@@ -132,6 +124,8 @@ export default function GoalCreation({ searchQuery }) {
 
   return (
     <div className="what">
+      <ToastContainer/>
+      {isConfettiActive && <Confetti wind={0.1} gravity={2} />}
       <div className="flow">
         <div className="si">
           <label className="ti">Goal Name</label>
@@ -195,11 +189,10 @@ export default function GoalCreation({ searchQuery }) {
             <option value="Housing">Housing</option>
             <option value="Transportation">Transportation</option>
             <option value="Education">Education</option>
-            <option value="Health">Health/Medical</option>
+            <option value="Health">Health-Medical</option>
             <option value="Entertainment">Entertainment</option>
             <option value="Personal">Personal Care</option>
-            <option value="Debt">Debt/Loans</option>
-            <option value="Bills">Bills</option>
+            <option value="Debt">Debt-Loans</option>
             <option value="Misc">Miscellaneous</option>
           </select>
         </div>

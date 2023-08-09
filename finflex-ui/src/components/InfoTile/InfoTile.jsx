@@ -56,7 +56,7 @@ const InfoTile = () => {
         setShowModal1(false);
       };
 
-      const handleSumbit = async (event) => {
+      const handleSubmit = async (event) => {
         event.preventDefault();
         setShowModal1(false);
 
@@ -77,7 +77,14 @@ const InfoTile = () => {
             userId: localStorage.getItem('userId'),
             balance: newBalance
           }, config)
-          navigate('/personal');
+          const earn = await axios.get(`${remoteHostURL}/budget/earnings/${userId}`, config);
+          const bud = await axios.get(`${remoteHostURL}/budget/total/${userId}`, config);
+          const balance = await axios.get(`${remoteHostURL}/balance/${userId}`, config);
+
+          setEarnings(earn.data.database[0].sum);
+          setBudget(bud.data.database[0].sum);
+          setBalance(balance.data.database[0].balance);
+
         } catch (error) {
           console.error(error);
         }
@@ -147,7 +154,7 @@ const InfoTile = () => {
               </div>
               </form>
 
-              <button type="submit" onSubmit={handleSumbit} className="btn" style={{marginTop:"10px"}}>Submit</button>
+              <button type="submit" onClick={handleSubmit} className="btn" style={{marginTop:"10px"}}>Submit</button>
 
           </div>
         </div>

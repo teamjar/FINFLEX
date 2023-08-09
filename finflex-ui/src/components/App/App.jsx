@@ -44,7 +44,7 @@ function App() {
       for(const ex in expenses.data.database) {
         const res = await axios.get(`${remoteHostURL}/expense/spent/${expenses.data.database[ex].category}/${userId}`, config);
         if(res?.data?.database) {
-          const response = await axios.put(`${remoteHostURL}/goals`, {
+          await axios.put(`${remoteHostURL}/goals`, {
             userId: userId,
             category: expenses.data.database[ex].category,
             towardsGoal: res.data.database[0].sum
