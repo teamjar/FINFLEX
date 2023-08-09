@@ -22,6 +22,8 @@
     padding: 12px;
     width: 200px;
     height: 14px;
+    box-shadow: 3px 3px 5px grey;
+    outline: 1px solid black;
   }
 
   .ti{
@@ -52,7 +54,7 @@
 th, td {
   border: 2px solid rgb(112, 162, 136);
   width: 10%;
-  /* background-color: #ece8df; */
+
   background-color: white;
   padding: 20px;
 }
@@ -73,4 +75,6 @@ table {
   border-radius: 30px;
   border: 2px solid whitesmoke;
   margin-top: 10px;
+  box-shadow: 3px 3px 5px grey;
+  outline: 1px solid black;
 }
