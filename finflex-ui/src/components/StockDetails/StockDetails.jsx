@@ -8,13 +8,29 @@ import StockSide from '../StockSide/StockSide';
 import Overview from "../Overview/Overview";
 import "./StockDetails.css";
 import Details from "../Details/Details";
-import BuyStock from "../BuyStock/BuyStock"
+import BuyStock from "../BuyStock/BuyStock";
+import SellStock from "../SellStock/SellStock";
+import Balance from "../Balance/Balance";
+
+
+
+
+
 
 const StockDetails = () => {
   const { symbol } = useParams();
   const [stockDetails, setStockDetails] = useState({});
   const [quote, setQuote] = useState({});
   const [showBuyModal, setShowBuyModal] = useState(false); // New state variable for modal visibility
+  const [showSellModal, setShowSellModal] = useState(false);
+  const userId = localStorage.getItem('userId');
+
+  
+
+
+
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,11 +47,22 @@ const StockDetails = () => {
     fetchData();
   }, [symbol]);
 
+ 
+
+
+
+ 
+ 
+
   const navigate = useNavigate();
 
   const buyStock = () => {
     setShowBuyModal(true); // Show the modal when Buy button is clicked
   };
+
+  const sellStock = () => {
+    setShowSellModal(true);  
+};
 
   const goBack = () => {
     navigate(`/stocks`);
@@ -69,6 +96,7 @@ const StockDetails = () => {
         {/* Buy Button */}
         <div className="BuyButton">
           <button onClick={buyStock} className="btn" style={{ margin: "10px" }}>Buy Stocks</button>
+          <button onClick={sellStock} className="btn" style={{ margin: "10px" }}>Sell Stocks</button>
           <button onClick={goBack} className="btn" style={{ margin: "10px" }}>Return Back</button>
         </div>
 
@@ -80,6 +108,14 @@ const StockDetails = () => {
             </div>
           </div>
         )}
+
+        {showSellModal && (
+            <div className="modal"> 
+                <SellStock />
+            </div>
+        )}
+
+
       </div>
     </StockProvider>
   );

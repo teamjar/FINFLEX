@@ -52,7 +52,7 @@ const RegisterForm = () => {
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('expiredTime', expirationTimestamp);
       
-      nav('/onboard');
+      nav('/onboard/financials');
     } catch(err) {
       console.log(err);
     }

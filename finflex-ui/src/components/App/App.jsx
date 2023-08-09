@@ -24,6 +24,7 @@ import WelcomeOnboard from '../WelcomeOnboard/WelcomeOnboard'
 import PerosnalOnboard from '../PersonalOnboard/PerosnalOnbaord'
 import StockOnboard from '../StockOnboard/StockOnboard'
 import Swal from 'sweetalert2'
+import { BalanceProvider } from '../../Context/BalanceContext';
 
 
 const queryClient = new QueryClient();
@@ -56,6 +57,7 @@ function App() {
 
   }, [])
   return (
+    <BalanceProvider>
     <QueryClientProvider client={queryClient}>
       <div className='back'>
         <Router>
@@ -85,6 +87,7 @@ function App() {
         </Router>
       </div>
     </QueryClientProvider>
+    </BalanceProvider>
   )
 }
 
