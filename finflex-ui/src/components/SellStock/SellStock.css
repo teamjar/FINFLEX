@@ -1,0 +1,102 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    margin: 0;
+    padding: 0;
+    
+}
+
+.BuyStock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 300px;
+    text-align: center;
+}
+
+.p {
+    margin-bottom: 20px;
+}
+
+.form-group input {
+    width: 250px;
+    padding: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 5px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.BuyStock button {
+    padding: 10px 20px;
+    border: none;
+    background: rgba(69, 162, 158, 0.5);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.BuyStock button:hover {
+    background: rgba(69, 162, 158, 1);
+}
+
+.lol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+#investment{
+    width: 300px;
+    background-color: white;
+    margin: 10px;
+    color: #031D44;
+    padding: 10px;
+    margin: 10px;
+    width: 250px;
+    border: none;
+    background: white;
+    border-radius: 5px;
+    backdrop-filter: blur(4px);
+}
+
+#quantity{
+    width: 300px;
+    background-color: white;
+    margin: 10px;
+    color: #031D44;
+    padding: 10px;
+    margin: 10px;
+    width: 250px;
+    border: none;
+    background: white;
+    border-radius: 5px;
+    backdrop-filter: blur(4px);
+}
+
+.bff{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

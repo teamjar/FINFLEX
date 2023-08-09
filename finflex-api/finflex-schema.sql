@@ -93,7 +93,7 @@ CREATE TABLE market (
 --  create a table notifications in database schema to store notifications.
 CREATE TABLE notifications (
   id SERIAL PRIMARY KEY,
-  userid INT NOT NULL,
+    userid INT NOT NULL,
   notification TEXT NOT NULL,
   read BOOLEAN DEFAULT FALSE,
   timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP

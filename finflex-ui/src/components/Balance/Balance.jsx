@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { remoteHostURL } from '../../apiClient';
 import './Balance.css'
+import { useBalance } from '../../Context/BalanceContext';
 
 function Balance() {
     const [stocks, setStocks] = useState([]);
-    const [totalInvestment, setTotalInvestment] = useState(0);
-    const [totalBalance, setTotalBalance] = useState(0);
+    
+    
+    const { state: { totalInvestment, totalBalance }, dispatch } = useBalance();
 
     useEffect(() => {
         const userId = localStorage.getItem('userId');
@@ -29,13 +31,9 @@ function Balance() {
         const fetchTotalInvestment = async () => {
             try {
                 const res = await axios.get(`${remoteHostURL}/stocks/investment/${userId}`, config);
-                // if (res.data && res.data.database) {
-                //     setTotalInvestment(res.data.database[0].sum);
-                // }
                 if (res.data && res.data.database) {
-                    setTotalInvestment((res.data.database[0].sum).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+                    dispatch({ type: "SET_INVESTMENT", payload: (res.data.database[0].sum).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) });
                 }
-                
             } catch (error) {
                 console.error(error);
             }
@@ -44,13 +42,9 @@ function Balance() {
         const fetchTotalBalance = async () => {
             try {
                 const res = await axios.get(`${remoteHostURL}/stocks/balance/${userId}`, config);
-                console.log('Response:', JSON.stringify(res.data, null, 2));
-
                 if (res.data && res.data.balance) {
-                    setTotalBalance((res.data.balance[0].sum).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
-                    console.log(totalBalance);  // log the balance
+                    dispatch({ type: "SET_BALANCE", payload: (res.data.balance[0].sum).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) });
                 }
-                
             } catch (error) {
                 console.error(error);
             }
@@ -63,7 +57,8 @@ function Balance() {
 
 
     return (
-        <div className='balance-container' >
+     
+            <div className='balance-container' >
             <div className='Portfolio'>
                 <h2 style={{color: "black"}}>Your Portfolio</h2>
             </div>
@@ -82,6 +77,9 @@ function Balance() {
                 </div>
             </div>
         </div>
+
+    
+        
     );
 }
 

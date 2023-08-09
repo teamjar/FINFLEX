@@ -136,6 +136,16 @@ app.get("/stocks/investment/:id", authenticateToken, async function (req, res, n
   return res.status(200).json({ database : stock })
 })
 
+app.post("/stocks/sell", authenticateToken, async function (req, res, next) {
+  try {
+      const stock = await Stock.sell(req.body);
+      return res.status(201).json({stock});
+  } catch(err) {
+      next(err);
+  }
+});
+
+
 app.post("/watchlist", async function (req, res, next) {
     try {
         const user = await Watchlist.add(req.body);

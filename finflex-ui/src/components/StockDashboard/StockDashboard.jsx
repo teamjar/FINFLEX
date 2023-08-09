@@ -11,6 +11,7 @@ import PortfolioChart from '../PortfolioChart/PortfolioChart';
 import StockChat from "../StockChat/StockChat";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCommentDots, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { BalanceProvider } from '../../Context/BalanceContext.jsx';
 
 function StockDashboard() {
   const [showChat, setShowChat] = useState(false);

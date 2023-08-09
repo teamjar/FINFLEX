@@ -89,11 +89,11 @@ const OnboardForm2 = () => {
     }
 
     setError("");
-    navigate("/onboard/3"); // Navigate to the next step after successful form submission
+    navigate("/onboard/bills"); // Navigate to the next step after successful form submission
   };
 
   const handleGoBack = () => {
-    navigate("/onboard"); // Navigate back to "/onboard" route
+    navigate("/onboard/financials"); // Navigate back to "/onboard" route
   };
 
   return (

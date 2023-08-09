@@ -158,8 +158,61 @@ class Stock {
 
         return user;
     }
+
+    static async sell(creds) {
+        const { userId, ticker, quantity, sellingPrice } = creds;
+        let existingStock = await this.findByUserAndTicker(userId, ticker);
+     
+        if (existingStock && existingStock.quantity >= quantity) {
+            const newQuantity = existingStock.quantity - quantity;
+            const newInvestment = existingStock.investment - (sellingPrice * quantity);  // Adjusted the formula to get the total selling price
+    
+            if (newQuantity === 0) {
+                // If the new quantity is 0, delete the record
+                await db.query(
+                    `DELETE FROM stocks
+                     WHERE userid = $1 AND ticker = $2`,
+                    [userId, ticker]
+                );
+                // return null;  // You can return null or a custom message here
+                return { message: "Stock sold and record removed as quantity reached zero." };
+            } else {
+                const result = await db.query(
+                    `UPDATE stocks
+                     SET quantity = $1,
+                         investment = $2,
+                         timestamp = CURRENT_TIMESTAMP
+                     WHERE userid = $3 AND ticker = $4
+                     RETURNING *`,
+                    [newQuantity, newInvestment, userId, ticker]
+                );
+                return result.rows[0];
+            }
+        } else {
+            throw new BadRequestError("Not enough stocks to sell or stock doesn't exist");
+        }
+    }
+
+    static async getStockQuantityBySymbol(userId, ticker) {
+        const result = await db.query(
+            `SELECT quantity
+             FROM stocks
+             WHERE userid = $1 AND ticker = $2`,
+            [userId, ticker]
+        );
+        const stock = result.rows[0];
+        return stock ? stock.quantity : 0;
+    }
+    
+    
+     
+    
 }
 
 
 
+
+
 module.exports = Stock;
+
+

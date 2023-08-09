@@ -63,7 +63,7 @@ const OnboardForm = () => {
         }, config);
 
         // If everything is fine, navigate to the next page
-        nav('/onboard/2');
+        nav('/onboard/goals');
       } catch (error) {
         console.log(error)
       }
