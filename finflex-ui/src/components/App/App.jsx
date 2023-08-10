@@ -23,39 +23,66 @@ import HelpChat from '../../HelpChat/HelpChat'
 import WelcomeOnboard from '../WelcomeOnboard/WelcomeOnboard'
 import PerosnalOnboard from '../PersonalOnboard/PerosnalOnbaord'
 import StockOnboard from '../StockOnboard/StockOnboard'
-import Swal from 'sweetalert2'
 import { BalanceProvider } from '../../Context/BalanceContext';
 
 
 const queryClient = new QueryClient();
 
 function App() {
-  useEffect (() => {
-    const first = async () => {
+  useEffect(() => {
+    const updateGoalsForWeeklyExpenses = async () => {
       const token = localStorage.getItem('token');
       const config = {
         headers: {
           Authorization: `Bearer ${token}`
         }
       };
-
+  
       const userId = localStorage.getItem('userId');
+  
+      // Fetch the goals with due dates
+      const goalsResponse = await axios.get(`${remoteHostURL}/goals/${userId}`, config);
+      const goals = goalsResponse?.data?.database || [];
+  
       const expenses = await axios.get(`${remoteHostURL}/expenses/${userId}`, config);
-      for(const ex in expenses.data.database) {
-        const res = await axios.get(`${remoteHostURL}/expense/spent/${expenses.data.database[ex].category}/${userId}`, config);
-        if(res?.data?.database) {
-          await axios.put(`${remoteHostURL}/goals`, {
-            userId: userId,
-            category: expenses.data.database[ex].category,
-            towardsGoal: res.data.database[0].sum
-          }, config)
+  
+      for (const ex in expenses.data.database) {
+        const expenseDate = new Date(expenses.data.database[ex].pdate);
+  
+        for (const goal of goals) {
+          const goalDueDate = new Date(goal.datedue);
+  
+          // Check if the expense is within 7 days before the goal's due date
+          const oneWeekBeforeGoal = new Date(goalDueDate);
+          oneWeekBeforeGoal.setDate(oneWeekBeforeGoal.getDate() - 7);
+          console.log(expenses.data.database[ex].pname, expenseDate >= oneWeekBeforeGoal && expenseDate <= goalDueDate, expenseDate);
+          
+          if (expenseDate >= oneWeekBeforeGoal && expenseDate <= goalDueDate && expenses.data.database[ex].category !== 'Bill') {
+            const res = await axios.get(
+              `${remoteHostURL}/expense/spent/${expenses.data.database[ex].category}/${userId}/${expenseDate.toISOString()}/${goalDueDate.toISOString()}`,
+              config
+            );
+  
+            if (res?.data?.database) {
+              await axios.put(
+                `${remoteHostURL}/goals`,
+                {
+                  userId: userId,
+                  category: expenses.data.database[ex].category,
+                  towardsGoal: res.data.database[0].sum
+                },
+                config
+              );
+            }
+          }
         }
       }
-    }
-
-    first();
-
-  }, [])
+    };
+  
+    updateGoalsForWeeklyExpenses();
+  }, []);
+  
+  
   return (
     <BalanceProvider>
     <QueryClientProvider client={queryClient}>

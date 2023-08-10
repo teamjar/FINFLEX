@@ -38,8 +38,69 @@ export default function GoalCreation({ searchQuery }) {
           setFilterCategory('');
           setCategoriesForFilter(uniqueCategories);
 
-          res.data.database.forEach(item => {
+          res.data.database.forEach(async (item) => {
 
+            console.log(item);
+
+            const dueDate = new Date(item.datedue);
+            const currentDate = new Date();
+            const timeDifference = dueDate.getTime() - currentDate.getTime();
+            const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+            if (daysDifference <= 3 && daysDifference > 0) {
+              toast.info(`Due date is approaching for ${item.gname} in ${daysDifference} days. You currently have 
+              $${item.towardsgoal} towards that goal.`, {autoClose: false})
+            }
+            if(daysDifference == 0 && item.towardsgoal <= item.target && item.towardsgoal != 0) {
+              const name = localStorage.getItem('name');
+              Swal.fire(`Congratulations ${name}!`, `You completed your ${item.gname} goal with only $${item.target - item.towardsgoal} to spare! We will set the same goal for next week!`)
+              setIsConfettiActive(true);
+              setTimeout(() => {
+                setIsConfettiActive(false);
+              }, 4000);
+
+              await axios.delete(`${remoteHostURL}/goals/${userId}/${item.gname}/${item.gdesc}/${item.category}`, config)
+
+              const nextWeekDate = new Date(dueDate);
+              nextWeekDate.setDate(nextWeekDate.getDate() + 7);
+
+              await axios.post(`${remoteHostURL}/goals`, {
+                userId: userId,
+                gName: item.gname,
+                gDesc: item.gdesc,
+                target: item.target,
+                dateDue: nextWeekDate.toISOString(),
+                category: item.category
+              }, config);
+
+              const resp = await axios.get(`${remoteHostURL}/goals/${userId}`, config);
+              if (resp?.data?.database) {
+                setArray(resp.data.database);
+              }
+            }
+            if(daysDifference == 0 && item.towardsgoal > item.target) {
+              const name = localStorage.getItem('name');
+              Swal.fire(`I'm sorry ${name}`, `You went over your ${item.gname} goal by $${item.towardsgoal - item.target}. I know you can do better next week!`);
+
+              await axios.delete(`${remoteHostURL}/goals/${userId}/${item.gname}/${item.gdesc}/${item.category}`, config)
+
+              const nextWeekDate = new Date(dueDate);
+              nextWeekDate.setDate(nextWeekDate.getDate() + 7);
+
+              await axios.post(`${remoteHostURL}/goals`, {
+                userId: userId,
+                gName: item.gname,
+                gDesc: item.gdesc,
+                target: item.target,
+                dateDue: nextWeekDate.toISOString(),
+                category: item.category
+              }, config);
+
+              const resp = await axios.get(`${remoteHostURL}/goals/${userId}`, config);
+              if (resp?.data?.database) {
+                setArray(resp.data.database);
+              }
+            }
           })
         }
         

@@ -61,6 +61,7 @@ const InfoTile = () => {
         setShowModal1(false);
 
         try {
+          const userId = localStorage.getItem('userId');
           const token = localStorage.getItem('token');
             const config = {
               headers: {

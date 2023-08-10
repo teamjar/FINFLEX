@@ -80,7 +80,11 @@ export default function BillCreation({ searchQuery }) {
         pDesc: item.billdesc,
         pPrice: item.price,
         pDate: item.due,
-        category: "Bill"
+        category: "Bills"
+      }, config)).then(
+        await axios.put(`${remoteHostURL}/subtract/balance`, {
+        userId: userId,
+        price: item.price
       }, config));
 
       const resp = await axios.get(`${remoteHostURL}/bills/${userId}`, config);
@@ -112,7 +116,7 @@ export default function BillCreation({ searchQuery }) {
             const timeDifference = dueDate.getTime() - currentDate.getTime();
             const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 
-            if (daysDifference <= 3) {
+            if (daysDifference <= 3 && daysDifference > 0) {
               toast.info(
                 `Due date is approaching for ${item.billname} in ${daysDifference} days!`,
                 { 
@@ -154,7 +158,8 @@ export default function BillCreation({ searchQuery }) {
                   )
                 }
               );
-            } else if (daysDifference < 0) {
+            } 
+            if (daysDifference < 0) {
               toast.info(
                 `Due date is overdue for ${item.billname}!`,
                 { 
