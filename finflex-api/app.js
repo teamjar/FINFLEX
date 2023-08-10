@@ -255,10 +255,12 @@ app.get("/expense/spent/:id", authenticateToken, async function (req, res, next)
   return res.status(200).json({ database : expenses })
 })
 
-app.get("/expense/spent/:category/:id", authenticateToken, async function (req, res, next) {
+app.get("/expense/spent/:category/:id/:made/:due", authenticateToken, async function (req, res, next) {
   const userId = req.params.id;
   const category = req.params.category;
-  const expenses = await Expenses.totalCategorySpent(category, userId);
+  const made = req.params.made;
+  const due = req.params.due
+  const expenses = await Expenses.totalCategorySpent(category, userId,made,due);
   return res.status(200).json({ database : expenses })
 })
 

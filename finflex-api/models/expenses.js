@@ -66,18 +66,19 @@ class Expense {
         return user;
     }
 
-    static async totalCategorySpent(category, id) {
+    static async totalCategorySpent(category, id, startDate, endDate) {
         const result = await db.query(
             `SELECT SUM(pprice)
             FROM expense
-            WHERE userid = $1 AND category = $2`,
-            [id, category]
+            WHERE userid = $1 AND category = $2 AND pdate >= $3 AND pdate <= $4`,
+            [id, category, startDate, endDate]
         );
-
+    
         const user = result.rows;
-
+    
         return user;
     }
+    
     
 }
 

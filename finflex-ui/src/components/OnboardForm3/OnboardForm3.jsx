@@ -75,6 +75,15 @@ const OnboardForm3 = () => {
           status: "Unpaid",
           price: dueAmount
         }, config);
+
+        await axios.post(`${remoteHostURL}/goals`, {
+          userId: userId,
+          gName: billName,
+          gDesc: description,
+          target: dueAmount,
+          dateDue: dueDate,
+          category: "Bill"
+        }, config)
       }
     } catch(err) {
       console.log(err);
