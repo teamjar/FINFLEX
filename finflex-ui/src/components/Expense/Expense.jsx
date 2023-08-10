@@ -87,10 +87,13 @@ export default function Expense({ searchQuery }) {
         pDate: date,
         category: category
       }, config)
-        await axios.put(`${remoteHostURL}/subtract/balance`, {
+      
+        const res2 = await axios.put(`${remoteHostURL}/subtract/balance`, {
           userId: userId,
           price: price
         }, config)
+
+      console.log(res2);
         
       const newArray = [...array, res.data.user];
       setArray(newArray);
